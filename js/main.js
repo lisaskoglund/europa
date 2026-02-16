@@ -588,6 +588,8 @@ function renderStart(){
     <h1>Europa – träningsprov (åk 5)</h1>
     <p>En fråga i taget. Du kan gå <b>fram</b> och <b>bak</b>. Rättning sker <b>bara i slutet</b>.</p>
     <p>Rättning: exakt = 1p, stavfel = 0,5p</p>
+    <br>
+    <p>(Här har jag ännu inte kontrollerat svaren med boken)</p>
     <div class="hr"></div>
 
     <div class="start-grid">
