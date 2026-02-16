@@ -17,15 +17,15 @@
 <div class="wrap">
     <div class="card">
         <header class="topHeader">
-            <div class="userSelectWrap">
+            <div class="userSelectWrap" id="userSelectWrap">
                 <button class="userSelectBtn" id="userSelectBtn">
                     👤 Välj användare
                 </button>
 
                 <div class="userDropdown hidden" id="userDropdown">
-                    <button data-user="Elsa">Elsa ❄️</button>
+                    <button data-user="Elsa">Elsa 🎀</button>
                     <button data-user="Ingrid">Ingrid 🌼</button>
-                    <button data-user="Elektra">Elektra 🙂</button>
+                    <button data-user="Elektra">Elektra 🌟</button>
                 </div>
             </div>
         </header>
@@ -50,24 +50,41 @@
 
     const btn = document.getElementById("userSelectBtn");
     const dropdown = document.getElementById("userDropdown");
+    const wrap = document.getElementById("userSelectWrap");
 
-    btn.addEventListener("click", () => {
+    // Map users to their emoji/icon
+    const USER_ICONS = {
+        Elsa: '🎀',
+        Ingrid: '🌼',
+        Elektra: '🌟'
+    };
+
+    function setButtonUserLabel(user){
+        const icon = USER_ICONS[user] || '👤';
+        btn.textContent = icon + ' ' + (user || 'Välj användare');
+    }
+
+    // Toggle dropdown when clicking the whole wrapper (wider hit area). If the click
+    // is inside the dropdown (e.g., selecting a user), don't toggle here.
+    wrap.addEventListener("click", (e) => {
+        if (e.target.closest('#userDropdown')) return; // let dropdown handle item clicks
         dropdown.classList.toggle("hidden");
     });
 
     dropdown.addEventListener("click", (e) => {
-        const user = e.target.dataset.user;
-        if(!user) return;
+        const btnEl = e.target.closest('button[data-user]');
+        if(!btnEl) return;
+        const user = btnEl.dataset.user;
 
         localStorage.setItem(USER_KEY, user);
-        btn.textContent = "👤 " + user;
+        setButtonUserLabel(user);
         dropdown.classList.add("hidden");
     });
 
     // Visa sparad användare direkt
     const savedUser = localStorage.getItem(USER_KEY);
     if(savedUser){
-        btn.textContent = "👤 " + savedUser;
+        setButtonUserLabel(savedUser);
     }
 </script>
 </body>

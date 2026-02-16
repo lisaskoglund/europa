@@ -185,10 +185,15 @@ const PRESETS = {
     ["Medelhavet","Mediterranean Sea"],
     ["Svarta havet","Black Sea"],
     ["Norska havet","Norwegian Sea"],
-    ["Barents hav","Barentshavet"],
-    ["Vita havet","White Sea"],
-    ["Keltiska havet","Celtic Sea"],
-    ["Irlandsjön","Irish Sea"]
+  ],
+  renewableEnergy: [
+    ["solkraft","solenergi"],
+    "vindkraft",
+    ["vattenkraft","vattenkraftverk"],
+  ],
+  nonRenewableEnergy: [
+    ["kärnkraft"],
+    ["fossila bränslen", "fossila bränsle"]
   ],
   fossilFuels: [
     ["kol","stenkol"],
@@ -248,7 +253,7 @@ const PRESETS = {
 
 const questions = [
   // MCQ block
-  { id:"q1", type:"mcq", topic:"Begrepp", text:"Beskriv vad en fältstudie är?",
+  { id:"q1", type:"mcq", topic:"Geografi", text:"Beskriv vad en fältstudie är?",
     options:[
       "När man undersöker något ute på plats och samlar egna observationer",
       "När man undersöker ett område med hjälp av kartor och satellitbilder hemma",
@@ -257,7 +262,7 @@ const questions = [
     ],
     correct:"När man undersöker något ute på plats och samlar egna observationer"
   },
-  { id:"q2", type:"mcq", topic:"Begrepp", text:"Vad betyder ordet konsumtion?",
+  { id:"q2", type:"mcq", topic:"Geografi", text:"Vad betyder ordet konsumtion?",
     options:[
       "Att använda, köpa och förbruka varor och tjänster",
       "Att producera varor i en fabrik eller på en gård",
@@ -266,7 +271,7 @@ const questions = [
     ],
     correct:"Att använda, köpa och förbruka varor och tjänster"
   },
-  { id:"q3", type:"mcq", topic:"Begrepp", text:"Vad betyder ordet transport?",
+  { id:"q3", type:"mcq", topic:"Geografi", text:"Vad betyder ordet transport?",
     options:[
       "Att flytta människor eller saker från en plats till en annan",
       "Att utbyta information mellan människor och grupper",
@@ -275,7 +280,7 @@ const questions = [
     ],
     correct:"Att flytta människor eller saker från en plats till en annan"
   },
-  { id:"q4", type:"mcq", topic:"Begrepp", text:"Vad betyder ordet kommunikation?",
+  { id:"q4", type:"mcq", topic:"Geografi", text:"Vad betyder ordet kommunikation?",
     options:[
       "Att skicka och ta emot information mellan människor",
       "Att resa från en plats till en annan med olika färdmedel",
@@ -284,7 +289,7 @@ const questions = [
     ],
     correct:"Att skicka och ta emot information mellan människor"
   },
-  { id:"q5", type:"mcq", topic:"Hållbarhet", text:"Vad menas med hållbar utveckling?",
+  { id:"q5", type:"mcq", topic:"Geografi", text:"Vad menas med hållbar utveckling?",
     options:[
       "Att använda resurser så att både människor och natur mår bra nu och senare",
       "Att utveckla snabbt, även om det sliter på naturen",
@@ -293,16 +298,16 @@ const questions = [
     ],
     correct:"Att använda resurser så att både människor och natur mår bra nu och senare"
   },
-  { id:"q6", type:"mcq", topic:"Kartor", text:"Hur gör man en karta?",
+  { id:"q6", type:"mcq", topic:"Kartan", text:"Hur gör man en karta?",
     options:[
-      "Man förminskar verkligheten och visar viktiga saker med symboler och skala",
-      "Man skriver ner alla platser i en lång lista utan bild",
-      "Man ritar bara det som är vackrast, inte det som är viktigast",
+      "Man samlar information om det kartan ska visa och förminskar verkligheten och visar viktiga saker med symboler och skala",
+      "Man försöker rita alla länder och platser så gott man kan",
+      "Man kan till exempel rita av en annan karta och ändra lite på den",
       "Man använder bara färger, men inga tecken eller förklaringar"
     ],
-    correct:"Man förminskar verkligheten och visar viktiga saker med symboler och skala"
+    correct:"Man samlar information om det kartan ska visa och förminskar verkligheten och visar viktiga saker med symboler och skala"
   },
-  { id:"q7", type:"mcq", topic:"Kartor", text:"Varför delas jorden upp i gradnät?",
+  { id:"q7", type:"mcq", topic:"Kartan", text:"Varför delas jorden upp i gradnät?",
     options:[
       "För att kunna hitta och ange exakta platser med koordinater",
       "För att rita upp alla länder med helt samma storlek",
@@ -311,16 +316,16 @@ const questions = [
     ],
     correct:"För att kunna hitta och ange exakta platser med koordinater"
   },
-  { id:"q8", type:"mcq", topic:"Kartor", text:"Vad heter dessa gradnät (delarna i gradnätet)?",
+  { id:"q8", type:"mcq", topic:"Kartan", text:"Vad heter dessa gradnät som vi delar upp jorden i?",
     options:[
       "Breddgrader och längdgrader",
       "Karttecken och höjdkurvor",
       "Norrpil och skala",
-      "Väderstreck och landsgränser"
+      "Gradlängder och nätstreck"
     ],
     correct:"Breddgrader och längdgrader"
   },
-  { id:"q9", type:"mcq", topic:"Kartor", text:"Vad betyder ordet väderstreck?",
+  { id:"q9", type:"mcq", topic:"Kartan", text:"Vad betyder ordet väderstreck?",
     options:[
       "Riktningar som norr, söder, öster och väster",
       "Olika sorters väder, som regn och solsken",
@@ -329,16 +334,16 @@ const questions = [
     ],
     correct:"Riktningar som norr, söder, öster och väster"
   },
-  { id:"q10", type:"mcq", topic:"Kartor", text:"Vad är en topografisk karta?",
+  { id:"q10", type:"mcq", topic:"Kartan", text:"Vad är en topografisk karta?",
     options:[
-      "En karta som visar natur, höjder och detaljer som sjöar, skogar och höjdkurvor",
+      "En karta som visar hur högt en plats ligger över havet med hjälp av höjdkurvor",
       "En karta som visar ett särskilt tema, till exempel befolkning eller klimat",
       "En karta som bara visar huvudstäder och landsgränser",
       "En karta som visar väderprognosen för en vecka"
     ],
-    correct:"En karta som visar natur, höjder och detaljer som sjöar, skogar och höjdkurvor"
+    correct:"En karta som visar hur högt en plats ligger över havet med hjälp av höjdkurvor"
   },
-  { id:"q11", type:"mcq", topic:"Kartor", text:"Vad är en tematisk karta?",
+  { id:"q11", type:"mcq", topic:"Kartan", text:"Vad är en tematisk karta?",
     options:[
       "En karta som visar ett särskilt tema, till exempel klimat eller befolkning",
       "En karta som visar terräng och höjder med höjdkurvor",
@@ -347,32 +352,32 @@ const questions = [
     ],
     correct:"En karta som visar ett särskilt tema, till exempel klimat eller befolkning"
   },
-  { id:"q12", type:"mcq", topic:"Kartor", text:"Vad är ekvatorn?",
+  { id:"q12", type:"mcq", topic:"Kartan", text:"Vad är ekvatorn?",
     options:[
-      "En tänkt linje runt jorden som delar den i norra och södra halvklotet",
+      "En tänkt linje runt jordens mitt som delar den i norra och södra halvklotet",
       "En tänkt linje som visar var polcirkeln går",
       "En linje som visar gränsen mellan två länder",
       "En linje som visar var en bergskedja slutar"
     ],
     correct:"En tänkt linje runt jorden som delar den i norra och södra halvklotet"
   },
-  { id:"q13", type:"mcq", topic:"Kartor", text:"Vad används en kompass till?",
+  { id:"q13", type:"mcq", topic:"Kartan", text:"Vad används en kompass till?",
     options:[
-      "För att hitta riktningar (väderstreck) när man är ute",
-      "För att mäta höjd över havet i ett område",
-      "För att räkna ut temperatur och lufttryck",
-      "För att rita kartans skala i rätt storlek"
+      "Eftersom kompassen pekar åt norr, vet du hur du ska hitta med kartan när du är ute i naturen",
+      "För att mäta höjd över havet i ett område så du vet om luften är tunn eller tjock",
+      "För att räkna ut temperatur och lufttryck så du kan förutspå vädret när du är ute",
+      "För att rita kartans skala i rätt storlek så du vet hur långt det är mellan olika platser"
     ],
-    correct:"För att hitta riktningar (väderstreck) när man är ute"
+    correct:"Eftersom kompassen pekar åt norr, vet du hur du ska hitta med kartan när du är ute i naturen"
   },
   { id:"q14", type:"mcq", topic:"Jorden", text:"Hur ser jordens inre ut (enkel modell)?",
     options:[
-      "Skorpa, mantel och kärna",
+      "Skorpa, mantel, yttre och inre kärna",
       "Skorpa, hav och atmosfär",
-      "Sandlager, jordlager och berglager",
-      "Kärna, moln och is"
+      "Sandlager, jordlager, berglager och grundvatten",
+      "Kärna, moln, glaciär och is"
     ],
-    correct:"Skorpa, mantel och kärna"
+    correct:"Skorpa, mantel, yttre och inre kärna"
   },
   { id:"q15", type:"mcq", topic:"Jorden", text:"Vad gör att jordens plattor rör på sig?",
     options:[
@@ -403,21 +408,21 @@ const questions = [
   },
   { id:"q18", type:"mcq", topic:"Jorden", text:"Vad betyder kontinentaldrift?",
     options:[
-      "Att kontinenterna rör sig långsamt över jordens yta",
-      "Att havsvatten stiger och täcker kontinenterna",
-      "Att kontinenterna får fler berg på kort tid",
-      "Att länder byter namn och gränser varje år"
+      "Det är att jordskorpans plattor långsamt rör sig över jordens yta",
+      "Att havsvatten stiger och till slut kommer att täcka kontinenterna",
+      "Att kontinenterna får fler berg på kort tid och till slut bli för höga",
+      "Att Mello kommer utöka till att ha 32 deltävlingar, från januari till augusti"
     ],
-    correct:"Att kontinenterna rör sig långsamt över jordens yta"
+    correct:"Det är att jordskorpans plattor långsamt rör sig över jordens yta"
   },
   { id:"q19", type:"mcq", topic:"Väder & klimat", text:"Vad är skillnaden mellan väder och klimat?",
     options:[
-      "Väder är hur det är just nu, klimat är hur det brukar vara under lång tid",
-      "Väder är mätningar i en stad, klimat är mätningar i ett hus",
+      "Väder är hur det är just nu, klimat är hur det brukar vara under lång tid (30 år)",
+      "Väder är mätningar i en stad, klimat är mätningar i ett hus (till exempel också luftfuktighet)",
       "Väder handlar om vind, klimat handlar bara om temperatur",
       "Klimat ändras varje dag, väder ändras varje år"
     ],
-    correct:"Väder är hur det är just nu, klimat är hur det brukar vara under lång tid"
+    correct:"Väder är hur det är just nu, klimat är hur det brukar vara under lång tid (30 år)"
   },
   { id:"q20", type:"mcq", topic:"Väder & klimat", text:"Varför blåser det?",
     options:[
@@ -440,22 +445,22 @@ const questions = [
   { id:"q22", type:"mcq", topic:"Väder & klimat", text:"Vad menas med växthuseffekten?",
     options:[
       "Att vissa gaser håller kvar värme så att jorden blir lagom varm (men kan förstärkas av utsläpp)",
-      "Att solen värmer jorden mindre när det är mycket moln",
+      "Att solen värmer jorden mindre när det är mycket moln eftersom de reflekterar bort solstrålarna",
       "Att växter alltid gör att temperaturen sjunker",
-      "Att jordens kärna värmer upp luften direkt"
+      "Att naturen blir fuktig på natten (dagg) eftersom nätter är kallare"
     ],
     correct:"Att vissa gaser håller kvar värme så att jorden blir lagom varm (men kan förstärkas av utsläpp)"
   },
-  { id:"q23", type:"mcq", topic:"Hav & natur", text:"Vad är risken med överfiske?",
+  { id:"q23", type:"mcq", topic:"Jordens naturresurser", text:"Vad är risken med överfiske?",
     options:[
-      "Att fiskbestånd kan minska kraftigt och att ekosystem rubbas",
-      "Att havet blir varmare när man fiskar mycket",
-      "Att fiskar alltid blir mindre när de simmar långt",
-      "Att salthalten i havet försvinner när man tar upp fisk"
+      "Att fiskarter kan minska eller försvinna så växter och djur påverkas negativt",
+      "Att havet blir varmare när man fiskar mycket vilket leder till algblomning",
+      "Att fiskar alltid blir mindre när de simmar långt, och till slut blir för små",
+      "Att salthalten i havet försvinner när man tar upp fisk eftersom de reglerar salthalten"
     ],
-    correct:"Att fiskbestånd kan minska kraftigt och att ekosystem rubbas"
+    correct:"Att fiskarter kan minska eller försvinna så växter och djur påverkas negativt"
   },
-  { id:"q24", type:"mcq", topic:"Hav & natur", text:"Vad är grundvatten?",
+  { id:"q24", type:"mcq", topic:"Jordens naturresurser", text:"Vad är grundvatten?",
     options:[
       "Vatten som finns i marken och i berggrunden under jordytan",
       "Vatten som samlas i sjöar och dammar på ytan",
@@ -464,16 +469,16 @@ const questions = [
     ],
     correct:"Vatten som finns i marken och i berggrunden under jordytan"
   },
-  { id:"q25", type:"mcq", topic:"Hav & natur", text:"Vad görs för att stoppa nedsmutsningen av haven?",
+  { id:"q25", type:"mcq", topic:"Jordens naturresurser", text:"Vad görs för att stoppa nedsmutsningen av haven?",
     options:[
-      "Man minskar plast och utsläpp, renar avloppsvatten och städar stränder och hamnar",
+      "Det finns internationella lagar som ska följas, och länder kommer också tillsammans överens om regler",
       "Man bygger fler båtar så att skräpet körs bort av vågor",
-      "Man flyttar fisken till andra hav där det är renare",
-      "Man slutar helt att använda havet för transporter"
+      "Man försöker tillverka konstgjorda hav som är fria från smuts och föroreningar",
+      "Man häller i kemikalier i haven som ska bryta ner plast och gifter"
     ],
-    correct:"Man minskar plast och utsläpp, renar avloppsvatten och städar stränder och hamnar"
+    correct:"Det finns internationella lagar som ska följas, och länder kommer också tillsammans överens om regler"
   },
-  { id:"q26", type:"mcq", topic:"Klimatzoner", text:"Vad är Taigan?",
+  { id:"q26", type:"mcq", topic:"Jordens naturresurser", text:"Vad är Taigan?",
     options:[
       "Ett stort barrskogsområde i kalla delar av norra halvklotet",
       "Ett varmt ökenområde med nästan ingen växtlighet",
@@ -482,66 +487,72 @@ const questions = [
     ],
     correct:"Ett stort barrskogsområde i kalla delar av norra halvklotet"
   },
-  { id:"q27", type:"mcq", topic:"Klimatzoner", text:"Varför är regnskogen så viktig?",
+  { id:"q27", type:"freeKeywords", topic:"Klimatzoner", text:"Vad är tempererade skogar?",
+    keywords:["barrskog","lövskog","ändras","varm","kall","årstider","varierar","olika","Sverige"],
+    maxPoints:3,
+  },
+  { id:"q28", type:"freeKeywords", topic:"Klimatzoner", text:"Vad är tropiska och subtropiska skogar?",
+    keywords:["områden","året om","alltid","varmt","varm","inga årstider","jämt","jämnt"],
+    maxPoints:3,
+  },
+  { id:"q29", type:"mcq", topic:"Jordens naturresurser", text:"Varför är regnskogen så viktig?",
     options:[
-      "Den har stor biologisk mångfald och påverkar klimatet genom att binda koldioxid",
+      "Den har stor biologisk mångfald, över hälften av jordens växt- och djurarter lever där",
       "Den gör att alla floder i världen får samma temperatur",
-      "Den behövs mest för att ge plats åt stora städer",
-      "Den påverkar bara vädret i länder som ligger nära polerna"
+      "Den är viktig för att den producerar mycket olja som vi kan använda som bränsle",
+      "Det är det enda stället där man kan hitta sällsynta metaller som används i mobiltelefoner och datorer"
     ],
-    correct:"Den har stor biologisk mångfald och påverkar klimatet genom att binda koldioxid"
+    correct:"Den har stor biologisk mångfald, över hälften av jordens växt- och djurarter lever där"
   },
 
   // Free text / list block
-  { id:"q28", type:"multiText", topic:"Hav", text:"Vilka är de tre större haven (vad heter dom)?",
-    prompts:["Större hav 1","Större hav 2","Större hav 3"],
+  { id:"q30", type:"multiText", topic:"Hav", text:"Vilka är världens tre stora hav (vad heter dom)?",
     allow: PRESETS.oceans3, pointsEach: 1, unique:true,
-    note:"Preliminär rättningslista (du kan ändra senare)."
   },
-  { id:"q29", type:"listText", topic:"Hav", text:"Nämn 5 mindre hav (i/kring Europa).",
+  { id:"q31", type:"listText", topic:"Hav", text:"Nämn 5 mindre hav (i/kring Europa).",
     count:5, allowList: PRESETS.seasEurope, pointsEach: 1, unique:true,
-    note:"Preliminär lista (justera när du har SO-boken)."
   },
-  { id:"q30", type:"freeKeywords", topic:"Hav", text:"Berätta om Golfströmmen.",
-    keywords:["varm ström","Atlanten","för med sig värme","Europa","klimat","västra Europa","havet","ström"],
+  { id:"q32", type:"freeKeywords", topic:"Hav", text:"Berätta om Golfströmmen.",
+    keywords:["varm ström","Atlanten", "varmt", "kallt", "Sverige", "för med sig värme","Europa","klimat","västra Europa","havet","ström"],
     maxPoints:5,
-    note:"Poäng ges för nyckelord (full=1p, stavfel≈0,5p)."
+    note:"Poäng ges för nyckelord"
   },
-  { id:"q31", type:"freeKeywords", topic:"Klimatzoner", text:"Berätta om tempererade, tropiska och subtropiska zoner (eller skogar).",
-    keywords:["tempererad","tropisk","subtropisk","varm","kall","årstider","regn","växtlighet","klimat"],
-    maxPoints:6,
-    note:"Preliminära nyckelord – byt gärna ut mot era i boken."
+  { id:"q33", type:"freeKeywords", topic:"Energi", text:"Vad betyder förnybara energikällor?",
+    keywords:["vind","sol","vattenkraft","biobränsle","inte ta slut", "inte tar slut", "nya", "nytt"],
+    maxPoints:2
   },
-  { id:"q32", type:"freeKeywords", topic:"Energi", text:"Berätta om förnybara energikällor och icke förnybara källor och ge exempel.",
-    keywords:["förnybar","vind","sol","vattenkraft","biobränsle","icke förnybar","olja","kol","naturgas","uran","kärnkraft"],
-    maxPoints:7
+  { id:"q34", type:"multiText", topic:"Hav", text:"Ge exempel på tre förnybara energikällor.",
+    allow: PRESETS.renewableEnergy, pointsEach: 1, unique:true,
   },
-  { id:"q33", type:"listText", topic:"Energi", text:"Skriv tre fossila bränslen.",
+  { id:"q35", type:"freeKeywords", topic:"Energi", text:"Vad betyder icke förnybara energikällor",
+    keywords:["olja","kol","naturgas","uran","kärnkraft", "ta slut", "finns inte"],
+    maxPoints:2
+  },
+  { id:"q36", type:"multiText", topic:"Hav", text:"Ge exempel på två förnybara energikällor.",
+    allow: PRESETS.nonRenewableEnergy, pointsEach: 1, unique:true,
+  },
+  { id:"q37", type:"listText", topic:"Energi", text:"Skriv tre fossila bränslen.",
     count:3, allowList: PRESETS.fossilFuels, pointsEach:1, unique:true
   },
-  { id:"q34", type:"singleText", topic:"Världsdelar", text:"Europa är en världsdel – hur många världsdelar finns det?",
-    exact:"7", points:1
+  { id:"q38", type:"singleText", topic:"Världsdelar", text:"Europa är en världsdel – hur många världsdelar finns det?",
+    allowList: ["7", "sju"], points:1
   },
-  { id:"q35", type:"multiText", topic:"Världsdelar", text:"Vad heter de olika världsdelarna?",
+  { id:"q39", type:"multiText", topic:"Världsdelar", text:"Vad heter de olika världsdelarna?",
     prompts:["1","2","3","4","5","6","7"],
     allow: PRESETS.continents7, pointsEach:1, unique:true
   },
-  { id:"q36", type:"listText", topic:"Europa", text:"Skriv namnen på minst tre stora sjöar i Europa.",
+  { id:"q40", type:"listText", topic:"Europa", text:"Skriv namnen på minst tre stora sjöar i Europa.",
     count:3, allowList: PRESETS.bigLakesEU, pointsEach:1, unique:true,
-    note:"Preliminär lista."
   },
-  { id:"q37", type:"listText", topic:"Europa", text:"Skriv namnen på minst tre stora floder i Europa.",
+  { id:"q41", type:"listText", topic:"Europa", text:"Skriv namnen på minst tre stora floder i Europa.",
     count:3, allowList: PRESETS.bigRiversEU, pointsEach:1, unique:true,
-    note:"Preliminär lista."
   },
-  { id:"q38", type:"listText", topic:"Europa", text:"Skriv namnen på minst tre stora öar i Europa.",
+  { id:"q42", type:"listText", topic:"Europa", text:"Skriv namnen på minst tre stora öar i Europa.",
     count:3, allowList: PRESETS.bigIslandsEU, pointsEach:1, unique:true,
-    note:"Preliminär lista."
   },
-  { id:"q39", type:"multiText", topic:"Europa", text:"Skriv namnen på de hav som ligger intill Europas länder (ett fält per hav).",
+  { id:"q43", type:"multiText", topic:"Europa", text:"Skriv namnen på de hav som ligger intill Europas länder (ett fält per hav).",
     prompts: PRESETS.nearbySeasEurope.map((_,i)=>`Hav ${i+1}`),
     allow: PRESETS.nearbySeasEurope, pointsEach:1, unique:true,
-    note:"Preliminär lista (du kan lägga till/ta bort hav)."
   },
 ];
 
@@ -588,8 +599,6 @@ function renderStart(){
     <h1>Europa – träningsprov (åk 5)</h1>
     <p>En fråga i taget. Du kan gå <b>fram</b> och <b>bak</b>. Rättning sker <b>bara i slutet</b>.</p>
     <p>Rättning: exakt = 1p, stavfel = 0,5p</p>
-    <br>
-    <p>(Här har jag ännu inte kontrollerat svaren med boken)</p>
     <div class="hr"></div>
 
     <div class="start-grid">
@@ -667,12 +676,14 @@ function renderQuestion(){
       <p class="hint">Tips: du får poäng per rätt svar. Stavfel ger ofta <b>0,5p</b>.</p>
     `;
   }else if(q.type==="multiText"){
-    const arr = answers[q.id] ?? Array.from({length:q.prompts.length}, ()=>"");
+    // multiText may omit explicit prompts; fall back to one prompt per allowed item
+    const prompts = q.prompts ?? (Array.isArray(q.allow) ? Array.from({length: q.allow.length}, (_,i)=>`Svar ${i+1}`) : []);
+    const arr = answers[q.id] ?? Array.from({length: prompts.length}, ()=>"");
     body = `
       <div class="grid">
-        ${q.prompts.map((p,i)=>`
+        ${prompts.map((p,i)=>`
           <div>
-            <div class="hint" style="margin-bottom:6px;">${escapeHtml(p)}</div>
+            ${p ? `<div class="hint" style="margin-bottom:6px;">${escapeHtml(p)}</div>` : ``}
             <input type="text" data-i="${i}" placeholder="Skriv här…" value="${escapeAttr(arr[i]||"")}" />
           </div>
         `).join("")}
@@ -714,8 +725,10 @@ function renderQuestion(){
       });
     });
   }else if(q.type==="listText" || q.type==="multiText"){
-    const count = (q.type==="listText") ? q.count : q.prompts.length;
-    const arr = answers[q.id] ?? Array.from({length:count}, ()=>"");
+    const count = (q.type==="listText")
+      ? (q.count ?? 0)
+      : (q.prompts?.length ?? (Array.isArray(q.allow) ? q.allow.length : 0));
+    const arr = answers[q.id] ?? Array.from({length:Math.max(0,count)}, ()=>"");
     app.querySelectorAll('input[type="text"][data-i]').forEach(inp=>{
       inp.addEventListener("input", ()=>{
         const i = Number(inp.getAttribute("data-i"));
@@ -766,7 +779,7 @@ function questionMaxPoints(q){
   if(q.type==="mcq") return 1;
   if(q.type==="singleText") return q.points ?? 1;
   if(q.type==="listText") return (q.pointsEach ?? 1) * (q.count ?? 1);
-  if(q.type==="multiText") return (q.pointsEach ?? 1) * (q.prompts?.length ?? 1);
+  if(q.type==="multiText") return (q.pointsEach ?? 1) * (q.prompts?.length ?? (q.allow ? q.allow.length : 1));
   if(q.type==="freeKeywords") return q.maxPoints ?? q.keywords?.length ?? 0;
   return 1;
 }
@@ -831,16 +844,17 @@ function gradeQuestion(q, user){
 
   if(q.type==="multiText"){
     const arr = Array.isArray(user) ? user : [];
+    const prompts = q.prompts ?? (Array.isArray(q.allow) ? Array.from({length: q.allow.length}, (_,i)=>`Svar ${i+1}`) : []);
     const used = new Set();
     let pts = 0;
     const b = [];
 
-    for(let i=0;i<q.prompts.length;i++){
+    for(let i=0;i<prompts.length;i++){
       const v = arr[i] ?? "";
       let best = {points:0, matched:null, level:"none"};
 
       // choose best match among remaining allow items
-      for(const item of q.allow){
+      for(const item of (q.allow || [])){
         const key = JSON.stringify(item);
         if(q.unique && used.has(key)) continue;
 
@@ -855,7 +869,7 @@ function gradeQuestion(q, user){
       if(best.points>0 && q.unique && best._key) used.add(best._key);
 
       pts += best.points * (q.pointsEach ?? 1);
-      b.push({label:`${q.prompts[i]}`, pts: best.points, detail: best.matched});
+      b.push({label:`${prompts[i]}`, pts: best.points, detail: best.matched});
     }
 
     pts = Math.round(pts*2)/2;
@@ -977,7 +991,6 @@ function renderResults(){
         <ol>
           ${top5.map(s=>`<li><b>${s.pct}%</b> (${s.points}/${s.max})</li>`).join("")}
         </ol>
-        <p class="hint">Highscore sparas i den här webbläsaren (localStorage).</p>
       </div>
     ` : `<p class="muted">Inga highscores än.</p>`}
 

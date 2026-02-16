@@ -170,10 +170,14 @@ h1{
     position:absolute;
     top:20px;
     left:20px;
+    z-index: 2000; /* ensure header is on top */
 }
 
 .userSelectWrap{
     position:relative;
+    z-index: 60; /* ensure the trigger sits above other header content */
+    width: 130px; /* make the clickable area wider so the pill spans more space */
+    pointer-events: auto;
 }
 
 .userSelectBtn{
@@ -185,11 +189,15 @@ h1{
     cursor:pointer;
     box-shadow: 0 12px 22px rgba(0,0,0,.10);
     transition: .15s ease;
-}
-
-.userSelectBtn:hover{
-    transform: translateY(-2px);
-    background: rgba(255,255,255,.75);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 61; /* above the dropdown background */
+    width: 100%;
+    justify-content: flex-start; /* keep text left-aligned while filling space */
+    padding-right: 36px; /* make right side more tappable */
+    position: relative; /* allow stacking/context */
+    pointer-events: auto;
 }
 
 .userDropdown{
@@ -200,18 +208,28 @@ h1{
     flex-direction:column;
     gap:8px;
     background: var(--card);
-    padding:12px;
+    padding:8px 0; /* remove horizontal padding so buttons can span full width and be fully clickable */
     border-radius:18px;
     box-shadow: 0 20px 40px rgba(0,0,0,.2);
+    width: 100%;
+    min-width: 120px;
+    z-index: 59; /* sit above most page content */
+    pointer-events: auto;
 }
 
 .userDropdown button{
     background: rgba(255,255,255,.6);
     border:none;
-    padding:8px 12px;
+    padding:10px 16px; /* a bit more horizontal padding inside each button */
     border-radius:12px;
     font-weight:700;
     cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:100%;
+    text-align:left;
+    box-sizing: border-box;
 }
 
 .userDropdown button:hover{
@@ -221,5 +239,3 @@ h1{
 .hidden{
     display:none;
 }
-
-
