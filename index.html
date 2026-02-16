@@ -9,15 +9,20 @@
             --bg1:#fff7d6; --bg2:#e7f8ff; --card:#ffffff; --ink:#1a1a1a; --muted:#5a5a5a; --line:#e9e9ef;
             --ok:#1f7a1f; --half:#8a6d00; --bad:#b00020; --btn:#6c4cff; --btn2:#ff4f87;
         }
+
         body{
-            margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink);
+            margin:0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color:var(--ink);
             background:
                     radial-gradient(1200px 600px at 20% 0%, var(--bg2), transparent),
                     radial-gradient(900px 500px at 85% 10%, #ffe7f1, transparent),
                     linear-gradient(180deg, var(--bg1), #ffffff);
             min-height:100vh;
         }
+
         .container{ max-width: 980px; margin: 0 auto; padding: 18px 16px 110px; }
+
         .card{
             background: var(--card);
             border: 2px solid rgba(0,0,0,.04);
@@ -37,12 +42,16 @@
             background: radial-gradient(circle at 30% 30%, #fff, #c9f1ff);
             border-radius: 999px; opacity:.8; transform: rotate(-10deg);
         }
+
         h1{ margin:0 0 6px; font-size: 22px; position:relative; z-index:1; }
         .subtitle{ margin:0; color: var(--muted); font-size: 14px; position:relative; z-index:1; }
+
         .topline{
             display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:10px;
             position:relative; z-index:1;
+            flex-wrap: wrap;
         }
+
         .userBadge{
             display:inline-flex; align-items:center; gap:8px;
             padding: 8px 10px; border-radius: 999px;
@@ -50,21 +59,49 @@
             font-weight: 900; cursor:pointer; user-select:none;
         }
         .userBadge small{ color: var(--muted); font-weight: 800; }
+
         .list{
             margin-top: 14px; background: var(--card); border-radius: 18px;
             padding: 8px 12px; border: 2px solid rgba(0,0,0,.04);
             box-shadow: 0 12px 28px rgba(0,0,0,.08);
         }
-        .row{ display:flex; align-items:center; gap:14px; padding: 10px 6px; border-bottom: 1px dashed var(--line); }
+
+        .row{
+            display:flex; align-items:center; gap:14px; padding: 10px 6px;
+            border-bottom: 1px dashed var(--line);
+        }
         .row:last-child{ border-bottom:none; }
+
         .row p{ margin:0; width:260px; font-weight:900; }
+
         .row input{
-            flex:1; padding: 10px 12px; border-radius: 14px; border: 2px solid #e7e7f3; font-size:15px; outline:none;
+            flex:1;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 2px solid #e7e7f3;
+            font-size:15px;
+            outline:none;
+            background:#fff;
             transition: transform .05s ease, border-color .12s ease, box-shadow .12s ease;
         }
-        .row input:focus{ border-color: rgba(108,76,255,.55); box-shadow: 0 0 0 4px rgba(108,76,255,.12); transform: translateY(-1px); }
-        .status{ width: 290px; text-align:right; font-size: 13px; font-weight: 900; color: var(--muted); user-select:none; }
-        .full .status{ color: var(--ok); } .half .status{ color: var(--half);} .zero .status{ color: var(--bad);}
+        .row input:focus{
+            border-color: rgba(108,76,255,.55);
+            box-shadow: 0 0 0 4px rgba(108,76,255,.12);
+            transform: translateY(-1px);
+        }
+
+        .status{
+            width: 290px;
+            text-align:right;
+            font-size: 13px;
+            font-weight: 900;
+            color: var(--muted);
+            user-select:none;
+        }
+        .full .status{ color: var(--ok); }
+        .half .status{ color: var(--half); }
+        .zero .status{ color: var(--bad); }
+
         .full input{ border-color: rgba(31,122,31,.35); background: rgba(31,122,31,.06); }
         .half input{ border-color: rgba(138,109,0,.35); background: rgba(138,109,0,.06); }
         .zero input{ border-color: rgba(176,0,32,.35); background: rgba(176,0,32,.06); }
@@ -73,6 +110,7 @@
             position: fixed; left:0; right:0; bottom:0;
             background: rgba(255,255,255,.9); backdrop-filter: blur(8px);
             border-top: 1px solid rgba(0,0,0,.06); padding: 12px 16px;
+            z-index: 50;
         }
         .footerInner{ max-width: 980px; margin: 0 auto; display:flex; align-items:center; gap:12px; }
         .pill{
@@ -120,31 +158,43 @@
         }
         .choiceBtn small{ display:block; margin-top:6px; color: var(--muted); font-weight: 900; }
 
-        /* Review page */
-        .hidden{ display:none !important; }
-        .reviewTable{
-            width:100%;
-            border-collapse: collapse;
-            margin-top: 12px;
-            overflow:hidden;
-            border-radius: 14px;
-            border: 2px solid rgba(0,0,0,.05);
-            background:#fff;
+        /* Fel-sida: rätt stavning i högerkolumn */
+        .correctBox{
+            width: 290px;
+            text-align:right;
+            font-size: 13px;
+            font-weight: 1000;
+            color: #2b2b2b;
+            user-select:none;
         }
-        .reviewTable th, .reviewTable td{
-            text-align:left;
-            padding: 10px 12px;
-            border-bottom: 1px solid #f0f0f0;
-            font-weight: 900;
-        }
-        .reviewTable th{ background: #f7f7ff; }
-        .reviewTable td{ font-weight: 800; }
-        .muted{ color: var(--muted); font-weight: 800; }
+        .correctBox .label{ color: var(--muted); font-weight: 900; margin-right: 6px; }
 
+        .mHalf .correctBox { color: var(--half); }
+        .mZero .correctBox { color: var(--bad); }
+
+        .badgeIcon{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            font-weight: 1000;
+            margin-left: 6px;
+            transform: translateY(-1px);
+        }
+        .badgeHalf{ background: rgba(138,109,0,.10); border: 2px solid rgba(138,109,0,.18); }
+        .badgeZero{ background: rgba(176,0,32,.08); border: 2px solid rgba(176,0,32,.16); }
+
+        .hidden{ display:none !important; }
+
+        @media (max-width: 860px){
+            .status, .correctBox { width: auto; text-align:left; }
+        }
         @media (max-width: 760px){
             .row{ flex-direction: column; align-items: stretch; }
             .row p{ width:auto; }
-            .status{ width:auto; text-align:left; }
+            .status, .correctBox{ width:auto; text-align:left; }
             .userChoices{ grid-template-columns: 1fr; }
         }
     </style>
@@ -174,35 +224,26 @@
     </div>
 </div>
 
-<!-- REVIEW VIEW -->
-<div id="reviewView" class="container hidden">
+<!-- MISTAKES VIEW (ser ut som quiz, men bara fel + rätt stavning) -->
+<div id="mistakesView" class="container hidden">
     <div class="card">
-        <h1>📚 Öva på dessa!</h1>
-        <p class="subtitle">Här är bara de du fick <b>0,5</b> eller <b>0</b> poäng på.</p>
-        <p class="subtitle"><span class="muted" id="reviewUserLine">Användare: —</span></p>
-    </div>
-
-    <div class="list">
-        <div id="reviewEmpty" class="subtitle" style="margin:10px 6px; display:none;">
-            Inga att öva på! Du hade allt helt rätt 😄🏆
+        <h1>📚 Öva på de här!</h1>
+        <p class="subtitle">Här ser du bara de du fick <b>0,5</b> eller <b>0</b> poäng på — och hur det ska stavas.</p>
+        <div class="topline">
+            <div class="userBadge" id="userBadge2" title="Byt användare">
+                👤 <span id="userName2">Ingen vald</span> <small>(klicka för att byta)</small>
+            </div>
+            <div class="subtitle" id="mistakeCount"></div>
         </div>
-
-        <table class="reviewTable" id="reviewTable">
-            <thead>
-            <tr>
-                <th>Din stavning</th>
-                <th>Rätt stavning</th>
-            </tr>
-            </thead>
-            <tbody id="reviewBody"></tbody>
-        </table>
     </div>
+
+    <div class="list" id="mistakesList"></div>
 </div>
 
-<div id="reviewFooter" class="footer hidden">
+<div id="mistakesFooter" class="footer hidden">
     <div class="footerInner">
-        <div class="pill" id="reviewHint">Redo för en ny runda?</div>
-        <button class="btn" id="playAgain">Kör igen! 🔁</button>
+        <div class="pill" id="mistakesHint">Redo för en ny runda?</div>
+        <button class="btn" id="playAgain">Kör igen 🔁</button>
     </div>
 </div>
 
@@ -240,13 +281,12 @@
 
             <div class="divider"></div>
 
-            <p class="hsTitle">🏅 Dina topp 3 (highscore)</p>
+            <p class="hsTitle">🏅 Dina topp 3 (highscore i %)</p>
             <ol class="hsList" id="hsList">
                 <li>—</li><li>—</li><li>—</li>
             </ol>
         </div>
         <div class="modalActions">
-            <button class="btnSmall btnAlt" id="closeResult2" type="button">Stäng</button>
             <button class="btnSmall btnClose" id="closeResult" type="button">Okej!</button>
         </div>
     </div>
@@ -299,10 +339,11 @@
         { land:"Luxemburg", stad:"Luxemburg" },
     ];
 
-    // --- User + highscore ---
+    // --- Users + highscore (localStorage) ---
     const USERS = ["Elsa","Ingrid","Elektra"];
-    const CURRENT_USER_KEY = "capquiz_current_user_v2";
-    const HIGHSCORE_PREFIX = "capquiz_highscores_v2_"; // + username
+    const CURRENT_USER_KEY = "capquiz_current_user_v3";
+    const HIGHSCORE_PREFIX = "capquiz_highscores_v3_";
+
     let currentUser = null;
 
     function loadCurrentUser(){
@@ -328,17 +369,12 @@
         setHighscores(u, top3);
         return top3;
     }
+
     function formatScore(x){ return Number.isInteger(x) ? String(x) : String(x).replace(".", ","); }
+    function toPercent(score){ return Math.round((score / COUNTRIES.length) * 100); }
+    function formatPercent(score){ return `${toPercent(score)}%`; }
 
-    function toPercent(score){
-        const max = COUNTRIES.length;
-        return Math.round((score / max) * 100);
-    }
-    function formatPercent(score){
-        return `${toPercent(score)}%`;
-    }
-
-    // --- Scoring ---
+    // --- Fuzzy matching (Damerau–Levenshtein) ---
     function normalize(s){ return (s ?? "").toString().trim().toLowerCase().replace(/\s+/g," "); }
 
     function damerauLevenshtein(a, b){
@@ -373,66 +409,43 @@
         return { points: 0, dist };
     }
 
-    // --- Elements ---
+    // --- DOM ---
     const listEl = document.getElementById("list");
     const totalEl = document.getElementById("total");
     const userNameEl = document.getElementById("userName");
+    const userName2El = document.getElementById("userName2");
     const hsMiniEl = document.getElementById("hsMini");
 
     const quizView = document.getElementById("quizView");
     const quizFooter = document.getElementById("quizFooter");
-    const reviewView = document.getElementById("reviewView");
-    const reviewFooter = document.getElementById("reviewFooter");
-
-    const reviewBody = document.getElementById("reviewBody");
-    const reviewTable = document.getElementById("reviewTable");
-    const reviewEmpty = document.getElementById("reviewEmpty");
-    const reviewUserLine = document.getElementById("reviewUserLine");
+    const mistakesView = document.getElementById("mistakesView");
+    const mistakesFooter = document.getElementById("mistakesFooter");
+    const mistakesListEl = document.getElementById("mistakesList");
+    const mistakeCountEl = document.getElementById("mistakeCount");
 
     const userBackdrop = document.getElementById("userBackdrop");
     const resultBackdrop = document.getElementById("resultBackdrop");
 
-    // We store the last round's mistakes so the review page can show them.
-    let lastRoundMistakes = []; // { typed, correct, points }
+    // last mistakes: { land, typed, correct, points }
+    let lastRoundMistakes = [];
 
-    // --- Build quiz list once ---
-    COUNTRIES.forEach((c, i) => {
-        const row = document.createElement("div");
-        row.className = "row";
-        row.dataset.idx = i;
-
-        const p = document.createElement("p");
-        p.textContent = c.land;
-
-        const input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "Skriv huvudstad här ✍️";
-
-        const status = document.createElement("div");
-        status.className = "status";
-        status.textContent = " ";
-
-        row.appendChild(p);
-        row.appendChild(input);
-        row.appendChild(status);
-        listEl.appendChild(row);
-    });
-
-    // --- Helpers: show views ---
+    // --- Views ---
     function showQuiz(){
-        reviewView.classList.add("hidden");
-        reviewFooter.classList.add("hidden");
+        mistakesView.classList.add("hidden");
+        mistakesFooter.classList.add("hidden");
         quizView.classList.remove("hidden");
         quizFooter.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    function showReview(){
+    function showMistakes(){
         quizView.classList.add("hidden");
         quizFooter.classList.add("hidden");
-        reviewView.classList.remove("hidden");
-        reviewFooter.classList.remove("hidden");
+        mistakesView.classList.remove("hidden");
+        mistakesFooter.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // --- Reset round (new attempt) ---
+    // --- Reset round ---
     function resetRound(){
         document.querySelectorAll("#list .row").forEach(row => {
             row.classList.remove("full","half","zero");
@@ -443,7 +456,12 @@
         lastRoundMistakes = [];
     }
 
-    // --- Highscore display ---
+    // --- Auto-scroll on focus (TAB-friendly) ---
+    function scrollToInput(el){
+        el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
+
+    // --- Highscore display (percent) ---
     function refreshMiniHighscore(){
         if (!currentUser){ hsMiniEl.textContent = ""; return; }
         const hs = getHighscores(currentUser);
@@ -460,13 +478,16 @@
         currentUser = u;
         saveCurrentUser(u);
         userNameEl.textContent = u;
+        userName2El.textContent = u;
         refreshMiniHighscore();
-        // New user => new round
+
+        // new user => new clean round
         resetRound();
         showQuiz();
     }
 
-    document.getElementById("userBadge").addEventListener("click", () => openUserModal());
+    document.getElementById("userBadge").addEventListener("click", openUserModal);
+    document.getElementById("userBadge2").addEventListener("click", openUserModal);
 
     userBackdrop.addEventListener("click", (e) => {
         const btn = e.target.closest(".choiceBtn");
@@ -477,17 +498,38 @@
         closeUserModal();
     });
 
-    // --- Result modal helpers ---
-    function openResultModal(){ resultBackdrop.style.display = "flex"; }
-    function closeResultModalAndGoReview(){
-        resultBackdrop.style.display = "none";
-        renderReviewTable();
-        showReview();
-    }
+    // --- Build quiz rows once ---
+    COUNTRIES.forEach((c, i) => {
+        const row = document.createElement("div");
+        row.className = "row";
+        row.dataset.idx = i;
 
-    document.getElementById("closeResult").addEventListener("click", closeResultModalAndGoReview);
-    document.getElementById("closeResult2").addEventListener("click", closeResultModalAndGoReview);
-    resultBackdrop.addEventListener("click", (e) => { if (e.target === resultBackdrop) closeResultModalAndGoReview(); });
+        const p = document.createElement("p");
+        p.textContent = c.land;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Skriv huvudstad här ✍️";
+        input.addEventListener("focus", () => scrollToInput(input)); // <-- auto-scroll on TAB/focus
+
+        const status = document.createElement("div");
+        status.className = "status";
+        status.textContent = " ";
+
+        row.appendChild(p);
+        row.appendChild(input);
+        row.appendChild(status);
+        listEl.appendChild(row);
+    });
+
+    // --- Result modal flow: OK -> mistakes page ---
+    function openResultModal(){ resultBackdrop.style.display = "flex"; }
+    function closeResultModalToMistakes(){
+        resultBackdrop.style.display = "none";
+        renderMistakesPage();
+        showMistakes();
+    }
+    document.getElementById("closeResult").addEventListener("click", closeResultModalToMistakes);
 
     // --- Grade ---
     document.getElementById("rätta").addEventListener("click", () => {
@@ -514,11 +556,11 @@
             } else if (res.points === 0.5) {
                 row.classList.add("half");
                 status.textContent = `0,5 p ⭐ (rätt: ${item.stad})`;
-                lastRoundMistakes.push({ typed: typedRaw.trim(), correct: item.stad, points: 0.5 });
+                lastRoundMistakes.push({ land: item.land, typed: typedRaw.trim(), correct: item.stad, points: 0.5 });
             } else {
                 row.classList.add("zero");
                 status.textContent = `0 p ❌ (rätt: ${item.stad})`;
-                lastRoundMistakes.push({ typed: typedRaw.trim(), correct: item.stad, points: 0 });
+                lastRoundMistakes.push({ land: item.land, typed: typedRaw.trim(), correct: item.stad, points: 0 });
             }
         });
 
@@ -545,7 +587,7 @@
         document.getElementById("resultPercent").textContent = `Det blir ${percent}% rätt.`;
         document.getElementById("resultExtra").textContent = extra;
 
-        // Top3 list
+        // Top3 list (percent)
         const hsList = document.getElementById("hsList");
         hsList.innerHTML = "";
         for (let i=0;i<3;i++){
@@ -557,55 +599,92 @@
         openResultModal();
     });
 
-    // --- Review page rendering ---
-    function renderReviewTable(){
-        reviewUserLine.textContent = `Användare: ${currentUser ?? "—"}`;
-        reviewBody.innerHTML = "";
+    // --- Mistakes page rendering ---
+    function renderMistakesPage(){
+        userName2El.textContent = currentUser ?? "Ingen vald";
 
-        const mistakes = (lastRoundMistakes || []).filter(x => x.points === 0 || x.points === 0.5);
+        const mistakes = (lastRoundMistakes || []).filter(m => m.points === 0 || m.points === 0.5);
+        mistakesListEl.innerHTML = "";
 
         if (mistakes.length === 0){
-            reviewTable.style.display = "none";
-            reviewEmpty.style.display = "block";
+            mistakeCountEl.textContent = "Inga fel! 🏆";
+            const nice = document.createElement("div");
+            nice.className = "subtitle";
+            nice.style.padding = "10px 6px";
+            nice.textContent = "Du hade allt helt rätt 😄 Klicka “Kör igen” för en ny runda!";
+            mistakesListEl.appendChild(nice);
             return;
         }
 
-        reviewEmpty.style.display = "none";
-        reviewTable.style.display = "table";
+        // 0p först, sen 0.5p
+        mistakes.sort((a,b) => a.points - b.points);
+
+        const zeros = mistakes.filter(m => m.points === 0).length;
+        const halves = mistakes.filter(m => m.points === 0.5).length;
+        mistakeCountEl.textContent = `${mistakes.length} att öva på · ❌ ${zeros} · ⭐ ${halves}`;
 
         for (const m of mistakes){
-            const tr = document.createElement("tr");
+            const row = document.createElement("div");
+            row.className = "row " + (m.points === 0.5 ? "mHalf" : "mZero");
 
-            const tdTyped = document.createElement("td");
-            tdTyped.textContent = m.typed && m.typed.length ? m.typed : "—";
+            const p = document.createElement("p");
+            p.textContent = m.land;
 
-            const tdCorrect = document.createElement("td");
-            tdCorrect.textContent = m.correct;
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = m.typed && m.typed.length ? m.typed : "";
+            input.disabled = true;
 
-            tr.appendChild(tdTyped);
-            tr.appendChild(tdCorrect);
-            reviewBody.appendChild(tr);
+            const correct = document.createElement("div");
+            correct.className = "correctBox";
+
+            const icon = (m.points === 0.5)
+                ? `<span class="badgeIcon badgeHalf">⭐</span>`
+                : `<span class="badgeIcon badgeZero">❌</span>`;
+
+            const label = (m.points === 0.5)
+                ? `<span class="label">Nästan rätt:</span>`
+                : `<span class="label">Rätt:</span>`;
+
+            correct.innerHTML = `${label}${escapeHtml(m.correct)} ${icon}`;
+
+            row.appendChild(p);
+            row.appendChild(input);
+            row.appendChild(correct);
+            mistakesListEl.appendChild(row);
         }
     }
 
-    // --- Play again: same user, new round, back to quiz ---
+    function escapeHtml(str){
+        return String(str)
+            .replaceAll("&","&amp;")
+            .replaceAll("<","&lt;")
+            .replaceAll(">","&gt;")
+            .replaceAll('"',"&quot;")
+            .replaceAll("'","&#039;");
+    }
+
+    // --- Kör igen ---
     document.getElementById("playAgain").addEventListener("click", () => {
         resetRound();
         showQuiz();
+        const firstInput = document.querySelector("#list .row input");
+        if (firstInput){
+            firstInput.focus();
+            scrollToInput(firstInput);
+        }
     });
 
     // --- Init ---
     currentUser = loadCurrentUser();
     if (currentUser){
-        userNameEl.textContent = currentUser;
-        refreshMiniHighscore();
-        showQuiz();
-        resetRound();
+        setUser(currentUser);
     } else {
         userNameEl.textContent = "Ingen vald";
+        userName2El.textContent = "Ingen vald";
         showQuiz();
         resetRound();
-        openUserModal(); // must pick at start
+        openUserModal();
     }
 </script>
 
