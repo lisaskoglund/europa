@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Huvudstäder – femteklass</title>
+    <style>
+        :root{
+            --bg1:#fff7d6; --bg2:#e7f8ff; --card:#ffffff; --ink:#1a1a1a; --muted:#5a5a5a; --line:#e9e9ef;
+            --ok:#1f7a1f; --half:#8a6d00; --bad:#b00020; --btn:#6c4cff; --btn2:#ff4f87;
+        }
+        body{
+            margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink);
+            background:
+                    radial-gradient(1200px 600px at 20% 0%, var(--bg2), transparent),
+                    radial-gradient(900px 500px at 85% 10%, #ffe7f1, transparent),
+                    linear-gradient(180deg, var(--bg1), #ffffff);
+            min-height:100vh;
+        }
+        .container{ max-width: 980px; margin: 0 auto; padding: 18px 16px 110px; }
+        .card{
+            background: var(--card);
+            border: 2px solid rgba(0,0,0,.04);
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: 0 12px 28px rgba(0,0,0,.08);
+            position: relative;
+            overflow:hidden;
+        }
+        .card:before{
+            content:""; position:absolute; inset:-60px -60px auto auto; width: 180px; height: 180px;
+            background: radial-gradient(circle at 30% 30%, #fff, #ffd3e1);
+            border-radius: 999px; opacity:.8; transform: rotate(10deg);
+        }
+        .card:after{
+            content:""; position:absolute; inset:auto auto -70px -70px; width: 220px; height: 220px;
+            background: radial-gradient(circle at 30% 30%, #fff, #c9f1ff);
+            border-radius: 999px; opacity:.8; transform: rotate(-10deg);
+        }
+        h1{ margin:0 0 6px; font-size: 22px; position:relative; z-index:1; }
+        .subtitle{ margin:0; color: var(--muted); font-size: 14px; position:relative; z-index:1; }
+        .topline{
+            display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:10px;
+            position:relative; z-index:1;
+        }
+        .userBadge{
+            display:inline-flex; align-items:center; gap:8px;
+            padding: 8px 10px; border-radius: 999px;
+            background: #f2f2ff; border: 2px solid rgba(108,76,255,.12);
+            font-weight: 900; cursor:pointer; user-select:none;
+        }
+        .userBadge small{ color: var(--muted); font-weight: 800; }
+        .list{
+            margin-top: 14px; background: var(--card); border-radius: 18px;
+            padding: 8px 12px; border: 2px solid rgba(0,0,0,.04);
+            box-shadow: 0 12px 28px rgba(0,0,0,.08);
+        }
+        .row{ display:flex; align-items:center; gap:14px; padding: 10px 6px; border-bottom: 1px dashed var(--line); }
+        .row:last-child{ border-bottom:none; }
+        .row p{ margin:0; width:260px; font-weight:900; }
+        .row input{
+            flex:1; padding: 10px 12px; border-radius: 14px; border: 2px solid #e7e7f3; font-size:15px; outline:none;
+            transition: transform .05s ease, border-color .12s ease, box-shadow .12s ease;
+        }
+        .row input:focus{ border-color: rgba(108,76,255,.55); box-shadow: 0 0 0 4px rgba(108,76,255,.12); transform: translateY(-1px); }
+        .status{ width: 290px; text-align:right; font-size: 13px; font-weight: 900; color: var(--muted); user-select:none; }
+        .full .status{ color: var(--ok); } .half .status{ color: var(--half);} .zero .status{ color: var(--bad);}
+        .full input{ border-color: rgba(31,122,31,.35); background: rgba(31,122,31,.06); }
+        .half input{ border-color: rgba(138,109,0,.35); background: rgba(138,109,0,.06); }
+        .zero input{ border-color: rgba(176,0,32,.35); background: rgba(176,0,32,.06); }
+
+        .footer{
+            position: fixed; left:0; right:0; bottom:0;
+            background: rgba(255,255,255,.9); backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(0,0,0,.06); padding: 12px 16px;
+        }
+        .footerInner{ max-width: 980px; margin: 0 auto; display:flex; align-items:center; gap:12px; }
+        .pill{
+            padding: 10px 12px; border-radius: 999px; background:#f2f2ff;
+            border: 2px solid rgba(108,76,255,.12); font-weight: 1000;
+        }
+        .btn{
+            margin-left:auto; padding: 12px 16px; border-radius: 16px; border:none; cursor:pointer;
+            font-weight: 1000; letter-spacing:.3px; color:#fff;
+            background: linear-gradient(135deg, var(--btn), var(--btn2));
+            box-shadow: 0 14px 26px rgba(108,76,255,.25);
+        }
+        .btn:active{ transform: translateY(1px); }
+
+        /* Modal */
+        .modalBackdrop{
+            position: fixed; inset: 0; background: rgba(0,0,0,.45);
+            display:none; align-items:center; justify-content:center; padding: 18px; z-index:999;
+        }
+        .modal{
+            width: min(620px, 100%); background:#fff; border-radius:22px;
+            box-shadow: 0 22px 70px rgba(0,0,0,.25); border: 2px solid rgba(0,0,0,.06);
+            overflow:hidden;
+        }
+        .modalTop{ padding: 16px 16px 10px; background: linear-gradient(135deg, #c9f1ff, #ffe7f1); }
+        .modalTitle{ margin:0; font-size:22px; font-weight:1000; display:flex; align-items:center; gap:10px; }
+        .emoji{ font-size:30px; }
+        .modalBody{ padding: 14px 16px 16px; }
+        .bigScore{ font-size:18px; font-weight:1000; margin: 8px 0; }
+        .small{ margin:0; color: var(--muted); }
+        .divider{ height:1px; background:#eee; margin:12px 0; }
+        .hsTitle{ margin: 0 0 8px; font-weight: 1000; }
+        .hsList{ margin:0; padding-left: 18px; font-weight: 900; }
+        .hsList li{ margin: 4px 0; }
+        .modalActions{ display:flex; justify-content:flex-end; gap:10px; padding: 0 16px 16px; }
+        .btnSmall{ border:none; border-radius: 14px; padding: 10px 12px; cursor:pointer; font-weight: 1000; }
+        .btnClose{ background:#111; color:#fff; }
+        .btnAlt{ background:#f2f2ff; color:#111; border: 2px solid rgba(108,76,255,.12); }
+
+        /* User selection */
+        .userChoices{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; margin-top:10px; }
+        .choiceBtn{
+            border: 2px solid rgba(0,0,0,.06); background:#fff; border-radius:18px;
+            padding: 14px 12px; cursor:pointer; font-weight:1000; box-shadow: 0 10px 18px rgba(0,0,0,.08);
+        }
+        .choiceBtn small{ display:block; margin-top:6px; color: var(--muted); font-weight: 900; }
+
+        /* Review page */
+        .hidden{ display:none !important; }
+        .reviewTable{
+            width:100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            overflow:hidden;
+            border-radius: 14px;
+            border: 2px solid rgba(0,0,0,.05);
+            background:#fff;
+        }
+        .reviewTable th, .reviewTable td{
+            text-align:left;
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: 900;
+        }
+        .reviewTable th{ background: #f7f7ff; }
+        .reviewTable td{ font-weight: 800; }
+        .muted{ color: var(--muted); font-weight: 800; }
+
+        @media (max-width: 760px){
+            .row{ flex-direction: column; align-items: stretch; }
+            .row p{ width:auto; }
+            .status{ width:auto; text-align:left; }
+            .userChoices{ grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- QUIZ VIEW -->
+<div id="quizView" class="container">
+    <div class="card">
+        <h1>🌍 Huvudstäder i Europa</h1>
+        <p class="subtitle">Exakt rätt = <b>1 poäng</b>. 1–2 bokstäver fel = <b>0,5 poäng</b>. Tryck <b>Rätta</b> när du är klar!</p>
+        <div class="topline">
+            <div class="userBadge" id="userBadge" title="Byt användare">
+                👤 <span id="userName">Ingen vald</span> <small>(klicka för att byta)</small>
+            </div>
+            <div class="subtitle" id="hsMini"></div>
+        </div>
+    </div>
+
+    <div class="list" id="list"></div>
+</div>
+
+<div id="quizFooter" class="footer">
+    <div class="footerInner">
+        <div class="pill" id="total">Total: 0 / 42</div>
+        <button class="btn" id="rätta">Rätta ✅</button>
+    </div>
+</div>
+
+<!-- REVIEW VIEW -->
+<div id="reviewView" class="container hidden">
+    <div class="card">
+        <h1>📚 Öva på dessa!</h1>
+        <p class="subtitle">Här är bara de du fick <b>0,5</b> eller <b>0</b> poäng på.</p>
+        <p class="subtitle"><span class="muted" id="reviewUserLine">Användare: —</span></p>
+    </div>
+
+    <div class="list">
+        <div id="reviewEmpty" class="subtitle" style="margin:10px 6px; display:none;">
+            Inga att öva på! Du hade allt helt rätt 😄🏆
+        </div>
+
+        <table class="reviewTable" id="reviewTable">
+            <thead>
+            <tr>
+                <th>Din stavning</th>
+                <th>Rätt stavning</th>
+            </tr>
+            </thead>
+            <tbody id="reviewBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="reviewFooter" class="footer hidden">
+    <div class="footerInner">
+        <div class="pill" id="reviewHint">Redo för en ny runda?</div>
+        <button class="btn" id="playAgain">Kör igen! 🔁</button>
+    </div>
+</div>
+
+<!-- Modal: välj användare -->
+<div class="modalBackdrop" id="userBackdrop" role="dialog" aria-modal="true" aria-labelledby="userTitle">
+    <div class="modal">
+        <div class="modalTop">
+            <h2 class="modalTitle" id="userTitle"><span class="emoji">👋</span> Vem är du?</h2>
+        </div>
+        <div class="modalBody">
+            <p class="small">Välj användare för att spara highscore. ✨</p>
+            <div class="userChoices">
+                <button class="choiceBtn" data-user="Elsa">Elsa <small>❄️</small></button>
+                <button class="choiceBtn" data-user="Ingrid">Ingrid <small>🌼</small></button>
+                <button class="choiceBtn" data-user="Annan">Annan <small>🙂</small></button>
+            </div>
+        </div>
+        <div class="modalActions">
+            <button class="btnSmall btnAlt" type="button" disabled title="Du måste välja en användare">Välj först</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: resultat -->
+<div class="modalBackdrop" id="resultBackdrop" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal">
+        <div class="modalTop">
+            <h2 class="modalTitle" id="resultTitle"><span class="emoji" id="resultEmoji">🎉</span> Bra jobbat!</h2>
+        </div>
+        <div class="modalBody">
+            <p class="small" id="resultUserLine">Användare: -</p>
+            <div class="bigScore" id="resultScore">Du fick 0 / 42 poäng.</div>
+            <p class="small" id="resultPercent">Det blir 0% rätt.</p>
+            <p class="small" id="resultExtra">Fortsätt så! 😄</p>
+
+            <div class="divider"></div>
+
+            <p class="hsTitle">🏅 Dina topp 3 (highscore)</p>
+            <ol class="hsList" id="hsList">
+                <li>—</li><li>—</li><li>—</li>
+            </ol>
+        </div>
+        <div class="modalActions">
+            <button class="btnSmall btnAlt" id="closeResult2" type="button">Stäng</button>
+            <button class="btnSmall btnClose" id="closeResult" type="button">Okej!</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Data (exakt enligt din lista) ---
+    const COUNTRIES = [
+        { land:"Ryssland", stad:"Moskva" },
+        { land:"Finland", stad:"Helsingfors" },
+        { land:"Estland", stad:"Tallinn" },
+        { land:"Lettland", stad:"Riga" },
+        { land:"Litauen", stad:"Vilnius" },
+        { land:"Belarus", stad:"Minsk" },
+        { land:"Ukraina", stad:"Kiev" },
+        { land:"Moldavien", stad:"Chisinàu" },
+        { land:"Rumänien", stad:"Bukarest" },
+        { land:"Bulgarien", stad:"Sofia" },
+        { land:"Turkiet", stad:"Ankara" },
+        { land:"Cypern", stad:"Nikosia" },
+        { land:"Grekland", stad:"Aten" },
+        { land:"Nordmacedonien", stad:"Skopje" },
+        { land:"Albanien", stad:"Tirana" },
+        { land:"Kosovo", stad:"Pristina" },
+        { land:"Montenegro", stad:"Podgorica" },
+        { land:"Serbien", stad:"Belgrad" },
+        { land:"Bosnien och Hercegovina", stad:"Sarajevo" },
+        { land:"Kroatien", stad:"Zagreb" },
+        { land:"Ungern", stad:"Budapest" },
+        { land:"Slovakien", stad:"Bratislava" },
+        { land:"Tjeckien", stad:"Prag" },
+        { land:"Polen", stad:"Warszawa" },
+        { land:"Tyskland", stad:"Berlin" },
+        { land:"Österrike", stad:"Wien" },
+        { land:"Italien", stad:"Rom" },
+        { land:"Malta", stad:"Valleta" },
+        { land:"Schweiz", stad:"Bern" },
+        { land:"Portugal", stad:"Lissabon" },
+        { land:"Spanien", stad:"Madrid" },
+        { land:"Frankrike", stad:"Paris" },
+        { land:"Belgien", stad:"Bryssel" },
+        { land:"Nederländerna", stad:"Amsterdam" },
+        { land:"Storbritannien", stad:"London" },
+        { land:"Irland", stad:"Dublin" },
+        { land:"Danmark", stad:"Köpenhamn" },
+        { land:"Sverige", stad:"Stockholm" },
+        { land:"Norge", stad:"Oslo" },
+        { land:"Island", stad:"Reykjavik" },
+        { land:"Slovenien", stad:"Ljubljana" },
+        { land:"Luxemburg", stad:"Luxemburg" },
+    ];
+
+    // --- User + highscore ---
+    const USERS = ["Elsa","Ingrid","Annan"];
+    const CURRENT_USER_KEY = "capquiz_current_user_v2";
+    const HIGHSCORE_PREFIX = "capquiz_highscores_v2_"; // + username
+    let currentUser = null;
+
+    function loadCurrentUser(){
+        const u = localStorage.getItem(CURRENT_USER_KEY);
+        return (u && USERS.includes(u)) ? u : null;
+    }
+    function saveCurrentUser(u){ localStorage.setItem(CURRENT_USER_KEY, u); }
+    function hsKey(u){ return HIGHSCORE_PREFIX + u; }
+
+    function getHighscores(u){
+        try{
+            const raw = localStorage.getItem(hsKey(u));
+            const arr = raw ? JSON.parse(raw) : [];
+            return Array.isArray(arr) ? arr : [];
+        } catch { return []; }
+    }
+    function setHighscores(u, arr){ localStorage.setItem(hsKey(u), JSON.stringify(arr)); }
+    function addScore(u, score){
+        const hs = getHighscores(u);
+        hs.push({ score, ts: Date.now() });
+        hs.sort((a,b) => b.score - a.score || a.ts - b.ts);
+        const top3 = hs.slice(0,3);
+        setHighscores(u, top3);
+        return top3;
+    }
+    function formatScore(x){ return Number.isInteger(x) ? String(x) : String(x).replace(".", ","); }
+
+    function toPercent(score){
+        const max = COUNTRIES.length;
+        return Math.round((score / max) * 100);
+    }
+    function formatPercent(score){
+        return `${toPercent(score)}%`;
+    }
+
+    // --- Scoring ---
+    function normalize(s){ return (s ?? "").toString().trim().toLowerCase().replace(/\s+/g," "); }
+
+    function damerauLevenshtein(a, b){
+        a = normalize(a); b = normalize(b);
+        const alen = a.length, blen = b.length;
+        if (!alen) return blen;
+        if (!blen) return alen;
+
+        const dp = Array.from({length: alen+1}, ()=> Array(blen+1).fill(0));
+        for (let i=0;i<=alen;i++) dp[i][0]=i;
+        for (let j=0;j<=blen;j++) dp[0][j]=j;
+
+        for (let i=1;i<=alen;i++){
+            for (let j=1;j<=blen;j++){
+                const cost = a[i-1]===b[j-1] ? 0 : 1;
+                dp[i][j] = Math.min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + cost);
+                if (i>1 && j>1 && a[i-1]===b[j-2] && a[i-2]===b[j-1]){
+                    dp[i][j] = Math.min(dp[i][j], dp[i-2][j-2] + cost);
+                }
+            }
+        }
+        return dp[alen][blen];
+    }
+
+    function scoreAnswer(userAnswer, correct){
+        const ua = normalize(userAnswer);
+        const ca = normalize(correct);
+        if (!ua) return { points: 0, dist: null };
+        if (ua === ca) return { points: 1, dist: 0 };
+        const dist = damerauLevenshtein(ua, ca);
+        if (dist === 1 || dist === 2) return { points: 0.5, dist };
+        return { points: 0, dist };
+    }
+
+    // --- Elements ---
+    const listEl = document.getElementById("list");
+    const totalEl = document.getElementById("total");
+    const userNameEl = document.getElementById("userName");
+    const hsMiniEl = document.getElementById("hsMini");
+
+    const quizView = document.getElementById("quizView");
+    const quizFooter = document.getElementById("quizFooter");
+    const reviewView = document.getElementById("reviewView");
+    const reviewFooter = document.getElementById("reviewFooter");
+
+    const reviewBody = document.getElementById("reviewBody");
+    const reviewTable = document.getElementById("reviewTable");
+    const reviewEmpty = document.getElementById("reviewEmpty");
+    const reviewUserLine = document.getElementById("reviewUserLine");
+
+    const userBackdrop = document.getElementById("userBackdrop");
+    const resultBackdrop = document.getElementById("resultBackdrop");
+
+    // We store the last round's mistakes so the review page can show them.
+    let lastRoundMistakes = []; // { typed, correct, points }
+
+    // --- Build quiz list once ---
+    COUNTRIES.forEach((c, i) => {
+        const row = document.createElement("div");
+        row.className = "row";
+        row.dataset.idx = i;
+
+        const p = document.createElement("p");
+        p.textContent = c.land;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Skriv huvudstad här ✍️";
+
+        const status = document.createElement("div");
+        status.className = "status";
+        status.textContent = " ";
+
+        row.appendChild(p);
+        row.appendChild(input);
+        row.appendChild(status);
+        listEl.appendChild(row);
+    });
+
+    // --- Helpers: show views ---
+    function showQuiz(){
+        reviewView.classList.add("hidden");
+        reviewFooter.classList.add("hidden");
+        quizView.classList.remove("hidden");
+        quizFooter.classList.remove("hidden");
+    }
+    function showReview(){
+        quizView.classList.add("hidden");
+        quizFooter.classList.add("hidden");
+        reviewView.classList.remove("hidden");
+        reviewFooter.classList.remove("hidden");
+    }
+
+    // --- Reset round (new attempt) ---
+    function resetRound(){
+        document.querySelectorAll("#list .row").forEach(row => {
+            row.classList.remove("full","half","zero");
+            row.querySelector("input").value = "";
+            row.querySelector(".status").textContent = " ";
+        });
+        totalEl.textContent = `Total: 0 / ${COUNTRIES.length}`;
+        lastRoundMistakes = [];
+    }
+
+    // --- Highscore display ---
+    function refreshMiniHighscore(){
+        if (!currentUser){ hsMiniEl.textContent = ""; return; }
+        const hs = getHighscores(currentUser);
+        hsMiniEl.textContent = (hs.length === 0)
+            ? "🏅 Highscore: —"
+            : `🏅 Highscore: ${formatPercent(hs[0].score)}`;
+    }
+
+    // --- User modal ---
+    function openUserModal(){ userBackdrop.style.display = "flex"; }
+    function closeUserModal(){ userBackdrop.style.display = "none"; }
+
+    function setUser(u){
+        currentUser = u;
+        saveCurrentUser(u);
+        userNameEl.textContent = u;
+        refreshMiniHighscore();
+        // New user => new round
+        resetRound();
+        showQuiz();
+    }
+
+    document.getElementById("userBadge").addEventListener("click", () => openUserModal());
+
+    userBackdrop.addEventListener("click", (e) => {
+        const btn = e.target.closest(".choiceBtn");
+        if (!btn) return;
+        const u = btn.dataset.user;
+        if (!USERS.includes(u)) return;
+        setUser(u);
+        closeUserModal();
+    });
+
+    // --- Result modal helpers ---
+    function openResultModal(){ resultBackdrop.style.display = "flex"; }
+    function closeResultModalAndGoReview(){
+        resultBackdrop.style.display = "none";
+        renderReviewTable();
+        showReview();
+    }
+
+    document.getElementById("closeResult").addEventListener("click", closeResultModalAndGoReview);
+    document.getElementById("closeResult2").addEventListener("click", closeResultModalAndGoReview);
+    resultBackdrop.addEventListener("click", (e) => { if (e.target === resultBackdrop) closeResultModalAndGoReview(); });
+
+    // --- Grade ---
+    document.getElementById("rätta").addEventListener("click", () => {
+        if (!currentUser){ openUserModal(); return; }
+
+        let total = 0;
+        lastRoundMistakes = [];
+
+        document.querySelectorAll("#list .row").forEach(row => {
+            const idx = Number(row.dataset.idx);
+            const item = COUNTRIES[idx];
+            const input = row.querySelector("input");
+            const status = row.querySelector(".status");
+
+            const typedRaw = input.value ?? "";
+            const res = scoreAnswer(typedRaw, item.stad);
+            total += res.points;
+
+            row.classList.remove("full","half","zero");
+
+            if (res.points === 1) {
+                row.classList.add("full");
+                status.textContent = "1 p ✅ (rätt)";
+            } else if (res.points === 0.5) {
+                row.classList.add("half");
+                status.textContent = `0,5 p ⭐ (rätt: ${item.stad})`;
+                lastRoundMistakes.push({ typed: typedRaw.trim(), correct: item.stad, points: 0.5 });
+            } else {
+                row.classList.add("zero");
+                status.textContent = `0 p ❌ (rätt: ${item.stad})`;
+                lastRoundMistakes.push({ typed: typedRaw.trim(), correct: item.stad, points: 0 });
+            }
+        });
+
+        const max = COUNTRIES.length;
+        const percent = Math.round((total / max) * 100);
+        totalEl.textContent = `Total: ${formatScore(total)} / ${max}`;
+
+        // Save highscore + get top3
+        const top3 = addScore(currentUser, total);
+        refreshMiniHighscore();
+
+        // Emoji & pepp
+        let emoji = "🎉";
+        let extra = "Fortsätt så! 😄";
+        if (percent >= 90) { emoji = "🏆"; extra = "WOW! Du är en mästare! 🤩"; }
+        else if (percent >= 75) { emoji = "🚀"; extra = "Superbra! Du är på topp! 😄"; }
+        else if (percent >= 50) { emoji = "👏"; extra = "Bra kämpat! Du är på väg! 🙂"; }
+        else { emoji = "🌟"; extra = "Bra jobbat! Öva lite till så sitter det! 😊"; }
+
+        // Fill modal
+        document.getElementById("resultEmoji").textContent = emoji;
+        document.getElementById("resultUserLine").textContent = `Användare: ${currentUser}`;
+        document.getElementById("resultScore").textContent = `Du fick ${formatScore(total)} / ${max} poäng.`;
+        document.getElementById("resultPercent").textContent = `Det blir ${percent}% rätt.`;
+        document.getElementById("resultExtra").textContent = extra;
+
+        // Top3 list
+        const hsList = document.getElementById("hsList");
+        hsList.innerHTML = "";
+        for (let i=0;i<3;i++){
+            const li = document.createElement("li");
+            li.textContent = top3[i] ? `${formatPercent(top3[i].score)}` : "—";
+            hsList.appendChild(li);
+        }
+
+        openResultModal();
+    });
+
+    // --- Review page rendering ---
+    function renderReviewTable(){
+        reviewUserLine.textContent = `Användare: ${currentUser ?? "—"}`;
+        reviewBody.innerHTML = "";
+
+        const mistakes = (lastRoundMistakes || []).filter(x => x.points === 0 || x.points === 0.5);
+
+        if (mistakes.length === 0){
+            reviewTable.style.display = "none";
+            reviewEmpty.style.display = "block";
+            return;
+        }
+
+        reviewEmpty.style.display = "none";
+        reviewTable.style.display = "table";
+
+        for (const m of mistakes){
+            const tr = document.createElement("tr");
+
+            const tdTyped = document.createElement("td");
+            tdTyped.textContent = m.typed && m.typed.length ? m.typed : "—";
+
+            const tdCorrect = document.createElement("td");
+            tdCorrect.textContent = m.correct;
+
+            tr.appendChild(tdTyped);
+            tr.appendChild(tdCorrect);
+            reviewBody.appendChild(tr);
+        }
+    }
+
+    // --- Play again: same user, new round, back to quiz ---
+    document.getElementById("playAgain").addEventListener("click", () => {
+        resetRound();
+        showQuiz();
+    });
+
+    // --- Init ---
+    currentUser = loadCurrentUser();
+    if (currentUser){
+        userNameEl.textContent = currentUser;
+        refreshMiniHighscore();
+        showQuiz();
+        resetRound();
+    } else {
+        userNameEl.textContent = "Ingen vald";
+        showQuiz();
+        resetRound();
+        openUserModal(); // must pick at start
+    }
+</script>
+
+</body>
+</html>
