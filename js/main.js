@@ -435,12 +435,12 @@ const questions = [
   },
   { id:"q21", type:"mcq", topic:"Väder & klimat", text:"Vad är ett moln?",
     options:[
-      "Små vattendroppar eller iskristaller som svävar i luften",
+      "Samlingar av små vattendroppar eller iskristaller uppe i himmelen",
       "Vattenånga som man kan se som rök från marken",
       "Regndroppar som faller rakt ner från himlen",
       "Snö som smälter och blir dimma högt upp"
     ],
-    correct:"Små vattendroppar eller iskristaller som svävar i luften"
+    correct:"Samlingar av små vattendroppar eller iskristaller uppe i himmelen"
   },
   { id:"q22", type:"mcq", topic:"Väder & klimat", text:"Vad menas med växthuseffekten?",
     options:[
@@ -487,12 +487,12 @@ const questions = [
     ],
     correct:"Ett stort barrskogsområde i kalla delar av norra halvklotet"
   },
-  { id:"q27", type:"freeKeywords", topic:"Klimatzoner", text:"Vad är tempererade skogar?",
+  { id:"q27", type:"freeKeywords", topic:"Jordens naturresurser", text:"Vad är tempererade skogar?",
     keywords:["barrskog","lövskog","temperatur","ändras","varm","kall","årstider","varierar","olika","Sverige"],
     maxPoints:2,
   },
-  { id:"q28", type:"freeKeywords", topic:"Klimatzoner", text:"Vad är tropiska och subtropiska skogar?",
-    keywords:["områden","året om","hela tiden","temperatur","alltid","varmt","varm","inga årstider","jämt","jämnt"],
+  { id:"q28", type:"freeKeywords", topic:"Jordens naturresurser", text:"Vad är tropiska och subtropiska skogar?",
+    keywords:["områden","året om","samma","hela tiden","temperatur","alltid","varmt","varm","inga årstider","jämt","jämnt"],
     maxPoints:2,
   },
   { id:"q29", type:"mcq", topic:"Jordens naturresurser", text:"Varför är regnskogen så viktig?",
@@ -521,7 +521,7 @@ const questions = [
     keywords:["vind","sol","vattenkraft","biobränsle", "råvaror", "resurser", "förnybara", "inte ta slut", "inte tar slut", "nya", "nytt"],
     maxPoints:2
   },
-  { id:"q34", type:"multiText", topic:"Hav", text:"Ge exempel på tre förnybara energikällor.",
+  { id:"q34", type:"multiText", topic:"Energi", text:"Ge exempel på tre förnybara energikällor.",
     allow: PRESETS.renewableEnergy, pointsEach: 1, unique:true,
   },
   { id:"q35", type:"freeKeywords", topic:"Energi", text:"Vad betyder icke förnybara energikällor",
