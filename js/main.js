@@ -282,10 +282,10 @@ const questions = [
   },
   { id:"q4", type:"mcq", topic:"Geografi", text:"Vad betyder ordet kommunikation?",
     options:[
-      "Att skicka och ta emot information mellan människor",
-      "Att resa från en plats till en annan med olika färdmedel",
-      "Att köpa och använda varor i samhället",
-      "Att bygga vägar och broar för att ta sig fram"
+      "Att människor och saker tar sig från en plats till en annan, t.e.x. med buss",
+      "Att skriva ner tankar och idéer inför framtiden",
+      "Att köpa och använda varor i samhället och sedan återvinna dem",
+      "Att mäta och rita kartor över olika platser i världen",
     ],
     correct:"Att skicka och ta emot information mellan människor"
   },
@@ -381,7 +381,7 @@ const questions = [
   },
   { id:"q15", type:"mcq", topic:"Jorden", text:"Vad gör att jordens plattor rör på sig?",
     options:[
-      "Rörelser i manteln (konvektion) som driver plattorna",
+      "Värme och rörelser i jordens inre, närmare bestämt i manteln",
       "Tidvatten från månen som flyttar marken",
       "Vindar i atmosfären som pressar jordskorpan",
       "Att vulkaner spränger och puttar plattorna varje dag"
@@ -709,7 +709,7 @@ function renderQuestion(){
       <button class="btn ghost" id="backBtn" ${backDisabled?"disabled":""}>⬅ Tillbaka</button>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-        <button class="${isLast ? "btn" : "btn ghost"}" id="gradeBtn">Rätta ✅</button>
+        <button class="${isLast ? "btn" : "btn ghost"}" id="gradeBtn">Rätta </button>
         ${isLast ? `` : `<button class="btn" id="nextBtn">Nästa ➜</button>`}
       </div>
     </div>
