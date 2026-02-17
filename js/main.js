@@ -282,12 +282,12 @@ const questions = [
   },
   { id:"q4", type:"mcq", topic:"Geografi", text:"Vad betyder ordet kommunikation?",
     options:[
-      "Att människor och saker tar sig från en plats till en annan, t.e.x. med buss",
-      "Att skriva ner tankar och idéer inför framtiden",
-      "Att köpa och använda varor i samhället och sedan återvinna dem",
-      "Att mäta och rita kartor över olika platser i världen",
+      "Att människor skickar och tar emot information, till exempel genom att prata, skriva eller använda internet",
+      "Att skriva ner tankar och idéer inför framtiden så att efterföljande kan lära sig av det",
+      "Att köpa och använda varor i samhället och sedan återvinna dem för hållbart bruk",
+      "Att mäta och rita kartor över olika platser i världen så man kan hitta dit och förstå hur det ser ut där",
     ],
-    correct:"Att skicka och ta emot information mellan människor"
+    correct:"Att människor skickar och tar emot information, till exempel genom att prata, skriva eller använda internet"
   },
   { id:"q5", type:"mcq", topic:"Geografi", text:"Vad menas med hållbar utveckling?",
     options:[
@@ -359,7 +359,7 @@ const questions = [
       "En linje som visar gränsen mellan två länder",
       "En linje som visar var en bergskedja slutar"
     ],
-    correct:"En tänkt linje runt jorden som delar den i norra och södra halvklotet"
+    correct:"En tänkt linje runt jordens mitt som delar den i norra och södra halvklotet"
   },
   { id:"q13", type:"mcq", topic:"Kartan", text:"Vad används en kompass till?",
     options:[
@@ -386,7 +386,7 @@ const questions = [
       "Vindar i atmosfären som pressar jordskorpan",
       "Att vulkaner spränger och puttar plattorna varje dag"
     ],
-    correct:"Rörelser i manteln (konvektion) som driver plattorna"
+    correct:"Värme och rörelser i jordens inre, närmare bestämt i manteln"
   },
   { id:"q16", type:"mcq", topic:"Jorden", text:"Vad betyder erosion?",
     options:[
