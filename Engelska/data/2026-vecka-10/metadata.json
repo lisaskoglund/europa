@@ -1,0 +1,15 @@
+{
+  "name": "2026 Vecka 10",
+  "date": "2026-03-10",
+  "level": "Åk 5",
+  "description": "Glosor för vecka 10",
+  "active": true,
+  "modules": [
+    {
+      "id": "glossary",
+      "name": "📚 Glosor",
+      "description": "Träna på engelska glosor"
+    }
+  ]
+}
+

@@ -34,6 +34,47 @@
         .backBtn:active {
             transform: translateY(0px);
         }
+        .headerWrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .versionSelector {
+            margin-bottom: 0;
+            padding: 12px 14px;
+            background: rgba(255,255,255,.4);
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,.05);
+            max-width: 200px;
+            flex-shrink: 0;
+        }
+        .versionSelector label {
+            font-weight: 700;
+            color: var(--text);
+            display: block;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+        .versionSelector select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 2px solid rgba(0,0,0,.08);
+            border-radius: 10px;
+            background: white;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: border .12s ease;
+        }
+        .versionSelector select:hover {
+            border: 2px solid rgba(0,0,0,.15);
+        }
+        .versionSelector p {
+            display: none;
+        }
     </style>
 </head>
 
@@ -41,24 +82,96 @@
 
 <div class="wrap">
     <div class="card">
-        <div style="margin-bottom: 20px;">
+        <div class="headerWrapper">
             <a class="backBtn" href="../index.html">← Till startsidan</a>
+            <div class="versionSelector">
+                <label for="examVersion">Vecka</label>
+                <select id="examVersion">
+                    <option value="2026-vecka-10">Vecka 10 (aktuell)</option>
+                </select>
+            </div>
         </div>
 
         <h1>Engelska</h1>
-        <p class="sub">Innehåll kommer snart 🚀</p>
+        <p class="sub">Träna på glosor 🌍✨</p>
 
-        <div class="btnRow">
-            <p style="color: var(--muted); text-align: center; width: 100%;">
-                Moduler för engelska kommer att läggas till här.
-            </p>
+        <div class="btnRow" id="modulesContainer">
+            <!-- Moduler läses in dynamiskt här -->
         </div>
+
+        <div class="hint">Träna på veckovisa glosor på engelska.</div>
 
         <div class="catsWrap">
             <img class="cats" src="../images/kawaii_cats.png" alt="Kawaii-djur" />
         </div>
     </div>
 </div>
+
+<script>
+// Clear any old exam versions from localStorage
+localStorage.removeItem('englishVocabVersion');
+
+// Load saved version from localStorage, but validate it exists
+const examVersionSelect = document.getElementById('examVersion');
+const modulesContainer = document.getElementById('modulesContainer');
+
+// Get saved version, but only if it's valid
+let savedVersion = localStorage.getItem('englishVocabVersion');
+
+// If saved version doesn't match any option, reset to default
+const validOptions = ['2026-vecka-10'];
+if (!savedVersion || !validOptions.includes(savedVersion)) {
+    savedVersion = '2026-vecka-10';
+    localStorage.setItem('englishVocabVersion', '2026-vecka-10');
+}
+
+examVersionSelect.value = savedVersion;
+
+// Update modules
+async function updateExamData() {
+    try {
+        const version = examVersionSelect.value;
+        const response = await fetch(`./data/${version}/metadata.json`);
+        const metadata = await response.json();
+
+        // Dynamically create module buttons
+        modulesContainer.innerHTML = '';
+        if (metadata.modules && metadata.modules.length > 0) {
+            metadata.modules.forEach(module => {
+                const link = document.createElement('a');
+                link.className = 'btn primary';
+                link.textContent = module.name;
+                link.title = module.description;
+
+                // Check if it's an external link
+                if (module.external && module.url) {
+                    link.href = module.url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                } else {
+                    link.href = `${module.id}/index.html`;
+                }
+
+                modulesContainer.appendChild(link);
+            });
+        } else {
+            modulesContainer.innerHTML = '<p style="color: var(--muted); text-align: center;">Inga moduler tillgängliga för denna vecka</p>';
+        }
+
+        // Save to localStorage
+        localStorage.setItem('englishVocabVersion', version);
+    } catch (error) {
+        console.error('Could not load vocabulary metadata:', error);
+        modulesContainer.innerHTML = '<p style="color: red;">Fel vid laddning av moduler</p>';
+    }
+}
+
+// Initialize
+updateExamData();
+
+// Update when selection changes
+examVersionSelect.addEventListener('change', updateExamData);
+</script>
 
 </body>
 </html>

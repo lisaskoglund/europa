@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Glosor – Engelska</title>
+
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../css/glossary.css">
+</head>
+
+<body>
+<header class="topHeader">
+    <a class="backBtn" href="../index.html">← Till ämnet</a>
+    <div class="pageTag">📚 Glosor</div>
+    <div class="user-info"></div>
+</header>
+
+<div class="wrap">
+    <div class="card">
+        <div style="margin-bottom: 20px;">
+            <label for="mode" style="font-weight: 700; margin-right: 10px;">Läge:</label>
+            <select id="mode" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; font-weight: 700;">
+                <option value="sv-en">📝 Svenska → Engelska</option>
+                <option value="en-sv">🇬🇧 Engelska → Svenska</option>
+                <option value="audio">🎧 Ljud</option>
+                <option value="conjugate">🔄 Böj verb</option>
+            </select>
+        </div>
+
+        <div id="app"></div>
+    </div>
+</div>
+
+<script src="../../js/shared.js"></script>
+<script src="../js/glossary.js"></script>
+</body>
+</html>
+
