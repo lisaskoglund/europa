@@ -1,3 +1,5 @@
+const USER_KEY = "capquiz_current_user_v3";
+
 const btn = document.getElementById("userSelectBtn");
 const dropdown = document.getElementById("userDropdown");
 const wrap = document.getElementById("userSelectWrap");

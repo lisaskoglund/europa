@@ -1,53 +1,53 @@
 // --- Data (exakt enligt din lista) ---
-    const COUNTRIES = [
-        { land:"Ryssland", stad:"Moskva" },
-        { land:"Finland", stad:"Helsingfors" },
-        { land:"Estland", stad:"Tallinn" },
-        { land:"Lettland", stad:"Riga" },
-        { land:"Litauen", stad:"Vilnius" },
-        { land:"Belarus", stad:"Minsk" },
-        { land:"Ukraina", stad:"Kiev" },
-        { land:"Moldavien", stad:"Chisinàu" },
-        { land:"Rumänien", stad:"Bukarest" },
-        { land:"Bulgarien", stad:"Sofia" },
-        { land:"Turkiet", stad:"Ankara" },
-        { land:"Cypern", stad:"Nikosia" },
-        { land:"Grekland", stad:"Aten" },
-        { land:"Nordmakedonien", stad:"Skopje" },
-        { land:"Albanien", stad:"Tirana" },
-        { land:"Kosovo", stad:"Pristina" },
-        { land:"Montenegro", stad:"Podgorica" },
-        { land:"Serbien", stad:"Belgrad" },
-        { land:"Bosnien och Hercegovina", stad:"Sarajevo" },
-        { land:"Kroatien", stad:"Zagreb" },
-        { land:"Ungern", stad:"Budapest" },
-        { land:"Slovakien", stad:"Bratislava" },
-        { land:"Tjeckien", stad:"Prag" },
-        { land:"Polen", stad:"Warszawa" },
-        { land:"Tyskland", stad:"Berlin" },
-        { land:"Österrike", stad:"Wien" },
-        { land:"Italien", stad:"Rom" },
-        { land:"Malta", stad:"Valleta" },
-        { land:"Schweiz", stad:"Bern" },
-        { land:"Portugal", stad:"Lissabon" },
-        { land:"Spanien", stad:"Madrid" },
-        { land:"Frankrike", stad:"Paris" },
-        { land:"Belgien", stad:"Bryssel" },
-        { land:"Nederländerna", stad:"Amsterdam" },
-        { land:"Storbritannien", stad:"London" },
-        { land:"Irland", stad:"Dublin" },
-        { land:"Danmark", stad:"Köpenhamn" },
-        { land:"Sverige", stad:"Stockholm" },
-        { land:"Norge", stad:"Oslo" },
-        { land:"Island", stad:"Reykjavik" },
-        { land:"Slovenien", stad:"Ljubljana" },
-        { land:"Luxemburg", stad:"Luxemburg" },
-    ];
+const COUNTRIES = [
+    { land:"Ryssland", stad:"Moskva" },
+    { land:"Finland", stad:"Helsingfors" },
+    { land:"Estland", stad:"Tallinn" },
+    { land:"Lettland", stad:"Riga" },
+    { land:"Litauen", stad:"Vilnius" },
+    { land:"Belarus", stad:"Minsk" },
+    { land:"Ukraina", stad:"Kiev" },
+    { land:"Moldavien", stad:"Chisinàu" },
+    { land:"Rumänien", stad:"Bukarest" },
+    { land:"Bulgarien", stad:"Sofia" },
+    { land:"Turkiet", stad:"Ankara" },
+    { land:"Cypern", stad:"Nikosia" },
+    { land:"Grekland", stad:"Aten" },
+    { land:"Nordmakedonien", stad:"Skopje" },
+    { land:"Albanien", stad:"Tirana" },
+    { land:"Kosovo", stad:"Pristina" },
+    { land:"Montenegro", stad:"Podgorica" },
+    { land:"Serbien", stad:"Belgrad" },
+    { land:"Bosnien och Hercegovina", stad:"Sarajevo" },
+    { land:"Kroatien", stad:"Zagreb" },
+    { land:"Ungern", stad:"Budapest" },
+    { land:"Slovakien", stad:"Bratislava" },
+    { land:"Tjeckien", stad:"Prag" },
+    { land:"Polen", stad:"Warszawa" },
+    { land:"Tyskland", stad:"Berlin" },
+    { land:"Österrike", stad:"Wien" },
+    { land:"Italien", stad:"Rom" },
+    { land:"Malta", stad:"Valleta" },
+    { land:"Schweiz", stad:"Bern" },
+    { land:"Portugal", stad:"Lissabon" },
+    { land:"Spanien", stad:"Madrid" },
+    { land:"Frankrike", stad:"Paris" },
+    { land:"Belgien", stad:"Bryssel" },
+    { land:"Nederländerna", stad:"Amsterdam" },
+    { land:"Storbritannien", stad:"London" },
+    { land:"Irland", stad:"Dublin" },
+    { land:"Danmark", stad:"Köpenhamn" },
+    { land:"Sverige", stad:"Stockholm" },
+    { land:"Norge", stad:"Oslo" },
+    { land:"Island", stad:"Reykjavik" },
+    { land:"Slovenien", stad:"Ljubljana" },
+    { land:"Luxemburg", stad:"Luxemburg" },
+];
 
-    // --- Users + highscore ---
-    const USERS = ["Elsa","Ingrid","Elektra"];
-    const CURRENT_USER_KEY = "capquiz_current_user_v3";
-    const HIGHSCORE_PREFIX = "capquiz_highscores_v3_";
+// --- Users + highscore ---
+const USERS = ["Elsa","Ingrid","Elektra"];
+const CURRENT_USER_KEY = USER_KEY;
+const HIGHSCORE_PREFIX = STORAGE_KEY;
 
     // --- State ---
     let currentUser = null;
@@ -72,10 +72,8 @@
     const resultBackdrop = document.getElementById("resultBackdrop");
 
     // --- Helpers ---
-    function normalize(s){ return (s ?? "").toString().trim().toLowerCase().replace(/\s+/g," "); }
-
     function damerauLevenshtein(a, b){
-        a = normalize(a); b = normalize(b);
+        a = norm(a); b = norm(b);
         const alen = a.length, blen = b.length;
         if (!alen) return blen;
         if (!blen) return alen;
