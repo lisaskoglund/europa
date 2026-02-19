@@ -75,6 +75,20 @@
         .versionSelector p {
             display: none;
         }
+        .user-info-header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .user-info-header .pill {
+            background: rgba(255,255,255,.55);
+            border: 2px solid rgba(0,0,0,.08);
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--text);
+        }
     </style>
 </head>
 
@@ -171,6 +185,19 @@ updateExamData();
 
 // Update when selection changes
 examVersionSelect.addEventListener('change', updateExamData);
+</script>
+
+<script src="../js/shared.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const store = loadStore();
+        const userInfoEl = document.querySelector('.user-info-header');
+        if (userInfoEl) {
+            userInfoEl.innerHTML = `
+                <div class="pill">Användare: <b>${escapeHtml(store.lastUser || "—")}</b></div>
+            `;
+        }
+    });
 </script>
 
 </body>

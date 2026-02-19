@@ -273,7 +273,6 @@ function renderQuestion(){
 
   const head = `
     <div class="row" style="justify-content:space-between;">
-      <div class="pill">Användare: <b>${escapeHtml(store.lastUser||"—")}</b></div>
       <div class="pill">Fråga <b>${idx+1}</b> av <b>${max}</b></div>
     </div>
     <div class="spacer"></div>

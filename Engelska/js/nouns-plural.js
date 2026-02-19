@@ -75,9 +75,9 @@ function render() {
     const progress = Math.round(((currentIndex + 1) / nouns.length) * 100);
 
     let content = `
-        <h2>Substantiv i plural</h2>
+        <h2 class="mode-title">Substantiv i plural</h2>
         <p style="font-size: 18px; color: #666; margin: 20px 0;">Singular: <strong>${item.singular}</strong></p>
-        <div style="max-width: 300px;">
+        <div class="input-group" style="max-width: 300px;">
             <label>Plural:</label>
             <input type="text" id="plural" />
         </div>

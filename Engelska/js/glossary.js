@@ -86,9 +86,9 @@ function render() {
     if (mode === 'sv-en') {
         // Svenska → Engelska
         content = `
-            <h2>Svenska → Engelska</h2>
+            <h2 class="mode-title">Svenska → Engelska</h2>
             <p style="font-size: 18px; color: #666; margin: 20px 0;">Ordet: <strong>${item.swedish.join(', ')}</strong></p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="input-group">
                 <div>
                     <label>Engelska 1:</label>
                     <input type="text" id="en1" />
@@ -102,9 +102,9 @@ function render() {
     } else if (mode === 'en-sv') {
         // Engelska → Svenska
         content = `
-            <h2>Engelska → Svenska</h2>
+            <h2 class="mode-title">Engelska → Svenska</h2>
             <p style="font-size: 18px; color: #666; margin: 20px 0;">Ordet: <strong>${item.english.join(', ')}</strong></p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="input-group">
                 <div>
                     <label>Svenska 1:</label>
                     <input type="text" id="sv1" />
@@ -118,11 +118,11 @@ function render() {
     } else if (mode === 'audio') {
         // Ljud
         content = `
-            <h2>Ljud</h2>
+            <h2 class="mode-title">Ljud</h2>
             <p style="margin: 20px 0;">
                 <button id="playBtn" style="padding: 12px 24px; font-size: 16px; border-radius: 8px; background: #4CAF50; color: white; border: none; cursor: pointer;">🔊 Spela ljud</button>
             </p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="input-group">
                 <div>
                     <label>Engelska 1:</label>
                     <input type="text" id="audio-en1" />
@@ -144,9 +144,9 @@ function render() {
     } else if (mode === 'conjugate') {
         // Böj verb
         content = `
-            <h2>Böj verb</h2>
+            <h2 class="mode-title">Böj verb</h2>
             <p style="font-size: 18px; color: #666; margin: 20px 0;">Nutid: <strong>${item.english[0]}</strong></p>
-            <div style="max-width: 300px;">
+            <div class="input-group" style="max-width: 300px;">
                 <label>Dåtid:</label>
                 <input type="text" id="conj" />
             </div>
