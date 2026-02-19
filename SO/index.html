@@ -145,10 +145,19 @@ async function updateExamData() {
         if (metadata.modules && metadata.modules.length > 0) {
             metadata.modules.forEach(module => {
                 const link = document.createElement('a');
-                link.href = `${module.id}/index.html`;
                 link.className = 'btn primary';
                 link.textContent = module.name;
                 link.title = module.description;
+
+                // Check if it's an external link
+                if (module.external && module.url) {
+                    link.href = module.url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                } else {
+                    link.href = `${module.id}/index.html`;
+                }
+
                 modulesContainer.appendChild(link);
             });
         } else {

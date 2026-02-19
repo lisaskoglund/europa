@@ -14,6 +14,13 @@
       "id": "instudering",
       "name": "📝 Instuderingsfrågor",
       "description": "Träna på instuderingsfrågor"
+    },
+    {
+      "id": "seterra",
+      "name": "🗺️ Seterra",
+      "description": "Geografi-träning på Geoguessr",
+      "external": true,
+      "url": "https://www.geoguessr.com/sv/vgp/3007?gamemode=pin"
     }
   ]
 }
