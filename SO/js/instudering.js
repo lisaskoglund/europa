@@ -389,11 +389,11 @@ function renderQuestion(){
   gradeBtn.onclick = ()=>{
     persistCurrent(q);
     if(!isLast){
-      const ok = confirm("Är du säker att du vill rätta redan?");
-      if(!ok) return;
+      showConfirmation();
+    } else {
+      phase = "results";
+      render();
     }
-    phase = "results";
-    render();
   };
 
   if(nextBtn){
@@ -529,7 +529,34 @@ function refreshMiniHighscore(){
     `;
 }
 
+function showConfirmation() {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.4); display: flex; align-items: center; justify-content: center; z-index: 1000;';
 
+    const modal = document.createElement('div');
+    modal.style.cssText = 'background: white; border-radius: 16px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,.2); max-width: 400px; text-align: center; animation: slideUp 0.3s ease;';
 
+    modal.innerHTML = `
+        <h2 style="margin: 0 0 15px 0; font-size: 22px; color: #333;">Är du säker?</h2>
+        <p style="margin: 0 0 25px 0; color: #666; font-size: 16px;">
+            Är du säker att du vill rätta provet innan du är klar?
+        </p>
+        <div style="display: flex; gap: 12px; justify-content: center;">
+            <button id="cancelBtn" style="padding: 12px 24px; border-radius: 10px; border: 2px solid #ccc; background: white; color: #333; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.2s ease;">Avbryt</button>
+            <button id="confirmBtn" style="padding: 12px 24px; border-radius: 10px; border: none; background: #2196F3; color: white; font-weight: 700; font-size: 16px; cursor: pointer; transition: all 0.2s ease;">Ja, rätta!</button>
+        </div>
+    `;
 
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
 
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+        overlay.remove();
+    });
+
+    document.getElementById('confirmBtn').addEventListener('click', () => {
+        overlay.remove();
+        phase = "results";
+        render();
+    });
+}
