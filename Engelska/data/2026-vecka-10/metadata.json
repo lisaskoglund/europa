@@ -7,8 +7,13 @@
   "modules": [
     {
       "id": "glossary",
-      "name": "📚 Glosor",
+      "name": "📚 Oregelbundna verb",
       "description": "Träna på engelska glosor"
+    },
+    {
+      "id": "nouns-plural",
+      "name": "🐈 Substantiv plural",
+      "description": "Träna på substantiv i plural"
     }
   ]
 }

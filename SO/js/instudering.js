@@ -9,20 +9,36 @@ const EXAM_VERSION = localStorage.getItem('examVersion') || '2026-februari';
 let PRESETS = {};
 let questions = [];
 
+// App state
+let quiz = null;
+let idx = 0;
+let answers = {};
+let phase = "start";
+
+const app = document.getElementById("app");
+
+function render(){
+  if(phase==="start") return renderStart();
+  if(phase==="quiz") return renderQuestion();
+  return renderResults();
+}
+
+// This function will be called first
+async function main() {
+    store = loadStore();
+    await loadExamData();
+}
+
 async function loadExamData() {
   try {
-    // Import data dynamically based on exam version
     const presetsModule = await import(`../data/${EXAM_VERSION}/presets.js`);
     const questionsModule = await import(`../data/${EXAM_VERSION}/questions.js`);
-
     PRESETS = presetsModule.PRESETS;
     questions = questionsModule.questions;
-
-    // Initialize the quiz after data is loaded
-    initializeApp();
+    render(); // Now render is called after data is loaded
   } catch (error) {
     console.error('Failed to load exam data:', error);
-    document.getElementById('app').innerHTML = `
+    app.innerHTML = `
       <div style="padding: 20px; color: red;">
         <h2>Fel vid laddning</h2>
         <p>Kunde inte ladda provdata för version: ${EXAM_VERSION}</p>
@@ -32,9 +48,7 @@ async function loadExamData() {
   }
 }
 
-// =====  ORIGINAL CODE BELOW =====
-// (PRESETS and questions will be set by loadExamData() above)
-
+main();
 
 function initQuiz(){
   const rng = Math.random;
@@ -207,26 +221,6 @@ function gradeQuestion(q, user){
   }
 
   return {points:0, breakdown:[{label:"—", pts:0}], correctDisplay:"", userDisplay:(user||"—")};
-}
-
-// App state
-let store = loadStore();
-let quiz = null;
-let idx = 0;
-let answers = {};
-let phase = "start";
-
-const app = document.getElementById("app");
-
-function initializeApp() {
-  // Initialize app after data is loaded
-  render();
-}
-
-function render(){
-  if(phase==="start") return renderStart();
-  if(phase==="quiz") return renderQuestion();
-  return renderResults();
 }
 
 function renderStart(){
@@ -536,6 +530,7 @@ function refreshMiniHighscore(){
     `;
 }
 
-// Boot
-loadExamData();
+
+
+
 

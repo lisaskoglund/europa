@@ -5,6 +5,8 @@
 const STORAGE_KEY = "capquiz_highscores_v3_";
 const USER_KEY = "capquiz_current_user_v3";
 
+let store;
+
 function deepClone(o){
   try{ return JSON.parse(JSON.stringify(o)); }catch(e){ return o; }
 }
@@ -155,7 +157,26 @@ function escapeAttr(str){
   return escapeHtml(str).replaceAll("\n"," ");
 }
 
-function formatPercent(pct){
-  return pct + "%";
+function formatPercent(p) {
+    if (p === null || p === undefined || isNaN(p)) return "—";
+    return `${Math.round(p * 100)}%`;
 }
 
+function saveHighscore(score, type) {
+    const currentUser = store.lastUser;
+    if (!currentUser) return;
+
+    const highscores = getHighscores(currentUser);
+    highscores.push({ type, score, date: new Date().toISOString() });
+
+    // Sortera efter poäng (högst först) och behåll topp 10
+    highscores.sort((a, b) => b.score - a.score);
+    const top10 = highscores.slice(0, 10);
+
+    localStorage.setItem(`highscores_${currentUser}`, JSON.stringify(top10));
+}
+
+function getHighscores(user) {
+    const data = localStorage.getItem(`highscores_${user}`);
+    return data ? JSON.parse(data) : [];
+}
