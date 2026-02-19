@@ -14,11 +14,21 @@ function setButtonUserLabel(user){
     btn.textContent = icon + ' ' + (user || 'Välj användare');
 }
 
-// Toggle dropdown when clicking the whole wrapper (wider hit area). If the click
-// is inside the dropdown (e.g., selecting a user), don't toggle here.
-wrap.addEventListener("click", (e) => {
-    if (e.target.closest('#userDropdown')) return; // let dropdown handle item clicks
+// Toggle dropdown when clicking the button
+btn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent this click from being caught by the document listener
     dropdown.classList.toggle("hidden");
+});
+
+// Close dropdown if clicking outside of it
+document.addEventListener('click', (event) => {
+    if (!dropdown.classList.contains('hidden')) {
+        // Check if the click was inside the button or the dropdown
+        const isClickInside = wrap.contains(event.target);
+        if (!isClickInside) {
+            dropdown.classList.add('hidden');
+        }
+    }
 });
 
 dropdown.addEventListener("click", (e) => {

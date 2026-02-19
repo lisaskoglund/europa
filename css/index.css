@@ -180,24 +180,32 @@ h1{
     pointer-events: auto;
 }
 
-.userSelectBtn{
-    background: rgba(255,255,255,.55);
-    border: 2px solid rgba(0,0,0,.08);
-    padding: 10px 16px;
-    border-radius: 999px;
-    font-weight: 800;
-    cursor:pointer;
-    box-shadow: 0 12px 22px rgba(0,0,0,.10);
-    transition: .15s ease;
+.userSelectBtn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    z-index: 61; /* above the dropdown background */
-    width: 100%;
-    justify-content: flex-start; /* keep text left-aligned while filling space */
-    padding-right: 36px; /* make right side more tappable */
-    position: relative; /* allow stacking/context */
-    pointer-events: auto;
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--text);
+    background: rgba(255,255,255,.55);
+    border: 2px solid rgba(0,0,0,.08);
+    padding: 12px 18px;
+    border-radius: 999px;
+    box-shadow: 0 8px 16px rgba(0,0,0,.10);
+    transition: transform .10s ease, background .12s ease, box-shadow .12s ease;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.userSelectBtn:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,.75);
+    box-shadow: 0 12px 22px rgba(0,0,0,.12);
+}
+
+.userSelectBtn:active {
+    transform: translateY(0px);
 }
 
 .userDropdown{
@@ -207,10 +215,8 @@ h1{
     display:flex;
     flex-direction:column;
     gap:8px;
-    background: var(--card);
+
     padding:8px 0; /* remove horizontal padding so buttons can span full width and be fully clickable */
-    border-radius:18px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.2);
     width: 100%;
     min-width: 120px;
     z-index: 59; /* sit above most page content */
@@ -218,22 +224,26 @@ h1{
 }
 
 .userDropdown button{
-    background: rgba(255,255,255,.6);
-    border:none;
-    padding:10px 16px; /* a bit more horizontal padding inside each button */
-    border-radius:12px;
-    font-weight:700;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    width:100%;
-    text-align:left;
+    background: rgba(255,255,255,.05);
+    border: 2px solid rgba(0,0,0,.08);
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
     box-sizing: border-box;
+    color: var(--text);
+    font-size: 16px;
+    font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    transition: background .12s ease;
 }
 
 .userDropdown button:hover{
-    background: rgba(240,124,74,.2);
+    background: rgba(240, 124, 74, 0.2);
 }
 
 .hidden{
