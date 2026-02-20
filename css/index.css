@@ -17,7 +17,7 @@ body{
     linear-gradient(180deg, #f5c1b7, var(--bg));
     min-height:100vh;
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
     padding: 24px;
 }
