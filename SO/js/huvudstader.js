@@ -161,12 +161,27 @@ function renderMistakesPage() {
     mistakeCountEl.textContent = `Du hade ${lastRoundMistakes.length} fel.`;
     lastRoundMistakes.forEach(item => {
         const row = document.createElement("div");
-        row.className = "mistake-row";
-        row.innerHTML = `
-            <p>${item.land}</p>
-            <p><b>Rätt svar:</b> ${item.correct}</p>
-            <p><b>Ditt svar:</b> ${item.typed || "<i>(tomt)</i>"}</p>
-        `;
+        row.className = "row " + (item.points === 0.5 ? "half" : "zero");
+
+        const p = document.createElement("p");
+        p.textContent = item.land;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = item.typed || "";
+        input.disabled = true;
+
+        const status = document.createElement("div");
+        status.className = "status";
+        if (item.points === 0.5) {
+            status.textContent = `0,5 p ⭐ (rätt: ${item.correct})`;
+        } else {
+            status.textContent = `0 p ❌ (rätt: ${item.correct})`;
+        }
+
+        row.appendChild(p);
+        row.appendChild(input);
+        row.appendChild(status);
         mistakesListEl.appendChild(row);
     });
 }
