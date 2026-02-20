@@ -110,7 +110,8 @@ function scrollToInput(el){
 function openUserModal(){ userBackdrop.style.display = "flex"; }
 function closeUserModal(){ userBackdrop.style.display = "none"; }
 
-function openResultModal(){ resultBackdrop.style.display = "flex"; }
+function openResultModal(){
+    resultBackdrop.style.display = "flex"}
 function closeResultModalToMistakes(){
     resultBackdrop.style.display = "none";
     renderMistakesPage();
@@ -190,6 +191,15 @@ function bindEvents() {
     const closeResultBtn = document.getElementById("closeResult");
     if (closeResultBtn) closeResultBtn.addEventListener("click", closeResultModalToMistakes);
 
+
+    const mistakesRestartBtn = document.getElementById("mistakesRestartBtn");
+    if (mistakesRestartBtn) mistakesRestartBtn.addEventListener("click", () => {
+        resetRound();
+        showQuiz();
+        const firstInput = document.querySelector("#list .row input");
+        if (firstInput){ firstInput.focus(); scrollToInput(firstInput); }
+    });
+
     userBackdrop.addEventListener("click", (e) => {
         const btn = e.target.closest(".choiceBtn");
         if (!btn) return;
@@ -236,16 +246,16 @@ function bindEvents() {
             const percent = Math.round((total / max) * 100);
             totalEl.textContent = `Total: ${formatScore(total)} / ${max}`;
 
-            // Highscore logic using shared store
+            // Highscore logic using huvudstäder-specific key
             const user = store.lastUser;
-            if (!store.highscores[user]) {
-                store.highscores[user] = [];
-            }
-            const hs = store.highscores[user];
-            hs.push({ score: total, ts: Date.now() });
-            hs.sort((a,b) => (b.score - a.score) || (a.ts - b.ts));
-            store.highscores[user] = hs.slice(0,3);
-            saveStore(store);
+            const hsKey = `huvudstader_hs_${user}`;
+            let hs = JSON.parse(localStorage.getItem(hsKey) || "[]");
+            hs.push({ pct: percent, points: total, max: max, ts: Date.now() });
+            hs = hs
+                .filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct))
+                .sort((a,b) => (b.pct - a.pct) || (b.points - a.points) || (a.ts - b.ts))
+                .slice(0, 20);
+            localStorage.setItem(hsKey, JSON.stringify(hs));
 
             let emoji;
             let extra;
@@ -262,10 +272,15 @@ function bindEvents() {
 
             const hsList = document.getElementById("hsList");
             hsList.innerHTML = "";
-            const top3 = store.highscores[user];
-            for (let i=0;i<3;i++){
+            const raw = JSON.parse(localStorage.getItem(hsKey) || "[]");
+            const top3 = raw.filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct)).slice(0, 3);
+            for (let i = 0; i < 3; i++){
                 const li = document.createElement("li");
-                li.textContent = top3[i] ? `${formatPercent(top3[i].score)}` : "—";
+                if (top3[i]) {
+                    li.textContent = `${top3[i].pct}% (${formatScore(top3[i].points)}/${top3[i].max})`;
+                } else {
+                    li.textContent = "—";
+                }
                 hsList.appendChild(li);
             }
 

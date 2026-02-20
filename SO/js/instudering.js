@@ -244,19 +244,11 @@ function renderStart(){
     <p>En fråga i taget. Du kan gå <b>fram</b> och <b>bak</b>. Rättning sker <b>bara i slutet</b>.</p>
     <p>Rättning: exakt = 1p, stavfel = 0,5p</p>
     <div class="hr"></div>
-
-    <div class="start-grid">
-        <div class="leaderboard">
-            <div class="hsMini" id="hsMini"></div>
-        </div>
-    </div>
-
     <div class="footerBtns">
       <button class="btn" id="startBtn">Starta ▶</button>
     </div>
   `;
 
-  refreshMiniHighscore();
 
   document.getElementById("startBtn").onclick = ()=>{
     if(!store.lastUser){
@@ -425,17 +417,21 @@ function renderResults(){
   const g = grade();
   const user = store.lastUser || "—";
 
-  // save highscore
+  // save highscore in instudering-specific key
   if(user && user !== "—"){
-    store.highscores[user] = store.highscores[user] || [];
-    store.highscores[user].push({pct:g.pct, points:g.total, max:g.max, ts: Date.now()});
-    store.highscores[user] = store.highscores[user]
-        .sort((a,b)=> b.pct - a.pct || b.points - a.points || b.ts - a.ts)
+    const key = `instudering_hs_${user}`;
+    let hs = JSON.parse(localStorage.getItem(key) || "[]");
+    hs.push({pct: g.pct, points: g.total, max: g.max, ts: Date.now()});
+    hs = hs
+        .filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct))
+        .sort((a,b) => b.pct - a.pct || b.points - a.points || b.ts - a.ts)
         .slice(0, 20);
-    saveStore(store);
+    localStorage.setItem(key, JSON.stringify(hs));
   }
 
-  const top5 = (store.highscores[user] || []).slice(0,5);
+  const raw = JSON.parse(localStorage.getItem(`instudering_hs_${user}`) || "[]");
+  const top3 = raw.filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct)).slice(0, 3);
+  while(top3.length < 3) top3.push(null);
 
   renderHeader({
     title: 'Resultat',
@@ -443,6 +439,12 @@ function renderResults(){
     back: { show: true, label: 'Till ämnet', href: '../index.html' },
     user: store.lastUser
   });
+
+  let emoji;
+  if(g.pct >= 90)      emoji = "🏆";
+  else if(g.pct >= 75) emoji = "🚀";
+  else if(g.pct >= 50) emoji = "👏";
+  else                  emoji = "🌟";
 
   app.innerHTML = `
     <h1>Resultat</h1>
@@ -461,24 +463,23 @@ function renderResults(){
       ${g.rows.map((r, i)=> renderResultItem(r, i)).join("")}
     </div>
 
-    <div class="hr"></div>
-
-    <h2>Highscore (topp 5 för ${escapeHtml(user)})</h2>
-    ${top5.length ? `
-      <div class="leaderboard">
-        <ol>
-          ${top5.map(s=>`<li><b>${s.pct}%</b> (${s.points}/${s.max})</li>`).join("")}
-        </ol>
-      </div>
-    ` : `<p class="muted">Inga highscores än.</p>`}
-
     <div class="footerBtns">
       <button class="btn ghost" id="toStartBtn">Byt användare</button>
       <button class="btn" id="restartBtn">Kör igen</button>
     </div>
   `;
 
-  refreshMiniHighscore();
+  // Show result modal
+  document.getElementById("resultEmoji").textContent = emoji;
+  document.getElementById("resultUserLine").textContent = `Användare: ${user}`;
+  document.getElementById("resultScore").textContent = `Du fick ${g.total} / ${g.max} poäng.`;
+  document.getElementById("resultPercent").textContent = `Det blir ${g.pct}% rätt.`;
+  const hsList = document.getElementById("hsList");
+  hsList.innerHTML = top3.map(s => `<li>${s ? `<b>${s.pct}%</b> (${s.points}/${s.max})` : "—"}</li>`).join("");
+  document.getElementById("resultBackdrop").style.display = "flex";
+  document.getElementById("closeResult").onclick = () => {
+    document.getElementById("resultBackdrop").style.display = "none";
+  };
 
   document.getElementById("restartBtn").onclick = ()=>{
     quiz = initQuiz();
@@ -530,23 +531,6 @@ function getHighscores(user){
   return (store.highscores && store.highscores[user]) || [];
 }
 
-function refreshMiniHighscore(){
-    const hsMiniEl = document.getElementById("hsMini");
-    if (!store.lastUser || !hsMiniEl){ return; }
-    const userScores = getHighscores(store.lastUser);
-
-    const top3 = userScores.slice(0, 3);
-    while (top3.length < 3) {
-        top3.push(null);
-    }
-
-    hsMiniEl.innerHTML = `
-        <div class="hs-title">🏅 Highscore</div>
-        <ol class="hs-list">
-            ${top3.map(s => `<li>${s ? `<b>${s.pct}%</b> (${s.points}/${s.max})` : '—'}</li>`).join("")}
-        </ol>
-    `;
-}
 
 function showConfirmation() {
     const overlay = document.createElement('div');
