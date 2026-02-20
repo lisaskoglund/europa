@@ -65,7 +65,10 @@
                     linear-gradient(180deg, #f5c1b7, var(--bg));
             min-height:100vh;
             padding: 24px;
-            padding-bottom: 110px; /* plats för fixed footer */
+            padding-bottom: 110px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
         }
 
         .wrap{ width:min(1100px, 100%); }
