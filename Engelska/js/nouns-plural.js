@@ -202,8 +202,52 @@ function gradeAll() {
     }
 
     const finalScore = (totalPoints / maxPoints);
-    saveHighscore(finalScore, 'english-nouns');
+
+    // Save highscore
+    const user = store.lastUser;
+    const pct = Math.round(finalScore * 100);
+    if (user && user !== "—") {
+        const key = `nouns_plural_hs_${user}`;
+        let hs = JSON.parse(localStorage.getItem(key) || "[]");
+        hs.push({ pct: pct, points: totalPoints, max: maxPoints, ts: Date.now() });
+        hs = hs
+            .filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct))
+            .sort((a,b) => b.pct - a.pct || b.points - a.points || b.ts - a.ts)
+            .slice(0, 20);
+        localStorage.setItem(key, JSON.stringify(hs));
+    }
+
     renderResults();
+    showHighscoreModal(totalPoints, maxPoints, pct);
+}
+
+function showHighscoreModal(total, max, pct) {
+    const user = store.lastUser || "—";
+    const key = `nouns_plural_hs_${user}`;
+    const raw = JSON.parse(localStorage.getItem(key) || "[]");
+    const top3 = raw.filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct)).slice(0, 3);
+    while (top3.length < 3) top3.push(null);
+
+    let emoji;
+    if (pct >= 90) emoji = "🏆";
+    else if (pct >= 75) emoji = "🚀";
+    else if (pct >= 50) emoji = "👏";
+    else emoji = "🌟";
+
+    document.getElementById("resultEmoji").textContent = emoji;
+    document.getElementById("resultUserLine").textContent = `Användare: ${escapeHtml(user)}`;
+    document.getElementById("resultScore").textContent = `Du fick ${total} / ${max} poäng.`;
+    document.getElementById("resultPercent").textContent = `Det blir ${pct}% rätt.`;
+
+    const hsList = document.getElementById("hsList");
+    hsList.innerHTML = top3.map(s => `<li>${s ? `<b>${s.pct}%</b> (${s.points}/${s.max})` : "—"}</li>`).join("");
+
+    const modal = document.getElementById("resultBackdrop");
+    modal.style.display = "flex";
+
+    document.getElementById("closeResult").onclick = () => {
+        modal.style.display = "none";
+    };
 }
 
 function renderResults() {

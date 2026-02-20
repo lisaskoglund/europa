@@ -17,6 +17,31 @@
         <div id="app"></div>
     </div>
 </div>
+
+<!-- Modal: resultat -->
+<div class="modalBackdrop" id="resultBackdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); align-items:center; justify-content:center; padding:18px; z-index:999;">
+    <div class="modal" style="width:min(520px,100%); background:var(--card); border-radius:22px; box-shadow:0 22px 70px rgba(0,0,0,.25); border:1px solid rgba(0,0,0,.08); overflow:hidden;">
+        <div class="modalTop" style="padding:16px 16px 10px; background:linear-gradient(135deg,rgba(255,255,255,.35),rgba(240,124,74,.12));">
+            <h2 class="modalTitle" style="margin:0; font-size:22px; font-weight:1000; display:flex; align-items:center; gap:10px; color:var(--text);">
+                <span style="font-size:30px;" id="resultEmoji">🎉</span> Bra jobbat!
+            </h2>
+        </div>
+        <div class="modalBody" style="padding:14px 16px 16px; color:var(--text);">
+            <p style="margin:0; color:var(--muted); font-weight:800;" id="resultUserLine">Användare: -</p>
+            <div style="font-size:18px; font-weight:1000; margin:8px 0;" id="resultScore">Du fick 0 poäng.</div>
+            <p style="margin:0; color:var(--muted); font-weight:800;" id="resultPercent">Det blir 0% rätt.</p>
+            <div style="height:1px; background:rgba(0,0,0,.10); margin:12px 0;"></div>
+            <p style="margin:0 0 8px; font-weight:1000; color:var(--text);">🏅 Dina topp 3 (highscore)</p>
+            <ol id="hsList" style="margin:0; padding-left:18px; font-weight:900; color:var(--text);">
+                <li>—</li><li>—</li><li>—</li>
+            </ol>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px; padding:0 16px 16px;">
+            <button id="closeResult" type="button" style="border:none; border-radius:999px; padding:12px 20px; cursor:pointer; font-weight:1000; background:#2b2621; color:#fff; font-size:15px;">Okej!</button>
+        </div>
+    </div>
+</div>
+
 <script src="../../js/shared.js"></script>
 <script src="../../js/header.js"></script>
 <script src="../js/nouns-plural.js"></script>
