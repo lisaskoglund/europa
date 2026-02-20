@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         id: 'version-selector',
         html: `
             <div class="versionSelector">
-                <label for="vocabVersion">Vecka</label>
                 <select id="vocabVersion">
                     <option value="2026-vecka-10">Vecka 10 (aktuell)</option>
                 </select>

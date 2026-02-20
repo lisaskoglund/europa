@@ -22,7 +22,6 @@ function versionSelectorAction() {
     id: 'version-selector',
     html: `
       <div class="versionSelector">
-        <label for="examVersion">Prov</label>
         <select id="examVersion">
           <option value="2026-februari">2026 februari</option>
           <option value="arkiv/2025-höst">2025 Höst (arkiv)</option>
