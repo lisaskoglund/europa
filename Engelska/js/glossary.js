@@ -17,6 +17,14 @@ modeSelect.value = savedMode;
 // Load vocabulary data
 async function loadVocabulary() {
     try {
+        store = loadStore();
+        renderHeader({
+            title: "Glosor",
+            breadcrumb: "Engelska",
+            back: { show: true, label: "Till Engelska", href: "../index.html" },
+            user: store.lastUser,
+        });
+
         const vocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
         const module = await import(`../data/${vocabVersion}/vocabulary.js`);
         vocabulary = module.vocabulary;
@@ -485,5 +493,6 @@ modeSelect.addEventListener('change', (e) => {
 });
 
 // Initialize
-loadVocabulary();
-
+document.addEventListener('DOMContentLoaded', () => {
+    loadVocabulary();
+});

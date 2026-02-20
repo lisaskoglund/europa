@@ -1,0 +1,220 @@
+/* css/header.css */
+
+#app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 25px;
+    background: var(--card);
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    position: relative;
+}
+
+#app-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.header-zone {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-zone.left {
+    flex: 1 0 200px; /* Fixed width to prevent jitter */
+    justify-content: flex-start;
+}
+
+.header-zone.center {
+    flex: 2 1 auto;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.header-zone.right {
+    flex: 1 0 200px; /* Fixed width */
+    justify-content: flex-end;
+}
+
+/* --- Left Zone --- */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 45px; /* Adjust as needed */
+    width: auto;
+}
+
+.logo span {
+    margin-right: 2px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.55);
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    padding: 10px 16px;
+    border-radius: 999px;
+    transition: all 0.15s ease;
+}
+
+.back-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+
+/* --- Center Zone --- */
+.breadcrumb {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    opacity: 0.8;
+}
+
+.header-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0;
+}
+
+.meta {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* --- Right Zone --- */
+.user-display {
+    font-weight: 700;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.4);
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* ===== User dropdown ===== */
+.userSelectWrap{
+    position:relative;
+    z-index: 60;
+}
+
+.userSelectBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--text);
+    background: rgba(255,255,255,.55);
+    border: 2px solid rgba(0,0,0,.08);
+    padding: 12px 18px;
+    border-radius: 999px;
+    box-shadow: 0 8px 16px rgba(0,0,0,.10);
+    transition: transform .10s ease, background .12s ease, box-shadow .12s ease;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.userSelectBtn:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,.75);
+    box-shadow: 0 12px 22px rgba(0,0,0,.12);
+}
+
+.userSelectBtn:active {
+    transform: translateY(0px);
+}
+
+.userDropdown{
+    position:absolute;
+    top:55px;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding:8px 0;
+    width: 100%;
+    min-width: 120px;
+    z-index: 59;
+}
+
+.userDropdown button{
+    background: rgba(255,255,255,.05);
+    border: 2px solid rgba(0,0,0,.08);
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+    color: var(--text);
+    font-size: 16px;
+    font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    transition: background .12s ease;
+}
+
+.userDropdown button:hover{
+    background: rgba(240, 124, 74, 0.2);
+}
+
+.hidden{
+    display:none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    #app-header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .header-zone.left,
+    .header-zone.right {
+        flex: 1 1 50%;
+    }
+
+    .header-zone.center {
+        flex: 1 1 100%;
+        order: 3; /* Move to bottom */
+        text-align: center;
+    }
+
+    .breadcrumb {
+        display: none; /* Hide breadcrumb on mobile */
+    }
+}

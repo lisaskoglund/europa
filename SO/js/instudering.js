@@ -26,6 +26,12 @@ function render(){
 // This function will be called first
 async function main() {
     store = loadStore();
+    renderHeader({
+        title: "Instudering",
+        breadcrumb: "SO",
+        back: { show: true, label: "Till SO", href: "../index.html" },
+        user: store.lastUser,
+    });
     await loadExamData();
 }
 
@@ -48,7 +54,9 @@ async function loadExamData() {
   }
 }
 
-main();
+document.addEventListener('DOMContentLoaded', () => {
+    main();
+});
 
 function initQuiz(){
   const rng = Math.random;
@@ -224,12 +232,12 @@ function gradeQuestion(q, user){
 }
 
 function renderStart(){
-  const userInfoEl = document.querySelector('.user-info');
-  if (userInfoEl) {
-    userInfoEl.innerHTML = `
-      <div class="pill">Användare: <b>${escapeHtml(store.lastUser || "—")}</b></div>
-    `;
-  }
+  renderHeader({
+    title: 'Instuderingsfrågor',
+    breadcrumb: 'SO',
+    back: { show: true, label: 'Till ämnet', href: '../index.html' },
+    user: store.lastUser
+  });
 
   app.innerHTML = `
     <h1>Europa – träningsprov (åk 5)</h1>
@@ -264,6 +272,14 @@ function renderStart(){
 }
 
 function renderQuestion(){
+  renderHeader({
+    title: 'Instuderingsfrågor',
+    breadcrumb: 'SO',
+    meta: `Fråga ${idx + 1} av ${quiz.length}`,
+    back: { show: true, label: 'Till ämnet', href: '../index.html' },
+    user: store.lastUser
+  });
+
   const q = quiz[idx];
   const max = quiz.length;
   const progressPct = Math.round(((idx+1) / max) * 100);
@@ -272,10 +288,6 @@ function renderQuestion(){
   const isLast = idx === max-1;
 
   const head = `
-    <div class="row" style="justify-content:space-between;">
-      <div class="pill">Fråga <b>${idx+1}</b> av <b>${max}</b></div>
-    </div>
-    <div class="spacer"></div>
     <div class="progress" aria-label="progress"><div style="width:${progressPct}%"></div></div>
     <div class="spacer"></div>
     <div class="row" style="justify-content:space-between;">
@@ -424,6 +436,13 @@ function renderResults(){
   }
 
   const top5 = (store.highscores[user] || []).slice(0,5);
+
+  renderHeader({
+    title: 'Resultat',
+    breadcrumb: 'SO › Instuderingsfrågor',
+    back: { show: true, label: 'Till ämnet', href: '../index.html' },
+    user: store.lastUser
+  });
 
   app.innerHTML = `
     <h1>Resultat</h1>

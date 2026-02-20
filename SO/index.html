@@ -10,89 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/index.css">
-    <style>
-        .backBtn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            font-weight: 800;
-            color: var(--text);
-            background: rgba(255,255,255,.55);
-            border: 2px solid rgba(0,0,0,.08);
-            padding: 12px 18px;
-            border-radius: 999px;
-            box-shadow: 0 8px 16px rgba(0,0,0,.10);
-            transition: transform .10s ease, background .12s ease, box-shadow .12s ease;
-            font-size: 16px;
-        }
-        .backBtn:hover {
-            transform: translateY(-2px);
-            background: rgba(255,255,255,.75);
-            box-shadow: 0 12px 22px rgba(0,0,0,.12);
-        }
-        .backBtn:active {
-            transform: translateY(0px);
-        }
-        .headerWrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .versionSelector {
-            margin-bottom: 0;
-            padding: 12px 14px;
-            background: rgba(255,255,255,.4);
-            border-radius: 16px;
-            border: 1px solid rgba(0,0,0,.05);
-            max-width: 300px;
-            flex-shrink: 0;
-        }
-        .versionSelector label {
-            font-weight: 700;
-            color: var(--text);
-            display: block;
-            margin-bottom: 6px;
-            font-size: 12px;
-        }
-        .versionSelector select {
-            width: 100%;
-            padding: 8px 10px;
-            border: 2px solid rgba(0,0,0,.08);
-            border-radius: 10px;
-            background: white;
-            color: var(--text);
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: border .12s ease;
-        }
-        .versionSelector select:hover {
-            border: 2px solid rgba(0,0,0,.15);
-        }
-        .versionSelector p {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 
 <body>
 
 <div class="wrap">
+    <header id="app-header"></header>
     <div class="card">
-        <div class="headerWrapper">
-            <a class="backBtn" href="../index.html">← Till startsidan</a>
-            <div class="versionSelector">
-                <label for="examVersion">Gamla prov</label>
-                <select id="examVersion">
-                    <option value="2026-februari">2026 februari (aktuell)</option>
-                    <option value="arkiv/2025-höst">2025 Höst (arkiv)</option>
-                </select>
-            </div>
-        </div>
-
         <h1>Samhällskunskap</h1>
         <p class="sub">Välj modul och träna 🌍✨</p>
 
@@ -109,73 +34,8 @@
     </div>
 </div>
 
+<script src="../js/shared.js"></script>
+<script src="../js/header.js"></script>
+<script src="js/index.js"></script>
 </body>
-</html>
-
-<script>
-// Clear any old exam versions from localStorage that no longer exist
-localStorage.removeItem('examVersion');
-
-// Load saved exam version from localStorage, but validate it exists
-const examVersionSelect = document.getElementById('examVersion');
-const modulesContainer = document.getElementById('modulesContainer');
-
-// Get saved version, but only if it's valid
-let savedVersion = localStorage.getItem('examVersion');
-
-// If saved version doesn't match any option, reset to default
-const validOptions = ['2026-februari', 'arkiv/2025-höst'];
-if (!savedVersion || !validOptions.includes(savedVersion)) {
-    savedVersion = '2026-februari';
-    localStorage.setItem('examVersion', '2026-februari');
-}
-
-examVersionSelect.value = savedVersion;
-
-// Update modules
-async function updateExamData() {
-    try {
-        const version = examVersionSelect.value;
-        const response = await fetch(`./data/${version}/metadata.json`);
-        const metadata = await response.json();
-
-
-        // Dynamically create module buttons
-        modulesContainer.innerHTML = '';
-        if (metadata.modules && metadata.modules.length > 0) {
-            metadata.modules.forEach(module => {
-                const link = document.createElement('a');
-                link.className = 'btn primary';
-                link.textContent = module.name;
-                link.title = module.description;
-
-                // Check if it's an external link
-                if (module.external && module.url) {
-                    link.href = module.url;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                } else {
-                    link.href = `${module.id}/index.html`;
-                }
-
-                modulesContainer.appendChild(link);
-            });
-        } else {
-            modulesContainer.innerHTML = '<p style="color: var(--muted); text-align: center;">Inga moduler tillgängliga för detta prov</p>';
-        }
-
-        // Save to localStorage
-        localStorage.setItem('examVersion', version);
-    } catch (error) {
-        console.error('Could not load exam metadata:', error);
-        modulesContainer.innerHTML = '<p style="color: red;">Fel vid laddning av moduler</p>';
-    }
-}
-
-// Initialize
-updateExamData();
-
-// Update when selection changes
-examVersionSelect.addEventListener('change', updateExamData);
-</script>
 

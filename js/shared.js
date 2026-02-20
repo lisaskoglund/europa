@@ -5,7 +5,7 @@
 const STORAGE_KEY = "capquiz_highscores_v3_";
 const USER_KEY = "capquiz_current_user_v3";
 
-let store;
+let store = {};
 
 function deepClone(o){
   try{ return JSON.parse(JSON.stringify(o)); }catch(e){ return o; }
@@ -18,18 +18,19 @@ const defaultState = {
 function loadStore(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    const store = raw ? JSON.parse(raw) : deepClone(defaultState);
-    store.lastUser = localStorage.getItem(USER_KEY);
-    return store;
+    const loadedStore = raw ? JSON.parse(raw) : deepClone(defaultState);
+    loadedStore.lastUser = localStorage.getItem(USER_KEY);
+    return loadedStore;
   }catch(e){
-    const store = deepClone(defaultState);
-    store.lastUser = localStorage.getItem(USER_KEY);
-    return store;
+    const newStore = deepClone(defaultState);
+    newStore.lastUser = localStorage.getItem(USER_KEY);
+    return newStore;
   }
 }
 
-function saveStore(store){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+function saveStore(s){
+  localStorage.setItem(USER_KEY, s.lastUser);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
 }
 
 function shuffle(arr, rng=Math.random){
@@ -179,4 +180,21 @@ function saveHighscore(score, type) {
 function getHighscores(user) {
     const data = localStorage.getItem(`highscores_${user}`);
     return data ? JSON.parse(data) : [];
+}
+
+let currentUser = null;
+
+function setCurrentUser(user) {
+    currentUser = user;
+    localStorage.setItem(USER_KEY, user ? user.name : '');
+}
+
+function loadCurrentUser() {
+    const savedUserName = localStorage.getItem(USER_KEY);
+    if (savedUserName) {
+        // In a real app, you might fetch user details from an API
+        // For now, we'll just create a user object from the name
+        currentUser = { name: savedUserName };
+    }
+    return currentUser;
 }

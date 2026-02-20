@@ -7,18 +7,12 @@
 
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../css/glossary.css">
+    <link rel="stylesheet" href="../../css/header.css">
 </head>
 
 <body>
-<header class="topHeader">
-    <div class="header-left">
-        <a class="backBtn" href="../index.html">← Till ämnet</a>
-        <div class="pageTag">📚 Glosor</div>
-    </div>
-    <div class="user-info-header"></div>
-</header>
-
 <div class="wrap">
+    <header id="app-header"></header>
     <div class="card">
         <div style="margin-bottom: 20px;">
             <label for="mode" style="font-weight: 700; margin-right: 10px;">Läge:</label>
@@ -35,17 +29,7 @@
 </div>
 
 <script src="../../js/shared.js"></script>
+<script src="../../js/header.js"></script>
 <script src="../js/glossary.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const store = loadStore();
-        const userInfoEl = document.querySelector('.user-info-header');
-        if (userInfoEl) {
-            userInfoEl.innerHTML = `
-                <div class="pill">Användare: <b>${escapeHtml(store.lastUser || "—")}</b></div>
-            `;
-        }
-    });
-</script>
 </body>
 </html>

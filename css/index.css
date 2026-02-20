@@ -84,7 +84,7 @@ h1{
     font-size: 26px;
     padding: 18px 40px;
     border-radius: 999px; /* extra rund som på bilden */
-    min-width: 260px;
+    min-width: 200px;
     transition: transform .10s ease, box-shadow .16s ease, background .16s ease;
     user-select:none;
     line-height: 1;

@@ -12,6 +12,14 @@ store = loadStore();
 
 async function loadNouns() {
     try {
+        store = loadStore();
+        renderHeader({
+            title: "Substantiv Plural",
+            breadcrumb: "Engelska",
+            back: { show: true, label: "Till Engelska", href: "../index.html" },
+            user: store.lastUser,
+        });
+
         const vocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
         const module = await import(`../data/${vocabVersion}/nouns.js`);
         nouns = module.nouns;
@@ -242,4 +250,6 @@ function formatPercent(p) {
 }
 
 // Init
-loadNouns();
+document.addEventListener('DOMContentLoaded', () => {
+    loadNouns();
+});

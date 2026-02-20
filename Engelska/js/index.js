@@ -2,16 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
     store = loadStore();
 
     const modulesContainer = document.getElementById('modulesContainer');
-    let examVersion = localStorage.getItem('examVersion') || '2026-februari';
+    let vocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
 
     const versionSelectorAction = {
         id: 'version-selector',
         html: `
             <div class="versionSelector">
-                <label for="examVersion">Gamla prov</label>
-                <select id="examVersion">
-                    <option value="2026-februari">2026 februari (aktuell)</option>
-                    <option value="arkiv/2025-höst">2025 Höst (arkiv)</option>
+                <label for="vocabVersion">Vecka</label>
+                <select id="vocabVersion">
+                    <option value="2026-vecka-10">Vecka 10 (aktuell)</option>
                 </select>
             </div>
         `
@@ -19,29 +18,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderPage() {
         renderHeader({
-            title: 'Samhällskunskap',
-            breadcrumb: 'SO',
+            title: 'Engelska',
+            breadcrumb: 'Engelska',
             back: { show: true, label: 'Till startsidan', href: '../index.html' },
-            user: store.lastUser,
-            actions: [versionSelectorAction]
+            actions: [versionSelectorAction],
+            user: store.lastUser
         });
 
-        const examVersionSelect = document.getElementById('examVersion');
-        if (examVersionSelect) {
-            examVersionSelect.value = examVersion;
-            examVersionSelect.addEventListener('change', (e) => {
-                examVersion = e.target.value;
-                localStorage.setItem('examVersion', examVersion);
-                updateExamData();
+        const vocabVersionSelect = document.getElementById('vocabVersion');
+        if (vocabVersionSelect) {
+            vocabVersionSelect.value = vocabVersion;
+            vocabVersionSelect.addEventListener('change', (e) => {
+                vocabVersion = e.target.value;
+                localStorage.setItem('englishVocabVersion', vocabVersion);
+                updateVocabData();
             });
         }
 
-        updateExamData();
+        updateVocabData();
     }
 
-    async function updateExamData() {
+    async function updateVocabData() {
         try {
-            const response = await fetch(`./data/${examVersion}/metadata.json`);
+            const response = await fetch(`./data/${vocabVersion}/metadata.json`);
             const metadata = await response.json();
 
             modulesContainer.innerHTML = '';
@@ -63,15 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     modulesContainer.appendChild(link);
                 });
             } else {
-                modulesContainer.innerHTML = '<p style="color: var(--muted); text-align: center;">Inga moduler tillgängliga för detta prov</p>';
+                modulesContainer.innerHTML = '<p style="color: var(--muted); text-align: center;">Inga moduler tillgängliga för denna vecka</p>';
             }
         } catch (error) {
-            console.error('Could not load exam metadata:', error);
+            console.error('Could not load vocabulary metadata:', error);
             modulesContainer.innerHTML = '<p style="color: red;">Fel vid laddning av moduler</p>';
         }
     }
 
     renderPage();
 });
-
 

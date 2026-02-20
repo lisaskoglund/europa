@@ -10,41 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/index.css">
-    <style>
-        .backBtn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            font-weight: 800;
-            color: var(--text);
-            background: rgba(255,255,255,.55);
-            border: 2px solid rgba(0,0,0,.08);
-            padding: 12px 18px;
-            border-radius: 999px;
-            box-shadow: 0 8px 16px rgba(0,0,0,.10);
-            transition: transform .10s ease, background .12s ease, box-shadow .12s ease;
-            font-size: 16px;
-        }
-        .backBtn:hover {
-            transform: translateY(-2px);
-            background: rgba(255,255,255,.75);
-            box-shadow: 0 12px 22px rgba(0,0,0,.12);
-        }
-        .backBtn:active {
-            transform: translateY(0px);
-        }
-    </style>
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 
 <body>
 
 <div class="wrap">
+    <header id="app-header"></header>
     <div class="card">
-        <div style="margin-bottom: 20px;">
-            <a class="backBtn" href="../index.html">← Till startsidan</a>
-        </div>
-
         <h1>Naturkunskap</h1>
         <p class="sub">Innehåll kommer snart 🚀</p>
 
@@ -60,6 +33,19 @@
     </div>
 </div>
 
+<script src="../js/shared.js"></script>
+<script src="../js/header.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        store = loadStore();
+        renderHeader({
+            title: 'Naturkunskap',
+            breadcrumb: 'NO',
+            back: { show: true, label: 'Till startsidan', href: '../index.html' },
+            user: store.lastUser,
+            actions: []
+        });
+    });
+</script>
 </body>
 </html>
-

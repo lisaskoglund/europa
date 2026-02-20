@@ -7,60 +7,55 @@
 
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/huvudstader.css">
+    <link rel="stylesheet" href="../../css/header.css">
 </head>
 
 <body>
-<header class="topHeader">
-    <a class="backBtn" href="../index.html">← Till ämnet</a>
-    <div class="pageTag">🏛️ Huvudstäder</div>
-    <div class="user-info">
-        <button class="userSelectBtn" id="userBadge">
-            <b>Användare: <span id="userName"></span></b>
-        </button>
-    </div>
-</header>
+<div class="wrap">
+    <header id="app-header"></header>
 
-<!-- QUIZ VIEW -->
-<div id="quizView" class="wrap">
-    <div class="card">
-        <div class="titleArea">
-            <h1>🌍 Huvudstäder i Europa</h1>
-            <p class="subtitle">Exakt rätt = <b>1 poäng</b>. 1–2 bokstäver fel = <b>0,5 poäng</b>. Tryck <b>Rätta</b> när du är klar!</p>
-        </div>
-
-        <div class="list" id="list"></div>
-    </div>
-</div>
-
-<div id="quizFooter" class="footer">
-    <div class="footerInner">
-        <div class="pill" id="total">Total: 0 / 42</div>
-        <button class="btn" id="rätta">Rätta</button>
-    </div>
-</div>
-
-<!-- MISTAKES VIEW -->
-<div id="mistakesView" class="wrap hidden">
-    <div class="card">
-        <div class="titleArea">
-            <h1>📚 Öva på de här!</h1>
-            <p class="subtitle">Här ser du bara de du fick <b>0,5</b> eller <b>0</b> poäng på — och hur det ska stavas.</p>
-
-            <div class="topline">
-                <div class="userBadge" id="userBadge2" title="Byt användare">
-                    👤 <span id="userName2">Ingen vald</span> <small>(klicka för att byta)</small>
-                </div>
-                <div class="subtitle" id="mistakeCount"></div>
+    <!-- QUIZ VIEW -->
+    <div id="quizView">
+        <div class="card">
+            <div class="titleArea">
+                <h1>🌍 Huvudstäder i Europa</h1>
+                <p class="subtitle">Exakt rätt = <b>1 poäng</b>. 1–2 bokstäver fel = <b>0,5 poäng</b>. Tryck <b>Rätta</b> när du är klar!</p>
             </div>
+
+            <div class="list" id="list"></div>
         </div>
-
-        <div class="list" id="mistakesList"></div>
     </div>
-</div>
 
-<div id="mistakesFooter" class="footer hidden">
-    <div class="footerInner">
-        <div class="pill" id="mistakesHint">Redo för en ny runda?</div>
+    <div id="quizFooter" class="footer">
+        <div class="footerInner">
+            <div class="pill" id="total">Total: 0 / 42</div>
+            <button class="btn" id="rätta">Rätta</button>
+        </div>
+    </div>
+
+    <!-- MISTAKES VIEW -->
+    <div id="mistakesView" class="hidden">
+        <div class="card">
+            <div class="titleArea">
+                <h1>📚 Öva på de här!</h1>
+                <p class="subtitle">Här ser du bara de du fick <b>0,5</b> eller <b>0</b> poäng på — och hur det ska stavas.</p>
+
+                <div class="topline">
+                    <div class="userBadge" id="userBadge2" title="Byt användare">
+                        👤 <span id="userName2">Ingen vald</span> <small>(klicka för att byta)</small>
+                    </div>
+                    <div class="subtitle" id="mistakeCount"></div>
+                </div>
+            </div>
+
+            <div class="list" id="mistakesList"></div>
+        </div>
+    </div>
+
+    <div id="mistakesFooter" class="footer hidden">
+        <div class="footerInner">
+            <div class="pill" id="mistakesHint">Redo för en ny runda?</div>
+        </div>
     </div>
 </div>
 
@@ -107,8 +102,8 @@
 </div>
 
 <script src="../../js/shared.js"></script>
+<script src="../../js/header.js"></script>
 <script src="../js/huvudstader.js"></script>
-
 </body>
 </html>
 
