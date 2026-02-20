@@ -36,10 +36,20 @@ function renderHeader(config = {}) {
     // --- Build Header HTML ---
 
     // 1. Left Zone (Navigation)
+    // Determine root path by looking at how header.js was included
+    let rootPath = '';
+    const scriptEl = document.querySelector('script[src*="js/header.js"]');
+    if (scriptEl) {
+        const src = scriptEl.getAttribute('src');
+        // e.g. "../../js/header.js" -> "../../"
+        // e.g. "js/header.js" -> ""
+        rootPath = src.replace('js/header.js', '');
+    }
+
     const backBtnHtml = back.show
         ? `<a href="${back.href}" class="back-btn">←</a>`
         : '';
-    const leftZoneHtml = `${backBtnHtml}<a href="/europa/index.html" class="logo"><img src="/images/logo.png" alt="Logo"></a>`;
+    const leftZoneHtml = `${backBtnHtml}<a href="${rootPath}index.html" class="logo"><img src="${rootPath}images/logo.png" alt="Logo"></a>`;
 
     // 2. Center Zone (Context)
     const centerZoneHtml = `
