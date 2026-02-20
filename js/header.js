@@ -46,13 +46,13 @@ function renderHeader(config = {}) {
         ${title ? `<h1 class="header-title">${title}</h1>` : ''}
     `;
 
-    // 3. Right Zone (User & Actions)
+    // 3. Right Zone (Actions + User)
     const userHtml = renderUser(user);
     const actionsHtml = actions.map(action => action.html).join('');
 
     const rightZoneHtml = `
-        ${userHtml}
         ${actionsHtml ? `<div class="header-actions">${actionsHtml}</div>` : ''}
+        ${userHtml}
     `;
 
     // --- Assemble Final Header ---

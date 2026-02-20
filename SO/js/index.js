@@ -2,15 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     store = loadStore();
 
     const modulesContainer = document.getElementById('modulesContainer');
-    let examVersion = localStorage.getItem('examVersion') || '2026-februari';
+    // Use a separate key from instudering so they don't interfere
+    let examVersion = localStorage.getItem('soIndexVersion') || '2026-februari';
 
     const versionSelectorAction = {
         id: 'version-selector',
         html: `
             <div class="versionSelector">
-                <label for="examVersion">Gamla prov</label>
+                <label for="examVersion">Prov</label>
                 <select id="examVersion">
-                    <option value="2026-februari">2026 februari (aktuell)</option>
+                    <option value="2026-februari">2026 februari</option>
                     <option value="arkiv/2025-höst">2025 Höst (arkiv)</option>
                 </select>
             </div>
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             examVersionSelect.value = examVersion;
             examVersionSelect.addEventListener('change', (e) => {
                 examVersion = e.target.value;
-                localStorage.setItem('examVersion', examVersion);
+                localStorage.setItem('soIndexVersion', examVersion);
                 updateExamData();
             });
         }
@@ -73,5 +74,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderPage();
 });
-
-

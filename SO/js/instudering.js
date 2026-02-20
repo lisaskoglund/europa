@@ -3,8 +3,8 @@
 ========================= */
 
 // ===== DYNAMIC DATA LOADING =====
-// Get exam version from localStorage or default to latest
-const EXAM_VERSION = localStorage.getItem('examVersion') || '2026-februari';
+// Use instudering-specific version key so it doesn't interfere with SO/index
+const EXAM_VERSION = localStorage.getItem('instuderingVersion') || '2026-februari';
 
 let PRESETS = {};
 let questions = [];
@@ -16,6 +16,34 @@ let answers = {};
 let phase = "start";
 
 const app = document.getElementById("app");
+
+function versionSelectorAction() {
+  return {
+    id: 'version-selector',
+    html: `
+      <div class="versionSelector">
+        <label for="examVersion">Prov</label>
+        <select id="examVersion">
+          <option value="2026-februari">2026 februari</option>
+          <option value="arkiv/2025-höst">2025 Höst (arkiv)</option>
+        </select>
+      </div>
+    `
+  };
+}
+
+function wireVersionSelector() {
+  const sel = document.getElementById('examVersion');
+  if (!sel) return;
+  sel.value = EXAM_VERSION;
+  // Replace element to remove any previously attached listeners
+  const fresh = sel.cloneNode(true);
+  sel.parentNode.replaceChild(fresh, sel);
+  fresh.addEventListener('change', (e) => {
+    localStorage.setItem('instuderingVersion', e.target.value);
+    location.reload();
+  });
+}
 
 function render(){
   if(phase==="start") return renderStart();
@@ -31,7 +59,9 @@ async function main() {
         breadcrumb: "SO",
         back: { show: true, label: "Till SO", href: "../index.html" },
         user: store.lastUser,
+        actions: [versionSelectorAction()]
     });
+    wireVersionSelector();
     await loadExamData();
 }
 
@@ -236,8 +266,10 @@ function renderStart(){
     title: 'Instuderingsfrågor',
     breadcrumb: 'SO',
     back: { show: true, label: 'Till ämnet', href: '../index.html' },
-    user: store.lastUser
+    user: store.lastUser,
+    actions: [versionSelectorAction()]
   });
+  wireVersionSelector();
 
   app.innerHTML = `
     <h1>Europa – träningsprov (åk 5)</h1>
@@ -269,8 +301,10 @@ function renderQuestion(){
     breadcrumb: 'SO',
     meta: `Fråga ${idx + 1} av ${quiz.length}`,
     back: { show: true, label: 'Till ämnet', href: '../index.html' },
-    user: store.lastUser
+    user: store.lastUser,
+    actions: [versionSelectorAction()]
   });
+  wireVersionSelector();
 
   const q = quiz[idx];
   const max = quiz.length;
@@ -437,8 +471,10 @@ function renderResults(){
     title: 'Resultat',
     breadcrumb: 'SO › Instuderingsfrågor',
     back: { show: true, label: 'Till ämnet', href: '../index.html' },
-    user: store.lastUser
+    user: store.lastUser,
+    actions: [versionSelectorAction()]
   });
+  wireVersionSelector();
 
   let emoji;
   if(g.pct >= 90)      emoji = "🏆";

@@ -194,7 +194,48 @@
     display:none;
 }
 
-/* --- Responsive --- */
+/* --- Version Selector --- */
+.versionSelector {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.versionSelector label {
+    font-weight: 800;
+    color: var(--muted);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.versionSelector select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6258' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+    border: 2px solid rgba(0,0,0,.08);
+    padding: 10px 36px 10px 14px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--text);
+    cursor: pointer;
+    font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,.07);
+    transition: background .12s ease, box-shadow .12s ease;
+}
+
+.versionSelector select:hover {
+    background-color: rgba(255,255,255,.75);
+    box-shadow: 0 6px 14px rgba(0,0,0,.10);
+}
+
+.versionSelector select:focus {
+    outline: none;
+    border-color: rgba(240,124,74,.5);
+    box-shadow: 0 0 0 3px rgba(240,124,74,.15);
+}
+
+
 @media (max-width: 768px) {
     #app-header {
         flex-wrap: wrap;
