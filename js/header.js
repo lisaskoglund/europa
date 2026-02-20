@@ -96,7 +96,7 @@ function renderUser(user) {
                 ${user ? `${users.find(u => u.name === user)?.icon || '👤'} ${user}` : '👤 Välj användare'}
             </button>
             <div class="userDropdown hidden" id="userDropdown">
-                ${users.map(u => `<button data-user="${u.name}">${u.name} ${u.icon}</button>`).join('')}
+                ${users.filter(u => u.name !== user).map(u => `<button data-user="${u.name}">${u.name} ${u.icon}</button>`).join('')}
             </div>
         </div>
     `;

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     store = loadStore();
     renderHeader({
-        title: 'Välkommen till Plugga!',
+        title: '',
         user: store.lastUser,
     });
 });
