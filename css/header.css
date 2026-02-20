@@ -148,7 +148,6 @@
     z-index: 60;
     display: flex;
     justify-content: flex-end;
-    width: 100%;
 }
 
 .userSelectBtn {
@@ -183,19 +182,20 @@
 
 .userDropdown{
     position:absolute;
-    top:55px;
-    left:0;
+    top:100%;
+    right:0;
+    left:auto;
     display:flex;
     flex-direction:column;
+    align-items: stretch;
     gap:8px;
     padding:8px 0;
-    width: 100%;
-    min-width: 120px;
+    min-width: 140px;
     z-index: 59;
 }
 
 .userDropdown button{
-    background: rgba(255,255,255,.05);
+    background: #ffffff;
     border: 2px solid rgba(0,0,0,.08);
     padding: 10px 16px;
     border-radius: 12px;
@@ -205,6 +205,7 @@
     align-items: center;
     gap: 8px;
     width: 100%;
+    white-space: nowrap;
     text-align: left;
     box-sizing: border-box;
     color: var(--text);
@@ -214,7 +215,7 @@
 }
 
 .userDropdown button:hover{
-    background: rgba(240, 124, 74, 0.2);
+    background: #a8dfff;
 }
 
 .hidden{
