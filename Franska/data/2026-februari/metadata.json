@@ -1,0 +1,24 @@
+{
+  "name": "2026 februari",
+  "date": "2026-02-23",
+  "level": "Åk 6",
+  "description": "Prov för februari 2026",
+  "active": true,
+  "modules": [
+    {
+      "id": "etre-song",
+      "name": "🎵 ÊTRE chanson",
+      "description": "Lyssna och lär dig böja être",
+      "external": true,
+      "url": "https://www.youtube.com/watch?v=7exzGyqGrlU&list=RD7exzGyqGrlU&start_radio=1"
+    },
+    {
+      "id": "wordwall-etre",
+      "name": "🧩 Böj être",
+      "description": "Träna på wordwall",
+      "external": true,
+      "url": "https://wordwall.net/fr/resource/2560218/verbe-%C3%AAtre"
+    }
+  ]
+}
+

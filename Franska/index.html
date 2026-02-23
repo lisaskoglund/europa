@@ -19,13 +19,22 @@
     <header id="app-header"></header>
     <div class="card">
         <h1>Franska</h1>
-        <p class="sub">Innehåll kommer snart 🚀</p>
+        <p class="sub" id="introSubtitle">Välj hur du vill träna din franska 🇫🇷✨</p>
 
-        <div class="btnRow">
-            <p style="color: var(--muted); text-align: center; width: 100%;">
-                Moduler för franska kommer att läggas till här.
-            </p>
+        <div class="btnRow" id="modulesContainer">
+            <!-- Moduler läses in dynamiskt här -->
         </div>
+
+        <div id="no-exam-view" class="hidden" style="text-align: center; margin-bottom: 30px;">
+            <div style="font-size: 60px; margin-bottom: 10px;">🎉</div>
+            <h2 style="margin: 0; color: var(--text);">Inget prov i sikte!</h2>
+            <p style="margin: 10px 0 0; color: var(--muted); font-size: 18px;">Just nu finns det inget aktivt prov att plugga på. Ta det lugnt!</p>
+        </div>
+
+        <!-- Mobile-only version selector container -->
+        <div id="mobileVersionSelector" class="mobile-version-selector"></div>
+
+        <div class="hint" id="introHint">Träna på franska glosor och grammatik.</div>
 
         <div class="catsWrap">
             <img class="cats" src="../images/kawaii_cats.png" alt="Kawaii-djur" />
@@ -36,17 +45,6 @@
 
 <script src="../js/shared.js"></script>
 <script src="../js/header.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        store = loadStore();
-        renderHeader({
-            title: 'Franska',
-            breadcrumb: 'Franska',
-            back: { show: true, label: 'Till startsidan', href: '../index.html' },
-            user: store.lastUser,
-            actions: []
-        });
-    });
-</script>
+<script src="js/index.js"></script>
 </body>
 </html>
