@@ -19,16 +19,23 @@
     <header id="app-header"></header>
     <div class="card">
         <h1>Samhällskunskap</h1>
-        <p class="sub">Välj modul och träna 🌍✨</p>
+        <p class="sub" id="introSubtitle">Välj modul och träna 🌍✨</p>
 
         <div class="btnRow" id="modulesContainer">
             <!-- Moduler läses in dynamiskt här -->
         </div>
 
+        <div id="no-exam-view" class="hidden" style="text-align: center; margin-bottom: 30px;">
+            <div style="font-size: 60px; margin-bottom: 10px;">🎉</div>
+            <h2 style="margin: 0; color: var(--text);">Inget prov i sikte!</h2>
+            <p style="margin: 10px 0 0; color: var(--muted); font-size: 18px;">Just nu finns det inget aktivt prov att plugga på. Ta det lugnt!</p>
+            <p style="margin: 10px 0 0; color: var(--muted); font-size: 14px;">(Du kan fortfarande se gammalt material i menyn om du klickar på "arkiv")</p>
+        </div>
+
         <!-- Mobile-only version selector container -->
         <div id="mobileVersionSelector" class="mobile-version-selector"></div>
 
-        <div class="hint">Träna på europiska huvudstäder och instuderingsfrågor.</div>
+        <div class="hint" id="introHint">Träna på europiska huvudstäder och instuderingsfrågor.</div>
 
 
         <div class="catsWrap">
@@ -42,4 +49,4 @@
 <script src="../js/header.js"></script>
 <script src="js/index.js"></script>
 </body>
-
+</html>

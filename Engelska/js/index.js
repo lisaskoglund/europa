@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html: `
             <div class="versionSelector">
                 <select id="vocabVersion">
-                    <option value="2026-vecka-10">Vecka 10 (aktuell)</option>
+                    <option value="2026-vecka-10" ${vocabVersion === '2026-vecka-10' ? 'selected' : ''}>Vecka 10 (aktuell)</option>
                 </select>
             </div>
         `
@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             vocabVersionSelect.value = vocabVersion;
             vocabVersionSelect.addEventListener('change', (e) => {
                 vocabVersion = e.target.value;
+
+                // IMPORTANT: Save to localStorage so sub-pages (glossary, nouns) know what to load!
                 localStorage.setItem('englishVocabVersion', vocabVersion);
 
                 // Sync mobile selector if it exists
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileSelector.innerHTML = `
                 <div class="versionSelector" style="justify-content:center;">
                     <select id="vocabVersionMobile">
-                        <option value="2026-vecka-10">Vecka 10 (aktuell)</option>
+                        <option value="2026-vecka-10" ${vocabVersion === '2026-vecka-10' ? 'selected' : ''}>Vecka 10 (aktuell)</option>
                     </select>
                 </div>
             `;
@@ -70,9 +72,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function updateVocabData() {
+        const noExamView = document.getElementById('no-exam-view');
+
+        if (!vocabVersion) {
+            // Should not happen with default logic, but good for safety
+            modulesContainer.style.display = 'none';
+            if (noExamView) noExamView.classList.remove('hidden');
+            return;
+        }
+
         try {
             const response = await fetch(`./data/${vocabVersion}/metadata.json`);
             const metadata = await response.json();
+
+            // Hide empty state, show modules container
+            if (noExamView) noExamView.classList.add('hidden');
+            modulesContainer.style.display = 'flex';
 
             modulesContainer.innerHTML = '';
             if (metadata.modules && metadata.modules.length > 0) {

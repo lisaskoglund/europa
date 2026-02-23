@@ -7,8 +7,8 @@
   "modules": [
     {
       "id": "huvudstader",
-      "name": "🌍 Huvudstäder",
-      "description": "Träna på huvudstäder"
+      "name": "🏛️ Huvudstäder",
+      "description": "Träna på europiska huvudstäder"
     },
     {
       "id": "instudering",
@@ -17,8 +17,8 @@
     },
     {
       "id": "seterra",
-      "name": "📍 Seterra",
-      "description": "Träna på kartan",
+      "name": "🗺️ Seterra",
+      "description": "Geografi-träning på Geoguessr",
       "external": true,
       "url": "https://www.geoguessr.com/sv/vgp/3007?gamemode=pin"
     }
