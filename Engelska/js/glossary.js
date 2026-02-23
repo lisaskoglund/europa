@@ -2,6 +2,7 @@
 
 // Load vocabulary from the selected week
 let vocabulary = [];
+let currentVocabVersion = '2026-vecka-10';
 let mode = 'en-sv';
 let currentIndex = 0;
 let answers = {};
@@ -25,8 +26,8 @@ async function loadVocabulary() {
             user: store.lastUser,
         });
 
-        const vocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
-        const module = await import(`../data/${vocabVersion}/vocabulary.js`);
+        currentVocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
+        const module = await import(`../data/${currentVocabVersion}/vocabulary.js`);
         vocabulary = module.vocabulary;
 
         // Reset state
@@ -243,7 +244,7 @@ function persistAnswer() {
 
 function playAudio() {
     const item = vocabulary[currentIndex];
-    const audioPath = `../data/${localStorage.getItem('englishVocabVersion')}/audio/${item.audioId}.mp3`;
+    const audioPath = `../data/${currentVocabVersion}/audio/${item.audioId}.mp3`;
     const audio = new Audio(audioPath);
     audio.play().catch(err => alert('Kunde inte spela ljud: ' + err.message));
 }
