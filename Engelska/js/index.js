@@ -24,14 +24,46 @@ document.addEventListener('DOMContentLoaded', () => {
             user: store.lastUser
         });
 
+        // Initialize Desktop Selector (in header)
         const vocabVersionSelect = document.getElementById('vocabVersion');
         if (vocabVersionSelect) {
             vocabVersionSelect.value = vocabVersion;
             vocabVersionSelect.addEventListener('change', (e) => {
                 vocabVersion = e.target.value;
                 localStorage.setItem('englishVocabVersion', vocabVersion);
+
+                // Sync mobile selector if it exists
+                const mobileSelect = document.getElementById('vocabVersionMobile');
+                if (mobileSelect) mobileSelect.value = vocabVersion;
+
                 updateVocabData();
             });
+        }
+
+        // Initialize Mobile Selector (in body)
+        const mobileSelector = document.getElementById('mobileVersionSelector');
+        if (mobileSelector) {
+            mobileSelector.innerHTML = `
+                <div class="versionSelector" style="justify-content:center;">
+                    <select id="vocabVersionMobile">
+                        <option value="2026-vecka-10">Vecka 10 (aktuell)</option>
+                    </select>
+                </div>
+            `;
+            const mobileSelect = document.getElementById('vocabVersionMobile');
+            if (mobileSelect) {
+                mobileSelect.value = vocabVersion;
+                mobileSelect.addEventListener('change', (e) => {
+                    vocabVersion = e.target.value;
+                    localStorage.setItem('englishVocabVersion', vocabVersion);
+
+                    // Sync desktop selector if it exists
+                    const headerSelect = document.getElementById('vocabVersion');
+                    if (headerSelect) headerSelect.value = vocabVersion;
+
+                    updateVocabData();
+                });
+            }
         }
 
         updateVocabData();
@@ -71,4 +103,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderPage();
 });
-

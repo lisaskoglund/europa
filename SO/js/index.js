@@ -26,14 +26,47 @@ document.addEventListener('DOMContentLoaded', () => {
             actions: [versionSelectorAction]
         });
 
+        // Initialize Desktop Selector (in header)
         const examVersionSelect = document.getElementById('examVersion');
         if (examVersionSelect) {
             examVersionSelect.value = examVersion;
             examVersionSelect.addEventListener('change', (e) => {
                 examVersion = e.target.value;
                 localStorage.setItem('soIndexVersion', examVersion);
+
+                // Sync mobile selector if it exists
+                const mobileSelect = document.getElementById('examVersionMobile');
+                if (mobileSelect) mobileSelect.value = examVersion;
+
                 updateExamData();
             });
+        }
+
+        // Initialize Mobile Selector (in body)
+        const mobileSelector = document.getElementById('mobileVersionSelector');
+        if (mobileSelector) {
+            mobileSelector.innerHTML = `
+                <div class="versionSelector" style="justify-content:center;">
+                    <select id="examVersionMobile">
+                        <option value="2026-februari">2026 februari</option>
+                        <option value="arkiv/2025-höst">2025 Höst (arkiv)</option>
+                    </select>
+                </div>
+            `;
+            const mobileSelect = document.getElementById('examVersionMobile');
+            if (mobileSelect) {
+                mobileSelect.value = examVersion;
+                mobileSelect.addEventListener('change', (e) => {
+                    examVersion = e.target.value;
+                    localStorage.setItem('soIndexVersion', examVersion);
+
+                    // Sync desktop selector if it exists
+                    const headerSelect = document.getElementById('examVersion');
+                    if (headerSelect) headerSelect.value = examVersion;
+
+                    updateExamData();
+                });
+            }
         }
 
         updateExamData();

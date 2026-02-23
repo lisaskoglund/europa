@@ -267,30 +267,34 @@
 
 @media (max-width: 768px) {
     #app-header {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-        height: auto;
-        padding: 12px 15px;
-        gap: 10px;
+        grid-template-columns: auto 1fr;
     }
 
-    .header-zone.left {
-        grid-column: 1;
-        grid-row: 1;
+    .back-btn {
+        display: none !important;
     }
 
+    .header-title {
+        display: none !important;
+    }
+
+    /* collapse center zone if it only contained title */
     .header-zone.center {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        text-align: center;
+        display: none;
     }
 
+    /* Make the header grid just left (logo) and right (user) */
+    #app-header {
+        grid-template-columns: auto 1fr;
+    }
+
+    /* Since center is gone, push right zone to the end */
     .header-zone.right {
-        grid-column: 2;
-        grid-row: 1;
+        justify-content: flex-end;
     }
 
-    .breadcrumb {
+    /* Hide version selector in header on mobile */
+    .header-actions .versionSelector {
         display: none;
     }
 }
