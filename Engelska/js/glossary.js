@@ -12,8 +12,8 @@ const app = document.getElementById('app');
 const modeSelect = document.getElementById('mode');
 
 // Läs in användarens sparade läge
-const savedMode = localStorage.getItem('glossaryMode') || 'en-sv';
-modeSelect.value = savedMode;
+// Force default to 'en-sv', ignoring localStorage history
+modeSelect.value = mode;
 
 // Load vocabulary data
 async function loadVocabulary() {
@@ -529,7 +529,7 @@ function showResults(total, max, pct) {
 // Mode change handler
 modeSelect.addEventListener('change', (e) => {
     mode = e.target.value;
-    localStorage.setItem('glossaryMode', mode);
+    // No longer saving to localStorage
     currentIndex = 0;
     answers = {};
     results = [];
