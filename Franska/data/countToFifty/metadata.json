@@ -1,0 +1,24 @@
+{
+  "name": "Être",
+  "date": "2026-02-23",
+  "level": "Åk 6",
+  "description": "Prov för februari 2026",
+  "active": true,
+  "modules": [
+    {
+      "id": "count-to-fifty",
+      "name": "🎵 Räkna - video",
+      "description": "Lyssna och lär dig räkna till 50",
+      "external": true,
+      "url": "https://www.youtube.com/watch?v=wlYqz2unHKc"
+    },
+    {
+      "id": "wordwall-etre",
+      "name": "🧩 Räkna - spel",
+      "description": "Träna på att räkna till 50",
+      "external": true,
+      "url": "https://wordwall.net/fr/resource/8403306/les-nombres-0-50"
+    }
+  ]
+}
+

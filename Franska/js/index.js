@@ -3,14 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modulesContainer = document.getElementById('modulesContainer');
     // Use a separate key from SO/Engelska so they don't interfere
-    let examVersion = localStorage.getItem('franskaIndexVersion') || '2026-februari';
+    let savedVersion = localStorage.getItem('franskaIndexVersion');
+    let examVersion = (savedVersion === 'countToFifty' || savedVersion === 'arkiv/etre')
+        ? savedVersion
+        : 'countToFifty';
 
     const versionSelectorAction = {
         id: 'version-selector',
         html: `
             <div class="versionSelector">
                 <select id="examVersion">
-                    <option value="2026-februari" ${examVersion === '2026-februari' ? 'selected' : ''}>2026 februari</option>
+                    <option value="" ${!examVersion ? 'selected' : ''}>Välj...</option>
+                    <option value="countToFifty" ${examVersion === 'countToFifty' ? 'selected' : ''}>Räkna till 50 (Nu)</option>
+                    <option value="arkiv/etre" ${examVersion === 'arkiv/etre' ? 'selected' : ''}>Être (Arkiv)</option>
                 </select>
             </div>
         `
@@ -49,7 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileSelector.innerHTML = `
                 <div class="versionSelector" style="justify-content:center;">
                     <select id="examVersionMobile">
-                        <option value="2026-februari" ${examVersion === '2026-februari' ? 'selected' : ''}>2026 februari</option>
+                        <option value="" ${!examVersion ? 'selected' : ''}>Välj...</option>
+                        <option value="countToFifty" ${examVersion === 'countToFifty' ? 'selected' : ''}>Räkna till 50</option>
+                        <option value="arkiv/etre" ${examVersion === 'arkiv/etre' ? 'selected' : ''}>Être</option>
                     </select>
                 </div>
             `;
@@ -77,7 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const introSubtitle = document.getElementById('introSubtitle');
         const introHint = document.getElementById('introHint');
 
-        if (!examVersion) {
+        // Allow retry with default if first attempt fails
+        let currentVersion = examVersion;
+
+        if (!currentVersion) {
              modulesContainer.style.display = 'none';
              if (noExamView) noExamView.classList.remove('hidden');
              if (introSubtitle) introSubtitle.style.display = 'none';
@@ -86,8 +96,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch(`./data/${examVersion}/metadata.json`);
-            if (!response.ok) throw new Error('Metadata not found');
+            console.log(`Loading metadata for version: ${currentVersion}`);
+            let response = await fetch(`./data/${currentVersion}/metadata.json`);
+
+            if (!response.ok) {
+                console.warn(`Metadata for ${currentVersion} not found. Status: ${response.status}`);
+                // If the saved version is invalid (e.g. old path), try falling back to default once
+                if (currentVersion !== 'countToFifty') {
+                    console.log('Falling back to default: countToFifty');
+                    currentVersion = 'countToFifty';
+                    examVersion = 'countToFifty';
+                    localStorage.setItem('franskaIndexVersion', 'countToFifty');
+                    // Update selectors
+                    const examVersionSelect = document.getElementById('examVersion');
+                    if (examVersionSelect) examVersionSelect.value = 'countToFifty';
+                    const mobileSelect = document.getElementById('examVersionMobile');
+                    if (mobileSelect) mobileSelect.value = 'countToFifty';
+
+                    response = await fetch(`./data/${currentVersion}/metadata.json`);
+                }
+            }
+
+            if (!response.ok) throw new Error(`Metadata not found for ${currentVersion}`);
 
             const metadata = await response.json();
 
