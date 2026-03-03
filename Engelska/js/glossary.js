@@ -192,6 +192,11 @@ function render() {
         });
     });
 
+    // Automatically focus the first input field
+    if (inputs.length > 0) {
+        inputs[0].focus();
+    }
+
     // Event listeners
     if (mode === 'audio') {
         document.getElementById('playBtn').addEventListener('click', playAudio);
@@ -409,12 +414,12 @@ function gradeAll() {
     // Save highscore
     const user = store.lastUser;
     if (user && user !== "—") {
-        const key = `glossary_hs_${user}`;
+        const key = `glossary_hs_${user}_${mode}`;
         let hs = JSON.parse(localStorage.getItem(key) || "[]");
         hs.push({ pct: pct, points: totalPoints, max: maxPoints, ts: Date.now() });
         hs = hs
             .filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct))
-            .sort((a,b) => b.pct - a.pct || b.points - a.points || b.ts - a.ts)
+            .sort((a,b) => (b.pct - a.pct) || (b.points - a.points) || (a.ts - b.ts))
             .slice(0, 20);
         localStorage.setItem(key, JSON.stringify(hs));
     }
@@ -425,24 +430,36 @@ function gradeAll() {
 
 function showHighscoreModal(total, max, pct) {
     const user = store.lastUser || "—";
-    const key = `glossary_hs_${user}`;
+    const key = `glossary_hs_${user}_${mode}`;
     const raw = JSON.parse(localStorage.getItem(key) || "[]");
     const top3 = raw.filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct)).slice(0, 3);
-    while (top3.length < 3) top3.push(null);
 
     let emoji;
-    if (pct >= 90) emoji = "🏆";
-    else if (pct >= 75) emoji = "🚀";
-    else if (pct >= 50) emoji = "👏";
-    else emoji = "🌟";
+    let extra;
+    if (pct >= 90) { emoji = "🏆"; extra = "WOW! Du är en mästare! 🤩"; }
+    else if (pct >= 75) { emoji = "🚀"; extra = "Superbra! Du är på topp! 😄"; }
+    else if (pct >= 50) { emoji = "👏"; extra = "Bra kämpat! Du är på väg! 🙂"; }
+    else { emoji = "🌟"; extra = "Bra jobbat! Öva lite till så sitter det! 😊"; }
 
     document.getElementById("resultEmoji").textContent = emoji;
     document.getElementById("resultUserLine").textContent = `Användare: ${escapeHtml(user)}`;
     document.getElementById("resultScore").textContent = `Du fick ${total} / ${max} poäng.`;
     document.getElementById("resultPercent").textContent = `Det blir ${pct}% rätt.`;
 
+    const extraEl = document.getElementById("resultExtra");
+    if (extraEl) extraEl.textContent = extra;
+
     const hsList = document.getElementById("hsList");
-    hsList.innerHTML = top3.map(s => `<li>${s ? `<b>${s.pct}%</b> (${s.points}/${s.max})` : "—"}</li>`).join("");
+    hsList.innerHTML = "";
+    for (let i = 0; i < 3; i++){
+        const li = document.createElement("li");
+        if (top3[i]) {
+            li.innerHTML = `<b>${top3[i].pct}%</b> (${top3[i].points}/${top3[i].max})`;
+        } else {
+            li.textContent = "—";
+        }
+        hsList.appendChild(li);
+    }
 
     const modal = document.getElementById("resultBackdrop");
     modal.style.display = "flex";
