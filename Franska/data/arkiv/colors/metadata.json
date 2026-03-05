@@ -1,0 +1,29 @@
+{
+  "name": "Colors",
+  "date": "2025-11-18",
+  "level": "Åk 5",
+  "description": "Träna på färgerna",
+  "active": true,
+  "modules": [
+    {
+      "id": "colors",
+      "name": "🎵 Färger - video",
+      "description": "Lyssna och lär dig färgerna",
+      "external": true,
+      "url": "https://www.youtube.com/watch?v=-4kNeFGBAcw"
+    },
+    {
+      "id": "colors",
+      "name": "🧩 Färger - spel",
+      "description": "Träna på färgerna",
+      "external": true,
+      "url": "https://www.lefleenfete.com/jeux-et-activit%C3%A9s-ludiques-pour-les-enfants/13-les-couleurs"
+    },
+    {
+      "id": "glossary",
+      "name": "📝 Färgerna",
+      "description": "Träna på färgerna i glosor"
+    }
+  ]
+}
+

@@ -15,7 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <select id="examVersion">
                     <option value="" ${!examVersion ? 'selected' : ''}>Välj...</option>
                     <option value="countToFifty" ${examVersion === 'countToFifty' ? 'selected' : ''}>Räkna till 50 (Nu)</option>
+                    <option value="arkiv/dansMaClasse" ${examVersion === 'arkiv/dansMaClasse' ? 'selected' : ''}>Dans ma classe (Arkiv)</option>
                     <option value="arkiv/etre" ${examVersion === 'arkiv/etre' ? 'selected' : ''}>Être (Arkiv)</option>
+                    <option value="arkiv/clock" ${examVersion === 'arkiv/clock' ? 'selected' : ''}>Klockan (Arkiv)</option>
+                    <option value="arkiv/avoir" ${examVersion === 'arkiv/avoir' ? 'selected' : ''}>Avoir (Arkiv)</option>
+                    <option value="arkiv/colors" ${examVersion === 'arkiv/colors' ? 'selected' : ''}>Färger (Arkiv)</option>
+                    <option value="arkiv/halsningsfraser" ${examVersion === 'arkiv/halsningsfraser' ? 'selected' : ''}>Hälsningsfraser (Arkiv)</option>
+                    <option value="arkiv/countToTwenty" ${examVersion === 'arkiv/countToTwenty' ? 'selected' : ''}>Räkna till 20 (Arkiv)</option>
+                    <option value="arkiv/pronomen" ${examVersion === 'arkiv/pronomen' ? 'selected' : ''}>Pronomen</option>
                 </select>
             </div>
         `
@@ -56,7 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <select id="examVersionMobile">
                         <option value="" ${!examVersion ? 'selected' : ''}>Välj...</option>
                         <option value="countToFifty" ${examVersion === 'countToFifty' ? 'selected' : ''}>Räkna till 50</option>
-                        <option value="arkiv/etre" ${examVersion === 'arkiv/etre' ? 'selected' : ''}>Être</option>
+                        <option value="arkiv/dansMaClasse" ${examVersion === 'arkiv/dansMaClasse' ? 'selected' : ''}>Dans ma classe</option>
+                        <option value="arkiv/etre" ${examVersion === 'arkiv/etre' ? 'selected' : ''}>Être (Arkiv)</option>
+                        <option value="arkiv/clock" ${examVersion === 'arkiv/clock' ? 'selected' : ''}>Klockan (Arkiv)</option>
+                        <option value="arkiv/avoir" ${examVersion === 'arkiv/avoir' ? 'selected' : ''}>Avoir (Arkiv)</option>
+                        <option value="arkiv/colors" ${examVersion === 'arkiv/colors' ? 'selected' : ''}>Färger (Arkiv)</option>
+                        <option value="arkiv/halsningsfraser" ${examVersion === 'arkiv/halsningsfraser' ? 'selected' : ''}>Hälsningsfraser</option>
+                        <option value="arkiv/countToTwenty" ${examVersion === 'arkiv/countToTwenty' ? 'selected' : ''}>Räkna till 20</option>
                     </select>
                 </div>
             `;

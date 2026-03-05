@@ -1,9 +1,9 @@
-/* Engelska Glosor - 4 Lägen */
+/* Franska Glosor */
 
 // Load vocabulary from the selected week
 let vocabulary = [];
-let currentVocabVersion = '2026-vecka-10';
-let mode = 'en-sv';
+let currentVocabVersion = 'arkiv/dansMaClasse';
+let mode = 'fr-sv';
 let currentIndex = 0;
 let answers = {};
 let results = [];
@@ -12,7 +12,6 @@ const app = document.getElementById('app');
 const modeSelect = document.getElementById('mode');
 
 // Läs in användarens sparade läge
-// Force default to 'en-sv', ignoring localStorage history
 modeSelect.value = mode;
 
 // Load vocabulary data
@@ -21,12 +20,12 @@ async function loadVocabulary() {
         store = loadStore();
         renderHeader({
             title: "Glosor",
-            breadcrumb: "Engelska",
-            back: { show: true, label: "Till Engelska", href: "../index.html" },
+            breadcrumb: "Franska",
+            back: { show: true, label: "Till Franska", href: "../index.html" },
             user: store.lastUser,
         });
 
-        currentVocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
+        currentVocabVersion = localStorage.getItem('franskaIndexVersion') || 'arkiv/dansMaClasse';
         const module = await import(`../data/${currentVocabVersion}/vocabulary.js`);
         vocabulary = module.vocabulary;
 
@@ -92,72 +91,30 @@ function render() {
 
     let content = '';
 
-    if (mode === 'sv-en') {
-        // Svenska → Engelska
+    if (mode === 'sv-fr') {
+        // Svenska → Franska
+        const swedishWord = item.swedish && item.swedish.length > 0 ? item.swedish.join(', ') : item.swedish;
         content = `
-            <h2 class="mode-title">Svenska → Engelska</h2>
-            <p style="font-size: 18px; color: #666; margin: 20px 0;"><strong>${item.swedish.join(', ')}</strong></p>
+            <h2 class="mode-title">Svenska → Franska</h2>
+            <p style="font-size: 18px; color: #666; margin: 20px 0;"><strong>${swedishWord}</strong></p>
             <div class="input-group">
                 <div>
-                    <label>Engelska 1:</label>
-                    <input type="text" id="en1" />
-                </div>
-                <div>
-                    <label>Engelska 2:</label>
-                    <input type="text" id="en2" />
+                    <label>Franska:</label>
+                    <input type="text" id="fr" autocomplete="off" spellcheck="false" />
                 </div>
             </div>
         `;
-    } else if (mode === 'en-sv') {
-        // Engelska → Svenska
+    } else if (mode === 'fr-sv') {
+        // Franska → Svenska
+        const frenchWord = item.french && item.french.length > 0 ? item.french.join(', ') : item.french;
         content = `
-            <h2 class="mode-title">Engelska → Svenska</h2>
-            <p style="font-size: 18px; color: #666; margin: 20px 0;"><strong>${item.english.join(', ')}</strong></p>
+            <h2 class="mode-title">Franska → Svenska</h2>
+            <p style="font-size: 18px; color: #666; margin: 20px 0;"><strong>${frenchWord}</strong></p>
             <div class="input-group">
                 <div>
-                    <label>Svenska 1:</label>
-                    <input type="text" id="sv1" />
+                    <label>Svenska:</label>
+                    <input type="text" id="sv" autocomplete="off" spellcheck="false" />
                 </div>
-                <div>
-                    <label>Svenska 2:</label>
-                    <input type="text" id="sv2" />
-                </div>
-            </div>
-        `;
-    } else if (mode === 'audio') {
-        // Ljud
-        content = `
-            <h2 class="mode-title">Ljud</h2>
-            <p style="margin: 20px 0;">
-                <button id="playBtn" style="padding: 12px 24px; font-size: 16px; border-radius: 8px; background: #4CAF50; color: white; border: none; cursor: pointer;">🔊 Spela ljud</button>
-            </p>
-            <div class="input-group">
-                <div>
-                    <label>Engelska 1:</label>
-                    <input type="text" id="audio-en1" />
-                </div>
-                <div>
-                    <label>Engelska 2:</label>
-                    <input type="text" id="audio-en2" />
-                </div>
-                <div>
-                    <label>Svenska 1:</label>
-                    <input type="text" id="audio-sv1" />
-                </div>
-                <div>
-                    <label>Svenska 2:</label>
-                    <input type="text" id="audio-sv2" />
-                </div>
-            </div>
-        `;
-    } else if (mode === 'conjugate') {
-        // Böj verb
-        content = `
-            <h2 class="mode-title">Böj verb</h2>
-            <p style="font-size: 18px; color: #666; margin: 20px 0;">Nutid: <strong>${item.english[0]}</strong></p>
-            <div class="input-group" style="max-width: 300px;">
-                <label>Dåtid:</label>
-                <input type="text" id="conj" />
             </div>
         `;
     }
@@ -181,25 +138,15 @@ function render() {
 
     app.innerHTML = content;
 
-    // Add Enter key listener to all inputs
-    const inputs = app.querySelectorAll('input[type="text"]');
-    inputs.forEach(input => {
+    const input = app.querySelector('input[type="text"]');
+    if (input) {
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 document.getElementById('nextBtn').click();
             }
         });
-    });
-
-    // Automatically focus the first input field
-    if (inputs.length > 0) {
-        inputs[0].focus();
-    }
-
-    // Event listeners
-    if (mode === 'audio') {
-        document.getElementById('playBtn').addEventListener('click', playAudio);
+        setTimeout(() => input.focus(), 50);
     }
 
     document.getElementById('backBtn').addEventListener('click', () => {
@@ -225,39 +172,20 @@ function render() {
 }
 
 function persistAnswer() {
-    const item = vocabulary[currentIndex];
-
-    if (mode === 'sv-en') {
+    if (mode === 'sv-fr') {
         answers[currentIndex] = {
-            en: [document.getElementById('en1').value, document.getElementById('en2').value]
+            fr: document.getElementById('fr').value
         };
-    } else if (mode === 'en-sv') {
+    } else if (mode === 'fr-sv') {
         answers[currentIndex] = {
-            sv: [document.getElementById('sv1').value, document.getElementById('sv2').value]
-        };
-    } else if (mode === 'audio') {
-        answers[currentIndex] = {
-            en: [document.getElementById('audio-en1').value, document.getElementById('audio-en2').value],
-            sv: [document.getElementById('audio-sv1').value, document.getElementById('audio-sv2').value]
-        };
-    } else if (mode === 'conjugate') {
-        answers[currentIndex] = {
-            conj: document.getElementById('conj').value
+            sv: document.getElementById('sv').value
         };
     }
-}
-
-function playAudio() {
-    const item = vocabulary[currentIndex];
-    const audioPath = `../data/${currentVocabVersion}/audio/${item.audioId}.mp3`;
-    const audio = new Audio(audioPath);
-    audio.play().catch(err => alert('Kunde inte spela ljud: ' + err.message));
 }
 
 function showConfirmation() {
     persistAnswer();
 
-    // Create modal overlay
     const overlay = document.createElement('div');
     overlay.style.cssText = `
         position: fixed;
@@ -314,7 +242,6 @@ function showConfirmation() {
         </div>
     `;
 
-    // Add animation style
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideUp {
@@ -333,7 +260,6 @@ function showConfirmation() {
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
 
-    // Event listeners
     document.getElementById('cancelBtn').addEventListener('click', () => {
         overlay.remove();
     });
@@ -343,7 +269,6 @@ function showConfirmation() {
         gradeAll();
     });
 
-    // Close on overlay click
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
             overlay.remove();
@@ -361,42 +286,18 @@ function gradeAll() {
         let points = 0;
         let breakdown = [];
 
-        if (mode === 'sv-en') {
-            const en1Score = scoreAnswer(ans.en?.[0] || '', item.english[0]);
-            const en2Score = scoreAnswer(ans.en?.[1] || '', item.english[1]);
-            points = en1Score.points + en2Score.points;
-            maxPoints += 2;
-            breakdown = [
-                { label: item.english[0], pts: en1Score.points },
-                { label: item.english[1], pts: en2Score.points }
-            ];
-        } else if (mode === 'en-sv') {
-            const sv1Score = scoreAnswer(ans.sv?.[0] || '', item.swedish[0]);
-            const sv2Score = scoreAnswer(ans.sv?.[1] || '', item.swedish[1]);
-            points = sv1Score.points + sv2Score.points;
-            maxPoints += 2;
-            breakdown = [
-                { label: item.swedish[0], pts: sv1Score.points },
-                { label: item.swedish[1], pts: sv2Score.points }
-            ];
-        } else if (mode === 'audio') {
-            const en1Score = scoreAnswer(ans.en?.[0] || '', item.english[0]);
-            const en2Score = scoreAnswer(ans.en?.[1] || '', item.english[1]);
-            const sv1Score = scoreAnswer(ans.sv?.[0] || '', item.swedish[0]);
-            const sv2Score = scoreAnswer(ans.sv?.[1] || '', item.swedish[1]);
-            points = en1Score.points + en2Score.points + sv1Score.points + sv2Score.points;
-            maxPoints += 4;
-            breakdown = [
-                { label: item.english[0], pts: en1Score.points },
-                { label: item.english[1], pts: en2Score.points },
-                { label: item.swedish[0], pts: sv1Score.points },
-                { label: item.swedish[1], pts: sv2Score.points }
-            ];
-        } else if (mode === 'conjugate') {
-            const conjScore = scoreAnswer(ans.conj || '', item.english[1]);
-            points = conjScore.points;
+        if (mode === 'sv-fr') {
+            const correctRaw = item.french[0]; // Assuming 1 word
+            const score = scoreAnswer(ans.fr || '', correctRaw);
+            points = score.points;
             maxPoints += 1;
-            breakdown = [{ label: 'Dåtid', pts: conjScore.points }];
+            breakdown = [{ label: correctRaw, pts: points }];
+        } else if (mode === 'fr-sv') {
+            const correctRaw = item.swedish[0]; // Assuming 1 word
+            const score = scoreAnswer(ans.sv || '', correctRaw);
+            points = score.points;
+            maxPoints += 1;
+            breakdown = [{ label: correctRaw, pts: points }];
         }
 
         totalPoints += points;
@@ -414,7 +315,7 @@ function gradeAll() {
     // Save highscore
     const user = store.lastUser;
     if (user && user !== "—") {
-        const key = `glossary_hs_${user}_${mode}`;
+        const key = `fr_glossary_hs_${user}_${mode}`;
         let hs = JSON.parse(localStorage.getItem(key) || "[]");
         hs.push({ pct: pct, points: totalPoints, max: maxPoints, ts: Date.now() });
         hs = hs
@@ -430,7 +331,7 @@ function gradeAll() {
 
 function showHighscoreModal(total, max, pct) {
     const user = store.lastUser || "—";
-    const key = `glossary_hs_${user}_${mode}`;
+    const key = `fr_glossary_hs_${user}_${mode}`;
     const raw = JSON.parse(localStorage.getItem(key) || "[]");
     const top3 = raw.filter(s => s && typeof s.pct === 'number' && !isNaN(s.pct)).slice(0, 3);
 
@@ -470,15 +371,10 @@ function showHighscoreModal(total, max, pct) {
 }
 
 function formatAnswer(ans, mode) {
-    if (mode === 'en-sv' || mode === 'sv-en') {
-        const pair = ans.sv || ans.en || [];
-        return pair.join(', ') || '(tomt)';
-    } else if (mode === 'audio') {
-        const en = (ans.en || []).join(', ') || '(tomt)';
-        const sv = (ans.sv || []).join(', ') || '(tomt)';
-        return `${en} / ${sv}`;
-    } else if (mode === 'conjugate') {
-        return ans.conj || '(tomt)';
+    if (mode === 'sv-fr') {
+        return ans.fr || '(tomt)';
+    } else if (mode === 'fr-sv') {
+        return ans.sv || '(tomt)';
     }
     return '(tomt)';
 }
@@ -499,15 +395,21 @@ function showResults(total, max, pct) {
     `;
 
     results.forEach((r, idx) => {
-        const correctDisplay = mode === 'en-sv' || mode === 'sv-en'
-            ? r.item.english.join(', ') + ' / ' + r.item.swedish.join(', ')
-            : mode === 'audio'
-            ? r.item.english.join(', ') + ' / ' + r.item.swedish.join(', ')
-            : r.item.english[1];
+        const correctDisplay = mode === 'sv-fr'
+             ? r.item.french.join(', ')
+             : r.item.swedish.join(', ');
+
+        const fromWord = mode === 'sv-fr'
+             ? r.item.swedish.join(', ')
+             : r.item.french.join(', ');
+
+        const toWord = mode === 'sv-fr'
+             ? r.item.french.join(', ')
+             : r.item.swedish.join(', ');
 
         html += `
             <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
-                <h3>${r.item.english[0]} → ${r.item.english[1]}</h3>
+                <h3>${fromWord} → ${toWord}</h3>
                 <p><strong>Ditt svar:</strong> ${formatAnswer(r.ans, r.mode)}</p>
                 <p><strong>Rätt svar:</strong> ${correctDisplay}</p>
                 <p><strong>Poäng:</strong> ${r.points}</p>
@@ -543,17 +445,15 @@ function showResults(total, max, pct) {
     });
 }
 
-// Mode change handler
 modeSelect.addEventListener('change', (e) => {
     mode = e.target.value;
-    // No longer saving to localStorage
     currentIndex = 0;
     answers = {};
     results = [];
     render();
 });
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadVocabulary();
 });
+

@@ -1,0 +1,24 @@
+{
+  "name": "Avoir",
+  "date": "2025-11-25",
+  "level": "Åk 5",
+  "description": "Träna på verbet avoir",
+  "active": true,
+  "modules": [
+    {
+      "id": "avoir-song",
+      "name": "🎵 Avoir chanson",
+      "description": "Lyssna och lär dig böja avoir",
+      "external": true,
+      "url": " https://www.youtube.com/watch?v=MnUWNIN3zss&list=RDMnUWNIN3zss&start_radio=1"
+    },
+    {
+      "id": "wordwall-avoir",
+      "name": "🧩 Böj avoir - spel",
+      "description": "Träna på wordwall",
+      "external": true,
+      "url": "https://wordwall.net/sv/resource/68214175/avoir"
+    }
+  ]
+}
+

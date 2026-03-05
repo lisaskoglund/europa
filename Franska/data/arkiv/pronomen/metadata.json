@@ -1,0 +1,16 @@
+{
+  "name": "Hälsningsfraser",
+  "date": "2026-03-05",
+  "level": "Åk 6",
+  "description": "Glosor: Hälsningsfraser",
+  "active": true,
+  "type": "vocabulary",
+  "modules": [
+    {
+      "id": "glossary",
+      "name": "📝 Pronomen",
+      "description": "Träna på olika pronomen"
+    }
+  ]
+}
+

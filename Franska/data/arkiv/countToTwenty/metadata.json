@@ -1,0 +1,24 @@
+{
+  "name": "Räkna till 20",
+  "date": "2025-11-04",
+  "level": "Åk 5",
+  "description": "Träna på att räkna",
+  "active": true,
+  "modules": [
+    {
+      "id": "count-to-twenty-video",
+      "name": "🎵 Räkna - video",
+      "description": "Lyssna och lär dig räkna till 20",
+      "external": true,
+      "url": "https://www.youtube.com/watch?v=UsEz58BblMY"
+    },
+    {
+      "id": "count-to-twenty-game",
+      "name": "🧩 Räkna - spel",
+      "description": "Träna på att räkna till 20",
+      "external": true,
+      "url": "https://jeux.ieducatif.fr/jeu-educatif/jeux-ce1/ecrire-les-chiffres-en-lettres-dans-l-ordre-81/"
+    }
+  ]
+}
+

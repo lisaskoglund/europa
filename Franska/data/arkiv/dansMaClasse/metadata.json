@@ -1,0 +1,16 @@
+{
+  "name": "Dans ma classe",
+  "date": "2026-01-20",
+  "level": "Åk 5",
+  "description": "Glosor: Dans ma classe",
+  "active": true,
+  "type": "vocabulary",
+  "modules": [
+    {
+      "id": "glossary",
+      "name": "📝 Glosor",
+      "description": "Träna på orden"
+    }
+  ]
+}
+

@@ -1,0 +1,17 @@
+{
+  "name": "Clock",
+  "date": "2026-02-3",
+  "level": "Åk 5",
+  "description": "Prov för februari 2026",
+  "active": true,
+  "modules": [
+    {
+      "id": "clock",
+      "name": "🧩 Klockan - spel",
+      "description": "Träna på klockan",
+      "external": true,
+      "url": "https://www.ortholud.com/lire-heure-3.html"
+    }
+  ]
+}
+
