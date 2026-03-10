@@ -1,0 +1,15 @@
+{
+  "name": "2026 Vecka 11",
+  "date": "2026-03-17",
+  "level": "Åk 5",
+  "description": "Glosor för vecka 11",
+  "active": true,
+  "modules": [
+    {
+      "id": "glossary",
+      "name": "✍️ Presens particip",
+      "description": "Träna på am/is/are + verb-ing"
+    }
+  ]
+}
+

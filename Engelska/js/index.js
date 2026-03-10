@@ -2,14 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
     store = loadStore();
 
     const modulesContainer = document.getElementById('modulesContainer');
-    let vocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
+    let vocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-11';
+
+    // Migration for moved folder
+    if (vocabVersion === '2026-vecka-10') {
+        vocabVersion = 'arkiv/2026-vecka-10';
+        localStorage.setItem('englishVocabVersion', vocabVersion);
+    }
 
     const versionSelectorAction = {
         id: 'version-selector',
         html: `
             <div class="versionSelector">
                 <select id="vocabVersion">
-                    <option value="2026-vecka-10" ${vocabVersion === '2026-vecka-10' ? 'selected' : ''}>Vecka 10 (aktuell)</option>
+                    <option value="2026-vecka-11" ${vocabVersion === '2026-vecka-11' ? 'selected' : ''}>Vecka 11 (aktuell)</option>
+                    <option value="arkiv/2026-vecka-10" ${vocabVersion === 'arkiv/2026-vecka-10' ? 'selected' : ''}>Vecka 10 (arkiv)</option>
                 </select>
             </div>
         `
@@ -48,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileSelector.innerHTML = `
                 <div class="versionSelector" style="justify-content:center;">
                     <select id="vocabVersionMobile">
-                        <option value="2026-vecka-10" ${vocabVersion === '2026-vecka-10' ? 'selected' : ''}>Vecka 10 (aktuell)</option>
+                        <option value="2026-vecka-11" ${vocabVersion === '2026-vecka-11' ? 'selected' : ''}>Vecka 11 (aktuell)</option>
+                        <option value="arkiv/2026-vecka-10" ${vocabVersion === 'arkiv/2026-vecka-10' ? 'selected' : ''}>Vecka 10 (arkiv)</option>
                     </select>
                 </div>
             `;

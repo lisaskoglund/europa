@@ -30,6 +30,19 @@ async function loadVocabulary() {
         const module = await import(`../data/${currentVocabVersion}/vocabulary.js`);
         vocabulary = module.vocabulary;
 
+        // Check for fill-in type
+        if (module.type === 'fill-in') {
+            mode = 'fill-in';
+            if (modeSelect && modeSelect.parentElement) {
+                modeSelect.parentElement.style.display = 'none';
+            }
+        } else {
+            if (mode === 'fill-in') mode = 'en-sv';
+            if (modeSelect && modeSelect.parentElement) {
+                modeSelect.parentElement.style.display = 'block';
+            }
+        }
+
         // Reset state
         currentIndex = 0;
         answers = {};
@@ -160,6 +173,15 @@ function render() {
                 <input type="text" id="conj" />
             </div>
         `;
+    } else if (mode === 'fill-in') {
+        // Fyll i luckor
+        // Ersätt underscores med input-fält
+        const sentence = item.english[0].replace(/_+/g, '<input type="text" id="fill-in-ans" autocomplete="off" style="display:inline-block; width:150px; margin:0 5px; padding:4px 8px; border:1px solid #ccc; border-radius:4px; font-size:18px;" />');
+
+        content = `
+            <h2 class="mode-title">Fyll i det som saknas</h2>
+            <p style="font-size: 18px; color: #666; margin: 20px 0; line-height: 2;"><strong>${sentence}</strong></p>
+        `;
     }
 
     content += `
@@ -180,6 +202,31 @@ function render() {
     `;
 
     app.innerHTML = content;
+
+    // Restore previous answer if exists
+    if (answers[currentIndex]) {
+        const ans = answers[currentIndex];
+        if (mode === 'sv-en' && ans.en) {
+            document.getElementById('en1').value = ans.en[0] || '';
+            document.getElementById('en2').value = ans.en[1] || '';
+        } else if (mode === 'en-sv' && ans.sv) {
+            document.getElementById('sv1').value = ans.sv[0] || '';
+            document.getElementById('sv2').value = ans.sv[1] || '';
+        } else if (mode === 'audio') {
+            if (ans.en) {
+                document.getElementById('audio-en1').value = ans.en[0] || '';
+                document.getElementById('audio-en2').value = ans.en[1] || '';
+            }
+            if (ans.sv) {
+                document.getElementById('audio-sv1').value = ans.sv[0] || '';
+                document.getElementById('audio-sv2').value = ans.sv[1] || '';
+            }
+        } else if (mode === 'conjugate') {
+             document.getElementById('conj').value = ans.conj || '';
+        } else if (mode === 'fill-in') {
+             document.getElementById('fill-in-ans').value = ans.ans || '';
+        }
+    }
 
     // Add Enter key listener to all inputs
     const inputs = app.querySelectorAll('input[type="text"]');
@@ -243,6 +290,10 @@ function persistAnswer() {
     } else if (mode === 'conjugate') {
         answers[currentIndex] = {
             conj: document.getElementById('conj').value
+        };
+    } else if (mode === 'fill-in') {
+        answers[currentIndex] = {
+            ans: document.getElementById('fill-in-ans').value
         };
     }
 }
@@ -393,10 +444,14 @@ function gradeAll() {
                 { label: item.swedish[1], pts: sv2Score.points }
             ];
         } else if (mode === 'conjugate') {
-            const conjScore = scoreAnswer(ans.conj || '', item.english[1]);
+            const conjScore = scoreAnswer(ans.conj || '', item.english[1]); // english[1] is past tense
             points = conjScore.points;
             maxPoints += 1;
             breakdown = [{ label: 'Dåtid', pts: conjScore.points }];
+        } else if (mode === 'fill-in') {
+            const score = scoreAnswer(ans.ans || '', item.swedish[0]);
+            points = score.points;
+            maxPoints += 1;
         }
 
         totalPoints += points;
@@ -479,6 +534,8 @@ function formatAnswer(ans, mode) {
         return `${en} / ${sv}`;
     } else if (mode === 'conjugate') {
         return ans.conj || '(tomt)';
+    } else if (mode === 'fill-in') {
+        return ans.ans || '(tomt)';
     }
     return '(tomt)';
 }
@@ -499,15 +556,22 @@ function showResults(total, max, pct) {
     `;
 
     results.forEach((r, idx) => {
-        const correctDisplay = mode === 'en-sv' || mode === 'sv-en'
-            ? r.item.english.join(', ') + ' / ' + r.item.swedish.join(', ')
-            : mode === 'audio'
-            ? r.item.english.join(', ') + ' / ' + r.item.swedish.join(', ')
-            : r.item.english[1];
+        let correctDisplay = '';
+        if (mode === 'en-sv' || mode === 'sv-en' || mode === 'audio') {
+            correctDisplay = r.item.english.join(', ') + ' / ' + r.item.swedish.join(', ');
+        } else if (mode === 'conjugate') {
+            correctDisplay = r.item.english[1];
+        } else if (mode === 'fill-in') {
+            correctDisplay = r.item.swedish[0];
+        }
+
+        let questionTitle = r.mode === 'fill-in'
+            ? r.item.english[0]
+            : `${r.item.english[0]} ${r.item.english[1] ? '→ ' + r.item.english[1] : ''}`;
 
         html += `
             <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
-                <h3>${r.item.english[0]} → ${r.item.english[1]}</h3>
+                <h3>${questionTitle}</h3>
                 <p><strong>Ditt svar:</strong> ${formatAnswer(r.ans, r.mode)}</p>
                 <p><strong>Rätt svar:</strong> ${correctDisplay}</p>
                 <p><strong>Poäng:</strong> ${r.points}</p>
