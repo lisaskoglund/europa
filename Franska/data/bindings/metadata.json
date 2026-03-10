@@ -1,0 +1,28 @@
+{
+  "name": "Bindningar",
+  "date": "2026-03-10",
+  "level": "Åk 5",
+  "description": "Träna på att räkna",
+  "active": true,
+  "instructions": [
+    "Öppna övningen",
+    "Lyssna på uttalet av de fem meningarna. Akta särskilt bindningarna och tala efter (mening för mening).",
+    "Skriv av texten i ditt häfte/på ett papper och ta med pappret till nästa lektion. Markera i texten mellan vilka ord du använde en bindning."
+  ],
+  "modules": [
+    {
+      "id": "bindings",
+      "name": "🎵 Repetition - video",
+      "description": "Repetition från lektionen",
+      "external": true,
+      "url": "https://urplay.se/program/215022-uttala-utan-skam-franska-bind-ihop-franskan"
+    },
+    {
+      "id": "exercise",
+      "name": "🧩 Övning",
+      "description": "Titta på videon för att göra uppgifterna",
+      "external": true,
+      "url": "https://www.estudiodefrances.com/?p=4295"
+    }
+  ]
+}

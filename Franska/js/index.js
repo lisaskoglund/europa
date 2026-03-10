@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="versionSelector">
                 <select id="examVersion">
                     <option value="" ${!examVersion ? 'selected' : ''}>Välj...</option>
-                    <option value="countToFifty" ${examVersion === 'countToFifty' ? 'selected' : ''}>Räkna till 50 (Nu)</option>
+                    <option value="bindings" ${examVersion === 'bindings' ? 'selected' : ''}>Bindningar</option>
                     <option value="arkiv/dansMaClasse" ${examVersion === 'arkiv/dansMaClasse' ? 'selected' : ''}>Dans ma classe (Arkiv)</option>
                     <option value="arkiv/etre" ${examVersion === 'arkiv/etre' ? 'selected' : ''}>Être (Arkiv)</option>
                     <option value="arkiv/clock" ${examVersion === 'arkiv/clock' ? 'selected' : ''}>Klockan (Arkiv)</option>
@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <option value="arkiv/halsningsfraser" ${examVersion === 'arkiv/halsningsfraser' ? 'selected' : ''}>Hälsningsfraser (Arkiv)</option>
                     <option value="arkiv/countToTwenty" ${examVersion === 'arkiv/countToTwenty' ? 'selected' : ''}>Räkna till 20 (Arkiv)</option>
                     <option value="arkiv/pronomen" ${examVersion === 'arkiv/pronomen' ? 'selected' : ''}>Pronomen</option>
+                    <option value="arkiv/countToFifty" ${examVersion === 'arkiv/countToFifty' ? 'selected' : ''}>Räkna till 20 (Arkiv)</option>
                 </select>
             </div>
         `
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="versionSelector" style="justify-content:center;">
                     <select id="examVersionMobile">
                         <option value="" ${!examVersion ? 'selected' : ''}>Välj...</option>
-                        <option value="countToFifty" ${examVersion === 'countToFifty' ? 'selected' : ''}>Räkna till 50</option>
+                        <option value="bindings" ${examVersion === 'bindings' ? 'selected' : ''}>Bindningar</option>
                         <option value="arkiv/dansMaClasse" ${examVersion === 'arkiv/dansMaClasse' ? 'selected' : ''}>Dans ma classe</option>
                         <option value="arkiv/etre" ${examVersion === 'arkiv/etre' ? 'selected' : ''}>Être (Arkiv)</option>
                         <option value="arkiv/clock" ${examVersion === 'arkiv/clock' ? 'selected' : ''}>Klockan (Arkiv)</option>
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <option value="arkiv/colors" ${examVersion === 'arkiv/colors' ? 'selected' : ''}>Färger (Arkiv)</option>
                         <option value="arkiv/halsningsfraser" ${examVersion === 'arkiv/halsningsfraser' ? 'selected' : ''}>Hälsningsfraser</option>
                         <option value="arkiv/countToTwenty" ${examVersion === 'arkiv/countToTwenty' ? 'selected' : ''}>Räkna till 20</option>
+                        <option value="arkiv/countToFifty" ${examVersion === 'arkiv/countToFifty' ? 'selected' : ''}>Räkna till 20</option>
                     </select>
                 </div>
             `;
@@ -105,6 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
              if (noExamView) noExamView.classList.remove('hidden');
              if (introSubtitle) introSubtitle.style.display = 'none';
              if (introHint) introHint.style.display = 'none';
+
+             const instructionsContainer = document.getElementById('instructionsContainer');
+             if (instructionsContainer) instructionsContainer.innerHTML = '';
              return;
         }
 
@@ -115,16 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 console.warn(`Metadata for ${currentVersion} not found. Status: ${response.status}`);
                 // If the saved version is invalid (e.g. old path), try falling back to default once
-                if (currentVersion !== 'countToFifty') {
-                    console.log('Falling back to default: countToFifty');
-                    currentVersion = 'countToFifty';
-                    examVersion = 'countToFifty';
-                    localStorage.setItem('franskaIndexVersion', 'countToFifty');
+                if (currentVersion !== 'bindings') {
+                    console.log('Falling back to default: bindings');
+                    currentVersion = 'bindings';
+                    examVersion = 'bindings';
+                    localStorage.setItem('franskaIndexVersion', 'bindings');
                     // Update selectors
                     const examVersionSelect = document.getElementById('examVersion');
-                    if (examVersionSelect) examVersionSelect.value = 'countToFifty';
+                    if (examVersionSelect) examVersionSelect.value = 'bindings';
                     const mobileSelect = document.getElementById('examVersionMobile');
-                    if (mobileSelect) mobileSelect.value = 'countToFifty';
+                    if (mobileSelect) mobileSelect.value = 'bindings';
 
                     response = await fetch(`./data/${currentVersion}/metadata.json`);
                 }
@@ -144,6 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
                  if (noExamView) noExamView.classList.remove('hidden');
                  if (introSubtitle) introSubtitle.style.display = 'none';
                  if (introHint) introHint.style.display = 'none';
+
+                 const instructionsContainer = document.getElementById('instructionsContainer');
+                 if (instructionsContainer) instructionsContainer.innerHTML = '';
                  return;
             }
 
@@ -152,6 +160,25 @@ document.addEventListener('DOMContentLoaded', () => {
             if (noExamView) noExamView.classList.add('hidden');
             if (introSubtitle) introSubtitle.style.display = 'block';
             if (introHint) introHint.style.display = 'block';
+
+            const instructionsContainer = document.getElementById('instructionsContainer');
+            if (instructionsContainer) {
+                instructionsContainer.innerHTML = '';
+                if (metadata.instructions && Array.isArray(metadata.instructions) && metadata.instructions.length > 0) {
+                    const list = document.createElement('ol');
+                    list.style.margin = '0';
+                    list.style.paddingLeft = '20px';
+                    list.style.color = 'var(--text)';
+
+                    metadata.instructions.forEach(instruction => {
+                        const li = document.createElement('li');
+                        li.textContent = instruction;
+                        li.style.marginTop = '8px';
+                        list.appendChild(li);
+                    });
+                    instructionsContainer.appendChild(list);
+                }
+            }
 
             metadata.modules.forEach(module => {
                 const link = document.createElement('a');
