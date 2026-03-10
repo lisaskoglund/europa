@@ -26,7 +26,14 @@ async function loadVocabulary() {
             user: store.lastUser,
         });
 
-        currentVocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-10';
+        currentVocabVersion = localStorage.getItem('englishVocabVersion') || '2026-vecka-11';
+
+        // Migration logic for old path
+        if (currentVocabVersion === '2026-vecka-10') {
+            currentVocabVersion = 'arkiv/2026-vecka-10';
+            localStorage.setItem('englishVocabVersion', currentVocabVersion);
+        }
+
         const module = await import(`../data/${currentVocabVersion}/vocabulary.js`);
         vocabulary = module.vocabulary;
 
