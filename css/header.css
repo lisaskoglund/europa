@@ -1,7 +1,7 @@
 /* css/header.css */
 
-/* Always load Baloo 2 for the header, regardless of which base CSS the page uses */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap');
+/* Self-hosted font – file lives at /fonts/Baloo2.woff2 */
+@import url('../fonts/fonts.css');
 
 /* Force consistent font on all header elements */
 #app-header,
