@@ -219,10 +219,11 @@ function gradeQuestion(q, user){
     }
 
     pts = Math.round(pts*2)/2;
+    const multiTextCorrect = (q.allow || []).map(item => Array.isArray(item) ? item[0] : item).join(", ");
     return {
       points: pts,
       breakdown: b,
-      correctDisplay: "Se lista",
+      correctDisplay: multiTextCorrect,
       userDisplay: arr.map(x=>x||"—").join(" · ")
     };
   }
@@ -256,10 +257,11 @@ function gradeQuestion(q, user){
     }
 
     pts = Math.round(pts*2)/2;
+    const listTextCorrect = (q.allowList || []).map(item => Array.isArray(item) ? item[0] : item).join(", ");
     return {
       points: pts,
       breakdown: b,
-      correctDisplay: "Se lista",
+      correctDisplay: listTextCorrect,
       userDisplay: arr.map(x=>x||"—").join(" · ")
     };
   }
@@ -593,14 +595,20 @@ function renderResultItem(r, i){
 
   const showCorrect = pts < maxP;
 
+  const multiSelectCorrectHtml = (r.q.type==="multiSelect" && showCorrect)
+      ? `<div class="corr"><b>Rätta svar:</b>${(Array.isArray(r.q.correct) ? r.q.correct : [r.q.correct]).map(s => `<div style="padding-left:10px;">• ${escapeHtml(s)}</div>`).join("")}</div>`
+      : ``;
+
   const correctExtra = (r.q.type==="mcq")
       ? (showCorrect ? `<div class="corr"><b>Rätt svar:</b> ${escapeHtml(r.correctDisplay)}</div>` : ``)
       : (r.q.type==="multiSelect"
+              ? multiSelectCorrectHtml
+              : (r.q.type==="multiText" || r.q.type==="listText"
               ? (showCorrect ? `<div class="corr"><b>Rätta svar:</b> ${escapeHtml(r.correctDisplay)}</div>` : ``)
               : (r.q.type==="freeKeywords"
               ? `<div class="corr"><b>Nyckelord:</b> ${escapeHtml(r.q.keywords.join(", "))} (max ${questionMaxPoints(r.q)}p)</div>`
               : (r.q.type==="singleText" ? (showCorrect ? `<div class="corr"><b>Rätt svar:</b> ${escapeHtml(r.correctDisplay)}</div>` : ``) : ``)
-      ));
+      )));
 
   return `
     <div class="resultItem">
