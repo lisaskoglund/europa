@@ -1,7 +1,13 @@
 /* css/header.css */
 
-/* Self-hosted font – file lives at /fonts/Baloo2.woff2 */
-@import url('../fonts/fonts.css');
+/* Self-hosted Baloo 2 font */
+@font-face {
+    font-family: 'Baloo 2';
+    font-style: normal;
+    font-weight: 600 800;
+    font-display: swap;
+    src: url('../fonts/Baloo2.woff2') format('woff2');
+}
 
 /* Force consistent font on all header elements */
 #app-header,
@@ -236,13 +242,11 @@
     white-space: nowrap;
 }
 
+/* Wrapper so the CSS chevron can overlay the select */
 .versionSelector select {
     appearance: none;
     -webkit-appearance: none;
     background-color: rgba(255,255,255,.55);
-    background-image: url('../images/chevron-down.svg');
-    background-repeat: no-repeat;
-    background-position: right 12px center;
     border: 2px solid rgba(0,0,0,.08);
     height: 44px;
     padding: 0 36px 0 14px;
@@ -253,7 +257,24 @@
     cursor: pointer;
     font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     box-shadow: 0 4px 10px rgba(0,0,0,.07);
-    transition: background .12s ease, box-shadow .12s ease;
+    transition: background-color .12s ease, box-shadow .12s ease;
+}
+
+/* CSS-only chevron arrow — no image, no URL */
+.versionSelector {
+    position: relative;
+}
+.versionSelector::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-75%) rotate(45deg);
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid #6b6258;
+    border-bottom: 2px solid #6b6258;
 }
 
 .versionSelector select:hover {
