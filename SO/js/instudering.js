@@ -4,7 +4,7 @@
 
 // ===== DYNAMIC DATA LOADING =====
 // Use instudering-specific version key so it doesn't interfere with SO/index
-const EXAM_VERSION = localStorage.getItem('instuderingVersion') || '2026-februari';
+const EXAM_VERSION = localStorage.getItem('instuderingVersion') || 'arkiv/2026-februari';
 
 let PRESETS = {};
 let questions = [];
@@ -23,7 +23,7 @@ function versionSelectorAction() {
     html: `
       <div class="versionSelector">
         <select id="examVersion">
-          <option value="2026-februari">2026 februari</option>
+          <option value="arkiv/2026-februari">2026 februari</option>
         </select>
       </div>
     `

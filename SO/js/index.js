@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="versionSelector">
                 <select id="examVersion">
                     <option value="" disabled ${examVersion === '' ? 'selected' : ''}>Arkiv</option>
-                    <option value="2026-februari">2026 februari</option>
+                    <option value="arkiv/2026-februari">2026 februari</option>
                 </select>
             </div>
         `
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="versionSelector" style="justify-content:center;">
                     <select id="examVersionMobile">
                         <option value="" disabled ${examVersion === '' ? 'selected' : ''}>Arkiv</option>
-                        <option value="2026-februari">2026 februari</option>
+                        <option value="arkiv/2026-februari">2026 februari</option>
                     </select>
                 </div>
             `;
