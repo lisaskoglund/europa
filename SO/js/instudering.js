@@ -4,7 +4,7 @@
 
 // ===== DYNAMIC DATA LOADING =====
 // Use instudering-specific version key so it doesn't interfere with SO/index
-const EXAM_VERSION = localStorage.getItem('instuderingVersion') || 'arkiv/2026-februari';
+const EXAM_VERSION = localStorage.getItem('instuderingVersion') || 'religion';
 
 let PRESETS = {};
 let questions = [];
@@ -23,7 +23,10 @@ function versionSelectorAction() {
     html: `
       <div class="versionSelector">
         <select id="examVersion">
-          <option value="arkiv/2026-februari">2026 februari</option>
+          <option value="religion">Religion</option>
+          <optgroup label="Arkiv">
+            <option value="arkiv/2026-februari">2026 februari</option>
+          </optgroup>
         </select>
       </div>
     `
@@ -93,12 +96,16 @@ function initQuiz(){
     if(qq.type==="mcq"){
       qq.shuffled = shuffle(qq.options, rng);
     }
+    if(qq.type==="multiSelect"){
+      qq.shuffled = shuffle(qq.options, rng);
+    }
     return qq;
   });
 }
 
 function questionMaxPoints(q){
   if(q.type==="mcq") return 1;
+  if(q.type==="multiSelect") return Array.isArray(q.correct) ? q.correct.length : 1;
   if(q.type==="singleText") return q.points ?? 1;
   if(q.type==="listText") return (q.pointsEach ?? 1) * (q.count ?? 1);
   if(q.type==="multiText") return (q.pointsEach ?? 1) * (q.prompts?.length ?? (q.allow ? q.allow.length : 1));
@@ -135,6 +142,28 @@ function gradeQuestion(q, user){
       breakdown: ok ? [{label:"Rätt", pts:1}] : [{label:"Fel", pts:0}],
       correctDisplay: q.correct,
       userDisplay: user || "—"
+    };
+  }
+
+  if(q.type==="multiSelect"){
+    const selected = Array.isArray(user) ? user : [];
+    const correct = Array.isArray(q.correct) ? q.correct : [q.correct];
+    const maxP = correct.length;
+    let pts = 0;
+    const b = [];
+    for(const opt of q.shuffled ?? q.options){
+      const wasSelected = selected.includes(opt);
+      const isCorrect = correct.includes(opt);
+      if(wasSelected && isCorrect){ pts++; b.push({label: opt, pts: 1}); }
+      else if(wasSelected && !isCorrect){ pts--; b.push({label: opt, pts: -1}); }
+    }
+    pts = Math.max(0, Math.min(pts, maxP));
+    const correctOnes = correct.join(", ");
+    return {
+      points: pts,
+      breakdown: b.length ? b : [{label:"Inget valt", pts:0}],
+      correctDisplay: correctOnes,
+      userDisplay: selected.length ? selected.join(", ") : "—"
     };
   }
 
@@ -270,7 +299,7 @@ function renderStart(){
   wireVersionSelector();
 
   app.innerHTML = `
-    <h1>Europa – träningsprov (åk 5)</h1>
+    <h1>Träningsprov (åk 5)</h1>
     <p>En fråga i taget. Du kan gå <b>fram</b> och <b>bak</b>. Rättning sker <b>bara i slutet</b>.</p>
     <p>Rättning: exakt = 1p, stavfel = 0,5p</p>
     <div class="hr"></div>
@@ -336,6 +365,20 @@ function renderQuestion(){
         `).join("")}
       </div>
     `;
+  }else if(q.type==="multiSelect"){
+    const selected = Array.isArray(answers[q.id]) ? answers[q.id] : [];
+    const correctCount = Array.isArray(q.correct) ? q.correct.length : 1;
+    body = `
+      <p class="hint">Välj exakt <b>${correctCount}</b> rätt svar. Fel svar ger minuspoäng.</p>
+      <div class="grid" role="group" aria-label="svarsalternativ">
+        ${q.shuffled.map((opt)=>`
+          <label class="choice">
+            <input type="checkbox" name="multiSelect" value="${escapeAttr(opt)}" ${selected.includes(opt)?"checked":""}/>
+            <div>${escapeHtml(opt)}</div>
+          </label>
+        `).join("")}
+      </div>
+    `;
   }else if(q.type==="listText"){
     const arr = answers[q.id] ?? Array.from({length:q.count}, ()=>"");
     body = `
@@ -392,6 +435,14 @@ function renderQuestion(){
     app.querySelectorAll('input[type="radio"][name="mcq"]').forEach(r=>{
       r.addEventListener("change", ()=>{
         answers[q.id] = r.value;
+      });
+    });
+  }else if(q.type==="multiSelect"){
+    app.querySelectorAll('input[type="checkbox"][name="multiSelect"]').forEach(cb=>{
+      cb.addEventListener("change", ()=>{
+        answers[q.id] = Array.from(
+          app.querySelectorAll('input[type="checkbox"][name="multiSelect"]:checked')
+        ).map(el => el.value);
       });
     });
   }else if(q.type==="listText" || q.type==="multiText"){
@@ -534,18 +585,20 @@ function renderResultItem(r, i){
   const tagText = pts===maxP ? "Rätt" : (pts===0 ? "Fel" : "Delvis");
   const breakdown = (r.breakdown || [])
       .filter(x=>x && typeof x.pts !== "undefined")
-      .slice(0, 8)
-      .map(x=>`<span class="tag ${x.pts===1?"good":(x.pts===0?"bad":"warn")}">${escapeHtml(x.label)}: <b>${x.pts}</b></span>`)
+      .slice(0, 25)
+      .map(x=>`<span class="tag ${x.pts===1?"good":(x.pts<=0?"bad":"warn")}">${escapeHtml(x.label)}: <b>${x.pts > 0 ? '+' : ''}${x.pts}</b></span>`)
       .join(" ");
 
   const showCorrect = pts < maxP;
 
   const correctExtra = (r.q.type==="mcq")
       ? (showCorrect ? `<div class="corr"><b>Rätt svar:</b> ${escapeHtml(r.correctDisplay)}</div>` : ``)
-      : (r.q.type==="freeKeywords"
+      : (r.q.type==="multiSelect"
+              ? (showCorrect ? `<div class="corr"><b>Rätta svar:</b> ${escapeHtml(r.correctDisplay)}</div>` : ``)
+              : (r.q.type==="freeKeywords"
               ? `<div class="corr"><b>Nyckelord:</b> ${escapeHtml(r.q.keywords.join(", "))} (max ${questionMaxPoints(r.q)}p)</div>`
               : (r.q.type==="singleText" ? (showCorrect ? `<div class="corr"><b>Rätt svar:</b> ${escapeHtml(r.correctDisplay)}</div>` : ``) : ``)
-      );
+      ));
 
   return `
     <div class="resultItem">

@@ -604,7 +604,7 @@ function renderStart(){
   }
 
   app.innerHTML = `
-    <h1>Europa – träningsprov (åk 5)</h1>
+    <h1>Träningsprov (åk 5)</h1>
     <p>En fråga i taget. Du kan gå <b>fram</b> och <b>bak</b>. Rättning sker <b>bara i slutet</b>.</p>
     <p>Rättning: exakt = 1p, stavfel = 0,5p</p>
     <div class="hr"></div>

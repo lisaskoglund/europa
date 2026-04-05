@@ -1,0 +1,27 @@
+export const metadata = {
+  name: "2026 februari",
+  date: "2026-02-19",
+  level: "Åk 5",
+  description: "Prov för februari 2026",
+  active: true,
+  modules: [
+    {
+      id: "huvudstader",
+      name: "🌍 Huvudstäder",
+      description: "Träna på huvudstäder"
+    },
+    {
+      id: "instudering",
+      name: "📝 Instuderingsfrågor",
+      description: "Träna på instuderingsfrågor"
+    },
+    {
+      id: "seterra",
+      name: "📍 Seterra",
+      description: "Träna på kartan",
+      external: true,
+      url: "https://www.geoguessr.com/sv/vgp/3007?gamemode=pin"
+    }
+  ]
+};
+
