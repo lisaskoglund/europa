@@ -4,24 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const modulesContainer = document.getElementById('modulesContainer');
     const ACTIVE_VERSION = 'religion';
 
-    // Always reset to the active homework on page load so stale localStorage never wins
+    // Always start on the active homework when visiting this page
     localStorage.setItem('instuderingVersion', ACTIVE_VERSION);
-
     let examVersion = ACTIVE_VERSION;
 
-    const versionSelectorAction = {
-        id: 'version-selector',
-        html: `
-            <div class="versionSelector">
-                <select id="examVersion">
-                    <option value="religion" ${examVersion === 'religion' ? 'selected' : ''}>Religion</option>
-                    <optgroup label="Arkiv">
-                        <option value="arkiv/2026-februari">2026 februari</option>
-                    </optgroup>
-                </select>
-            </div>
-        `
-    };
+    function versionSelectorAction() {
+        return {
+            id: 'version-selector',
+            html: `
+                <div class="versionSelector">
+                    <select id="examVersion">
+                        <option value="religion" ${examVersion === 'religion' ? 'selected' : ''}>Religion</option>
+                        <optgroup label="Arkiv">
+                            <option value="arkiv/2026-februari" ${examVersion === 'arkiv/2026-februari' ? 'selected' : ''}>2026 februari</option>
+                        </optgroup>
+                    </select>
+                </div>
+            `
+        };
+    }
 
     function renderPage() {
         renderHeader({
@@ -29,23 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
             breadcrumb: 'SO',
             back: { show: true, label: 'Till startsidan', href: '../index.html' },
             user: store.lastUser,
-            actions: [versionSelectorAction]
+            actions: [versionSelectorAction()]
         });
 
         // Initialize Desktop Selector (in header)
         const examVersionSelect = document.getElementById('examVersion');
         if (examVersionSelect) {
-            examVersionSelect.value = examVersion;
             examVersionSelect.addEventListener('change', (e) => {
                 examVersion = e.target.value;
-
-                // Save so instudering.js picks up the selected version
                 localStorage.setItem('instuderingVersion', examVersion);
-
-                // Sync mobile selector if it exists
                 const mobileSelect = document.getElementById('examVersionMobile');
                 if (mobileSelect) mobileSelect.value = examVersion;
-
                 updateExamData();
             });
         }
@@ -58,19 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <select id="examVersionMobile">
                         <option value="religion" ${examVersion === 'religion' ? 'selected' : ''}>Religion</option>
                         <optgroup label="Arkiv">
-                            <option value="arkiv/2026-februari">2026 februari</option>
+                            <option value="arkiv/2026-februari" ${examVersion === 'arkiv/2026-februari' ? 'selected' : ''}>2026 februari</option>
                         </optgroup>
                     </select>
                 </div>
             `;
             const mobileSelect = document.getElementById('examVersionMobile');
             if (mobileSelect) {
-                mobileSelect.value = examVersion;
                 mobileSelect.addEventListener('change', (e) => {
                     examVersion = e.target.value;
                     localStorage.setItem('instuderingVersion', examVersion);
-
-                    // Sync desktop selector if it exists
                     const headerSelect = document.getElementById('examVersion');
                     if (headerSelect) headerSelect.value = examVersion;
 
