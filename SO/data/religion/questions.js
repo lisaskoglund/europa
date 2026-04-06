@@ -154,9 +154,9 @@ export const questions = [
         text:"Vilka tre delar är Tanakh indelad i?",
         prompts:["Del 1","Del 2","Del 3"],
         allow:[
-            ["tora","läran"],
-            ["neviim","profeterna"],
-            ["khetuvim","ketuvim","skrifterna"]
+            ["tora","toran"],
+            ["neviim","nevim", "nevi'im"],
+            ["khetuvim","ketuvim"]
         ],
         pointsEach:1,
         unique:true
@@ -443,7 +443,7 @@ export const questions = [
         options:[
             "Man äter särskild mat som påminner om händelsen",
             "Man fastar i en hel månad",
-            "Man tänder åtta ljus varje kväll",
+            "Man tänder sju ljus varje kväll",
             "Man blåser i shofar varje morgon"
         ],
         correct:"Man äter särskild mat som påminner om händelsen"
@@ -481,7 +481,7 @@ export const questions = [
         options:[
             "Man firar nyåret och blåser i ett shofarhorn",
             "Man minns uttåget ur Egypten med särskild mat",
-            "Man tänder ljus i en åttaarmad ljusstake",
+            "Man tänder ljus i en sjuarmad ljusstake",
             "Man fastar för att minnas Mose"
         ],
         correct:"Man firar nyåret och blåser i ett shofarhorn"
@@ -505,12 +505,12 @@ export const questions = [
         topic:"Judendomen",
         text:"Vad gör man under Chanukka?",
         options:[
-            "Man tänder ljus i en åttaarmad ljusstake",
+            "Man tänder ljus i en sjuarmad ljusstake",
             "Man läser ur Tora under hela natten i synagogan som en särskild tradition",
             "Man bygger en hydda utomhus och äter sina måltider där under flera dagar",
-            "Man firar sabbat extra länge och vilar i åtta dagar i rad"
+            "Man firar sabbat extra länge och vilar i sju dagar i rad"
         ],
-        correct:"Man tänder ljus i en åttaarmad ljusstake"
+        correct:"Man tänder ljus i en sjuarmad ljusstake"
     },
     {
         id:"q37",
