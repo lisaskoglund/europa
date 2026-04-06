@@ -346,6 +346,7 @@ function renderQuestion(){
 
   const head = `
     <div class="progress" aria-label="progress"><div style="width:${progressPct}%"></div></div>
+    <div style="text-align:left; font-size:13px; font-weight:800; color:var(--muted); margin-top:4px;">${idx+1} / ${max}</div>
     <div class="spacer"></div>
     <div class="row" style="justify-content:space-between;">
       <span class="tag">${escapeHtml(q.topic || "Fråga")}</span>
