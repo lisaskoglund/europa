@@ -157,9 +157,9 @@ function gradeQuestion(q, user){
       const wasSelected = selected.includes(opt);
       const isCorrect = correct.includes(opt);
       if(wasSelected && isCorrect){ pts++; b.push({label: opt, pts: 1}); }
-      else if(wasSelected && !isCorrect){ pts--; b.push({label: opt, pts: -1}); }
+      else if(wasSelected && !isCorrect){ b.push({label: opt, pts: 0}); }
     }
-    pts = Math.max(0, Math.min(pts, maxP));
+    pts = Math.min(pts, maxP);
     const correctOnes = correct.join(", ");
     return {
       points: pts,
@@ -372,8 +372,9 @@ function renderQuestion(){
   }else if(q.type==="multiSelect"){
     const selected = Array.isArray(answers[q.id]) ? answers[q.id] : [];
     const correctCount = Array.isArray(q.correct) ? q.correct.length : 1;
+    const maxSelect = q.maxSelect ?? correctCount;
     body = `
-      <p class="hint">Välj exakt <b>${correctCount}</b> rätt svar. Fel svar ger minuspoäng.</p>
+      <p class="hint">Välj de <b>${correctCount}</b> rätta svaren (max ${maxSelect} val).</p>
       <div class="grid" role="group" aria-label="svarsalternativ">
         ${q.shuffled.map((opt)=>`
           <label class="choice">
@@ -442,11 +443,21 @@ function renderQuestion(){
       });
     });
   }else if(q.type==="multiSelect"){
+    const maxSelect = q.maxSelect ?? (Array.isArray(q.correct) ? q.correct.length : 1);
     app.querySelectorAll('input[type="checkbox"][name="multiSelect"]').forEach(cb=>{
       cb.addEventListener("change", ()=>{
-        answers[q.id] = Array.from(
+        let checked = Array.from(
           app.querySelectorAll('input[type="checkbox"][name="multiSelect"]:checked')
-        ).map(el => el.value);
+        );
+        // Enforce max — uncheck the oldest if over limit
+        if(checked.length > maxSelect){
+          // find the one that was just checked and uncheck it
+          cb.checked = false;
+          checked = Array.from(
+            app.querySelectorAll('input[type="checkbox"][name="multiSelect"]:checked')
+          );
+        }
+        answers[q.id] = checked.map(el => el.value);
       });
     });
   }else if(q.type==="listText" || q.type==="multiText"){
@@ -590,7 +601,7 @@ function renderResultItem(r, i){
   const breakdown = (r.breakdown || [])
       .filter(x=>x && typeof x.pts !== "undefined")
       .slice(0, 25)
-      .map(x=>`<span class="tag ${x.pts===1?"good":(x.pts<=0?"bad":"warn")}">${escapeHtml(x.label)}: <b>${x.pts > 0 ? '+' : ''}${x.pts}</b></span>`)
+      .map(x=>`<span class="tag ${x.pts===1?"good":"bad"}">${escapeHtml(x.label)}: <b>${x.pts}</b></span>`)
       .join(" ");
 
   const showCorrect = pts < maxP;
