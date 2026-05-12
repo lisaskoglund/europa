@@ -2,8 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     store = loadStore();
 
     const modulesContainer = document.getElementById('modulesContainer');
-    const ACTIVE_VERSION = 'religion';
-
+    const ACTIVE_VERSION = 'religionIslam';
     // Always start on the active homework when visiting this page
     localStorage.setItem('instuderingVersion', ACTIVE_VERSION);
     let examVersion = ACTIVE_VERSION;
@@ -14,8 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
             html: `
                 <div class="versionSelector">
                     <select id="examVersion">
-                        <option value="religion" ${examVersion === 'religion' ? 'selected' : ''}>Religion</option>
+                        <option value="religionIslam" ${examVersion === 'religionIslam' ? 'selected' : ''}>Islam</option>
                         <optgroup label="Arkiv">
+                            <option value="arkiv/religionJudaism" ${examVersion === 'arkiv/religionJudaism' ? 'selected' : ''}>Judendomen</option>
                             <option value="arkiv/2026-februari" ${examVersion === 'arkiv/2026-februari' ? 'selected' : ''}>2026 februari</option>
                         </optgroup>
                     </select>
@@ -51,8 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileSelector.innerHTML = `
                 <div class="versionSelector" style="justify-content:center;">
                     <select id="examVersionMobile">
-                        <option value="religion" ${examVersion === 'religion' ? 'selected' : ''}>Religion</option>
+                        <option value="religionIslam" ${examVersion === 'religionIslam' ? 'selected' : ''}>Islam</option>
                         <optgroup label="Arkiv">
+                            <option value="arkiv/religionJudaism" ${examVersion === 'arkiv/religionJudaism' ? 'selected' : ''}>Judendomen</option>
                             <option value="arkiv/2026-februari" ${examVersion === 'arkiv/2026-februari' ? 'selected' : ''}>2026 februari</option>
                         </optgroup>
                     </select>

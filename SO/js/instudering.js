@@ -4,9 +4,9 @@
 
 // ===== DYNAMIC DATA LOADING =====
 // Use instudering-specific version key so it doesn't interfere with SO/index
-const VALID_VERSIONS = ['religion', 'arkiv/2026-februari'];
+const VALID_VERSIONS = ['religionIslam', 'arkiv/religionJudaism', 'arkiv/2026-februari'];
 const _stored = localStorage.getItem('instuderingVersion');
-const EXAM_VERSION = VALID_VERSIONS.includes(_stored) ? _stored : 'religion';
+const EXAM_VERSION = VALID_VERSIONS.includes(_stored) ? _stored : 'religionIslam';
 
 let PRESETS = {};
 let questions = [];
@@ -25,8 +25,9 @@ function versionSelectorAction() {
     html: `
       <div class="versionSelector">
         <select id="examVersion">
-          <option value="religion" ${EXAM_VERSION === 'religion' ? 'selected' : ''}>Religion</option>
+          <option value="religionIslam" ${EXAM_VERSION === 'religionIslam' ? 'selected' : ''}>Islam</option>
           <optgroup label="Arkiv">
+            <option value="arkiv/religionJudaism" ${EXAM_VERSION === 'arkiv/religionJudaism' ? 'selected' : ''}>Judendomen</option>
             <option value="arkiv/2026-februari" ${EXAM_VERSION === 'arkiv/2026-februari' ? 'selected' : ''}>2026 februari</option>
           </optgroup>
         </select>

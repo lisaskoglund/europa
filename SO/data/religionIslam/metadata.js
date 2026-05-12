@@ -1,14 +1,14 @@
 export const metadata = {
-  name: "Religion",
-  date: "2026-04-05",
+  name: "Islam",
+  date: "2026-05-12",
   level: "Åk 5",
-  description: "Instuderingsfrågor om religion",
+  description: "Instuderingsfrågor om islam",
   active: true,
   modules: [
     {
       id: "instudering",
       name: "📝 Instuderingsfrågor",
-      description: "Träna på instuderingsfrågor om religion"
+      description: "Träna på instuderingsfrågor om islam"
     }
   ]
 };
