@@ -51,12 +51,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad var Jesus tanke med nattvarden?",
         options:[
-            "En påminnelse om Jesu kropp och blod, ett förbund mellan människor och Jesus. Brödet symboliserar hans kropp och vinet symboliserar hans blod.",
-            "En högtid där lärjungarna firade att romarna till slut hade lämnat Jerusalem och att alla kristna blivit fria till slut.",
-            "En måltid där Jesus bestämde att alla kristna alltid måste fasta innan de går till kyrkan för att sedan kunna ta nattvarden.",
-            "En ceremoni där prästerna valde vilka personer som fick läsa ur Bibeln och undervisa andra och vara förebilder för yngre församlingsmedlemmar."
+            "En påminnelse om Jesu kropp och blod, ett förbund mellan människor och Jesus. Brödet symboliserar hans kropp och vinet symboliserar hans blod",
+            "En högtid där lärjungarna firade att romarna till slut hade lämnat Jerusalem och att alla kristna blivit fria till slut",
+            "En måltid där Jesus bestämde att alla kristna alltid måste fasta innan de går till kyrkan för att sedan kunna ta nattvarden",
+            "En ceremoni där prästerna valde vilka personer som fick läsa ur Bibeln och undervisa andra och vara förebilder för yngre församlingsmedlemmar"
         ],
-        correct:"En påminnelse om Jesu kropp och blod, ett förbund mellan människor och Jesus. Brödet symboliserar hans kropp och vinet symboliserar hans blod."
+        correct:"En påminnelse om Jesu kropp och blod, ett förbund mellan människor och Jesus. Brödet symboliserar hans kropp och vinet symboliserar hans blod"
     },
 
     {
@@ -135,12 +135,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Varför var lärjungarna så rädda efter att Jesus dött?",
         options:[
-            "De var osäkra på om Jesus verkligen levde igen men blev övertygade efter att han visat sig för dem flera gånger. Det var också förbjudet och farligt att vara kristen.",
-            "De var rädda för att de skulle tvingas lämna Jerusalem nu när Jesus var död och därmed aldrig få återvända till sina familjer igen.",
-            "De trodde att romarna skulle förbjuda alla människor att läsa Bibeln och stänga alla kyrkor.",
-            "De var oroliga för att de inte längre skulle få träffa varandra eller samlas till gudstjänster, men även för att Jesus inte längre kunde ledsaga dem."
+            "De var osäkra på om Jesus verkligen levde igen men blev övertygade efter att han visat sig för dem flera gånger. Det var också förbjudet och farligt att vara kristen",
+            "De var rädda för att de skulle tvingas lämna Jerusalem nu när Jesus var död och därmed aldrig få återvända till sina familjer igen",
+            "De trodde att romarna skulle förbjuda alla människor att läsa Bibeln och stänga alla kyrkor",
+            "De var oroliga för att de inte längre skulle få träffa varandra eller samlas till gudstjänster, men även för att Jesus inte längre kunde ledsaga dem"
         ],
-        correct:"De var osäkra på om Jesus verkligen levde igen men blev övertygade efter att han visat sig för dem flera gånger. Det var också förbjudet och farligt att vara kristen."
+        correct:"De var osäkra på om Jesus verkligen levde igen men blev övertygade efter att han visat sig för dem flera gånger. Det var också förbjudet och farligt att vara kristen"
     },
 
     {
@@ -149,12 +149,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad hände med lärjungarna femtio dagar efter påsk?",
         options:[
-            "De blev uppfyllda av glädje och kraft när de fick den heliga anden och började berätta om Jesus och sprida hans lära.",
-            "De reste tillbaka till Betlehem för att skriva ner alla berättelser om Jesu liv i en ny bok, det som sedan blev bibeln.",
-            "De gömde sig undan romarna och slutade träffas eftersom de fortfarande var mycket räddaför att bli förföljda och dödade.",
-            "De byggde den första stora kyrkan i Jerusalem där alla människor kunde samlas till bön."
+            "De blev uppfyllda av glädje och kraft när de fick den heliga anden och började berätta om Jesus och sprida hans lära",
+            "De reste tillbaka till Betlehem för att skriva ner alla berättelser om Jesu liv i en ny bok, det som sedan blev bibeln",
+            "De gömde sig undan romarna och slutade träffas eftersom de fortfarande var mycket räddaför att bli förföljda och dödade",
+            "De byggde den första stora kyrkan i Jerusalem där alla människor kunde samlas till bön"
         ],
-        correct:"De blev uppfyllda av glädje och kraft när de fick den heliga anden och började berätta om Jesus och sprida hans lära."
+        correct:"De blev uppfyllda av glädje och kraft när de fick den heliga anden och började berätta om Jesus och sprida hans lära"
     },
 
     {
@@ -163,12 +163,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vilka var orsakerna till att kristendomen snabbt fick så stor spridning i romarriket?",
         options:[
-            "Kristendomen gav människovärde till slavarna, kvinnor var lika välkomna som män och religionen gav hopp om ett liv efter döden.",
-            "Alla romerska kejsare blev kristna och bestämde då tidigt att hela romarriket skulle bli kristet och följa Bibeln.",
-            "Kristendomen spreds mest genom att stora arméer reste runt och byggde kyrkor i alla städer, folket tyckte att det var ett bra sätt att träffas på.",
-            "De kristna använde samma tempel som romarna och därför började alla automatiskt tro på Jesus."
+            "Kristendomen gav människovärde till slavarna, kvinnor var lika välkomna som män och religionen gav hopp om ett liv efter döden",
+            "Alla romerska kejsare blev kristna och bestämde då tidigt att hela romarriket skulle bli kristet och följa Bibeln",
+            "Kristendomen spreds mest genom att stora arméer reste runt och byggde kyrkor i alla städer, folket tyckte att det var ett bra sätt att träffas på",
+            "De kristna använde samma tempel som romarna och därför började alla automatiskt tro på Jesus"
         ],
-        correct:"Kristendomen gav människovärde till slavarna, kvinnor var lika välkomna som män och religionen gav hopp om ett liv efter döden."
+        correct:"Kristendomen gav människovärde till slavarna, kvinnor var lika välkomna som män och religionen gav hopp om ett liv efter döden"
     },
 
     {
@@ -177,12 +177,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vem var Paulus och varför var han viktig för kristendomen?",
         options:[
-            "Han var farisé och tyckte illa om kristna men efter en upplevelse av Jesus började han sprida kristendomen.",
-            "Han var en av Jesu första lärjungar och skrev hela Gamla testamentet medan Jesus fortfarande levde.",
-            "Han var en romersk kejsare som bestämde att alla människor i Europa skulle bli kristna, annars blev de bannlysta.",
-            "Han var överstepräst i Jerusalem och ansvarade för att bygga de första stora kyrkorna. De blev väldigt välbesökta."
+            "Han var farisé och tyckte illa om kristna men efter en upplevelse av Jesus började han sprida kristendomen",
+            "Han var en av Jesu första lärjungar och skrev hela Gamla testamentet medan Jesus fortfarande levde",
+            "Han var en romersk kejsare som bestämde att alla människor i Europa skulle bli kristna, annars blev de bannlysta",
+            "Han var överstepräst i Jerusalem och ansvarade för att bygga de första stora kyrkorna. De blev väldigt välbesökta"
         ],
-        correct:"Han var farisé och tyckte illa om kristna men efter en upplevelse av Jesus började han sprida kristendomen."
+        correct:"Han var farisé och tyckte illa om kristna men efter en upplevelse av Jesus började han sprida kristendomen"
     },
 
     {
@@ -191,12 +191,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Var i Europa var den ortodoxa kyrkan starkast och var var den katolska kyrkan starkast?",
         options:[
-            "Den ortodoxa kyrkan var starkast i östra Europa, till exempel Grekland, Rumänien och Ryssland. Den katolska kyrkan var starkast i Västeuropa.",
-            "Den ortodoxa kyrkan var starkast i Norden medan den katolska kyrkan mest fanns i Mellanöstern och Afrika.",
-            "Den ortodoxa och katolska kyrkan var ungefär lika starka i alla delar av Europa under samma tid.",
-            "Den ortodoxa kyrkan fanns bara i Ryssland medan den katolska kyrkan bara fanns i Italien och Spanien."
+            "Den ortodoxa kyrkan var starkast i östra Europa, till exempel Grekland, Rumänien och Ryssland. Den katolska kyrkan var starkast i Västeuropa",
+            "Den ortodoxa kyrkan var starkast i Norden medan den katolska kyrkan mest fanns i Mellanöstern och Afrika",
+            "Den ortodoxa och katolska kyrkan var ungefär lika starka i alla delar av Europa under samma tid",
+            "Den ortodoxa kyrkan fanns bara i Ryssland medan den katolska kyrkan bara fanns i Italien och Spanien"
         ],
-        correct:"Den ortodoxa kyrkan var starkast i östra Europa, till exempel Grekland, Rumänien och Ryssland. Den katolska kyrkan var starkast i Västeuropa."
+        correct:"Den ortodoxa kyrkan var starkast i östra Europa, till exempel Grekland, Rumänien och Ryssland. Den katolska kyrkan var starkast i Västeuropa"
     },
 
     {
@@ -219,12 +219,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad var det Martin Luther kritiserade den katolska kyrkan för?",
         options:[
-            "Han kritiserade bland annat avlatsbrev och att kyrkan hade för mycket makt",
-            "Han kritiserade att kyrkan lät människor läsa Bibeln på latin",
+            "Han kritiserade bland annat avlatsbrev och att Bibeln inte översattes",
+            "Han kritiserade att kyrkan hade för stränga regler för sin medlemmar",
             "Han kritiserade att kyrkan inte hade några präster eller gudstjänster",
             "Han kritiserade att kristna firade jul och påsk varje år"
         ],
-        correct:"Han kritiserade bland annat avlatsbrev och att kyrkan hade för mycket makt"
+        correct:"Han kritiserade bland annat avlatsbrev och att Bibeln inte översattes"
     },
 
     {
@@ -289,25 +289,25 @@ export const questions = [
         topic:"Islam",
         text:"Vad var Mekka känt för under Muhammeds tid?",
         options:[
-            "Mekka var en handelsstad och en viktig religiös plats med Kaba",
-            "Mekka var romarrikets huvudstad och centrum för kristna kyrkor",
-            "Mekka var en liten fiskeby där de flesta människor levde av havet",
+            "Mekka var en handelsstad och en viktig religiös plats med templet Kaba",
+            "Mekka var romarrikets huvudstad och centrum för flera olika kristna kyrkor",
+            "Mekka var en liten fiskeby där de flesta människor levde av havet och naturen",
             "Mekka var platsen där Bibeln först skrevs ner på arabiska"
         ],
-        correct:"Mekka var en handelsstad och en viktig religiös plats med Kaba"
+        correct:"Mekka var en handelsstad och en viktig religiös plats med templet Kaba"
     },
     {
         id:"q22",
         type:"mcq",
         topic:"Islam",
-        text:"Vem var Khadidja och varför var hon så viktig?",
+        text:"Vem var Khadija och varför var hon så viktig?",
         options:[
-            "Hon var Muhammeds fru och en av de första som trodde på hans budskap",
+            "Hon var Muhammeds fru, trodde honom och skrev ner det han sa till Koranen",
             "Hon var den första personen som byggde en moské i Medina",
             "Hon var en drottning som bestämde att alla i Mekka skulle bli muslimer",
             "Hon var en lärjunge som skrev ner hela Koranen tillsammans med Paulus"
         ],
-        correct:"Hon var Muhammeds fru och en av de första som trodde på hans budskap"
+        correct:"Hon var Muhammeds fru, trodde honom och skrev ner det han sa till Koranen"
     },
     {
         id:"q23",
@@ -315,12 +315,12 @@ export const questions = [
         topic:"Islam",
         text:"Varför fick Muhammed så många nya anhängare i Medina?",
         options:[
-            "Många i Medina lyssnade på honom och han blev en viktig religiös och politisk ledare där",
+            "Islam hjälpte många att komma överens och skapade fred i Medina, det gjorde att många där blev muslimer",
             "Människorna i Medina hade redan byggt Kaba och väntade på att han skulle flytta dit",
-            "Romarriket tvingade alla i Medina att följa Muhammeds budskap",
-            "Muhammed gav alla i Medina avlatsbrev som gjorde att de slapp betala skatt"
+            "Romarriket tvingade alla i Medina att följa Muhammeds budskap, annars blev de bannlysta och fick flytta",
+            "Muhammed gav alla i Medina avlatsbrev som gjorde att de slapp betala skatt för 100 år framåt"
         ],
-        correct:"Många i Medina lyssnade på honom och han blev en viktig religiös och politisk ledare där"
+        correct:"Islam hjälpte många att komma överens och skapade fred i Medina, det gjorde att många där blev muslimer"
     },
     {
         id:"q24",
@@ -354,15 +354,30 @@ export const questions = [
         topic:"Islam",
         text:"Varför ska Koranen helst läsas på arabiska?",
         options:[
-            "Eftersom muslimer tror att Koranen uppenbarades på arabiska och att språket är viktigt",
-            "Eftersom arabiska är det enda språk som får användas i alla religioner",
+            "Eftersom det är Allahs ord och de får man inte ändra på, det kan också blir fel i översättning",
+            "Eftersom arabiska är det enda språk som får användas inom islam",
             "Eftersom Koranen från början skrevs på latin men senare översattes till arabiska",
-            "Eftersom det bara är personer från Arabien som får läsa Koranen"
+            "Eftersom det bara är personer från arabsika länder som får läsa Koranen"
         ],
-        correct:"Eftersom muslimer tror att Koranen uppenbarades på arabiska och att språket är viktigt"
+        correct:"Eftersom det är Allahs ord och de får man inte ändra på, det kan också blir fel i översättning"
     },
     {
         id:"q27",
+        type:"multiText",
+        topic:"Islam",
+        text:"Vilka är islams fem pelare?",
+        allow:[
+            ["trosbekännelsen","shahada","shahadah", "tro", "tron"],
+            ["bönen","salah","salat", "bön", "be", "ber"],
+            ["zakat","allmosa","skatten", "skatt"],
+            ["fastan","ramadan","sawm", "fasta"],
+            ["vallfärden","hajj","pilgrimsfärden till mecka", "vallfärd"]
+        ],
+        pointsEach:1,
+        unique:true
+    },
+    {
+        id:"q27b",
         type:"mcq",
         topic:"Islam",
         text:"Vad är de fem pelarna till för?",
@@ -419,12 +434,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad är zakat?",
         options:[
-            "Att ge en del av sina pengar till behövande",
+            "En skatt som ges till de fattiga",
             "Att fasta under hela månaden ramadan",
             "Att resa till Mecka minst en gång i livet",
             "Att läsa Koranen på arabiska varje dag"
         ],
-        correct:"Att ge en del av sina pengar till behövande"
+        correct:"En skatt som ges till de fattiga"
     },
     {
         id:"q32",
@@ -448,7 +463,7 @@ export const questions = [
             "Att det bara finns en Gud, Allah",
             "Att det finns många gudar som styr olika delar av världen",
             "Att Muhammed är Gud och därför ska tillbes",
-            "Att alla heliga byggnader måste ligga i Jerusalem"
+            "Att alla heliga byggnader måste ligga i Mecka"
         ],
         correct:"Att det bara finns en Gud, Allah"
     },
@@ -459,9 +474,9 @@ export const questions = [
         text:"Mecka, Medina och Jerusalem betraktas som heliga städer inom islam. Förklara kort varför.",
         prompts:["Mecka","Medina","Jerusalem"],
         allow:[
-            ["kaba","vallfärd","muhammed föddes","heligaste staden"],
-            ["muhammed flyttade dit","första muslimska samhället","profetens stad"],
-            ["muhammeds himmelsfärd","al aqsa","klippdomen","helig stad"]
+            ["kaba","vallfärd","muhammed föddes", "född", "föddes", "muhammed", "heligaste staden"],
+            ["muhammed flyttade dit","första muslimska samhället","profetens stad", "muhammed", "begravdes", "begravs", "död", "dog"],
+            ["muhammeds himmelsfärd","al aqsa","klippdomen", "klipptemplet", "helig stad"]
         ],
         pointsEach:1,
         unique:false
@@ -472,12 +487,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad minns man under offerhögtiden?",
         options:[
-            "Att Ibrahim var beredd att offra sin son men Gud stoppade honom",
+            "Att Abraham var beredd att offra sin son men Gud stoppade honom",
             "Att Muhammed föddes i Medina och byggde den första kyrkan",
             "Att Moses tog emot de tio budorden på berget Sinai",
             "Att Jesus åt den sista måltiden med sina lärjungar"
         ],
-        correct:"Att Ibrahim var beredd att offra sin son men Gud stoppade honom"
+        correct:"Att Abraham var beredd att offra sin son men Gud stoppade honom"
     },
     {
         id:"q36",
@@ -486,8 +501,8 @@ export const questions = [
         text:"Förklara orden halal och haram.",
         prompts:["Halal","Haram"],
         allow:[
-            ["tillåtet","tillåten","sådant som är tillåtet"],
-            ["förbjudet","förbjuden","sådant som är förbjudet"]
+            ["tillåtet","tillåten","sådant som är tillåtet", "rätt", "får", "göra", "nötkött"],
+            ["förbjudet","förbjuden","sådant som är förbjudet", "får inte", "inte får", "griskött", "fel", "otillåtet", "inte tillåtet"]
         ],
         pointsEach:1,
         unique:false
