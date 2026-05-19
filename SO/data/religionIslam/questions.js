@@ -205,12 +205,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad är ett helgon?",
         options:[
-            "Människor som levt ett särskilt gott och kärleksfullt liv och som anses stå nära Gud.",
-            "Personer som alltid leder gudstjänster och bestämmer vilka regler som ska gälla i kyrkan.",
-            "Kungar och drottningar som hjälpt kristendomen att spridas över hela Europa genom historien.",
-            "Människor som skrivit delar av Bibeln och därför får bestämma över andra kristna."
+            "En person som anses ha levt särskilt nära Gud och gjort mycket gott",
+            "En person som alltid måste vara ledare för en kyrka eller församling",
+            "En kung som bestämmer vilka högtider kristna människor ska fira",
+            "Man kan faktiskt säga att mamma är något av ett helgon eftersom hon alltid är så snäll"
         ],
-        correct:"Människor som levt ett särskilt gott och kärleksfullt liv och som anses stå nära Gud."
+        correct:"En person som anses ha levt särskilt nära Gud och gjort mycket gott"
     },
 
     {
@@ -219,12 +219,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad var det Martin Luther kritiserade den katolska kyrkan för?",
         options:[
-            "Han kritiserade bland annat avlatsbreven och att människor inte kunde läsa Bibeln på sitt eget språk.",
-            "Han kritiserade att kyrkan hade för få präster och att gudstjänsterna var för korta och enkla.",
-            "Han kritiserade att kristna firade för många högtider och använde för många symboler i kyrkorna.",
-            "Han kritiserade att kyrkan inte längre trodde på Jesus och därför ville han skapa en ny religion."
+            "Han kritiserade bland annat avlatsbrev och att kyrkan hade för mycket makt",
+            "Han kritiserade att kyrkan lät människor läsa Bibeln på latin",
+            "Han kritiserade att kyrkan inte hade några präster eller gudstjänster",
+            "Han kritiserade att kristna firade jul och påsk varje år"
         ],
-        correct:"Han kritiserade bland annat avlatsbreven och att människor inte kunde läsa Bibeln på sitt eget språk."
+        correct:"Han kritiserade bland annat avlatsbrev och att kyrkan hade för mycket makt"
     },
 
     {
@@ -233,12 +233,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad innebar den protestantiska kyrkan, och vad protesterade de mot?",
         options:[
-            "De protesterade mot den katolska kyrkan och menade att människans egen tro på Gud var viktig och att Bibeln skulle översättas.",
-            "De protesterade mot att människor gick i kyrkan och tyckte att alla högtider skulle förbjudas.",
-            "De protesterade mot att Jesus nämndes i Bibeln och ville istället fokusera på Gamla testamentet.",
-            "De protesterade mot att människor bad för mycket och ville att alla skulle sluta gå till gudstjänster."
+            "Den protestantiska kyrkan växte fram genom protester mot sådant man tyckte var fel i katolska kyrkan",
+            "Den protestantiska kyrkan var en del av islam och protesterade mot alla kristna högtider",
+            "Den protestantiska kyrkan ville att påven skulle få ännu mer makt över alla kungar",
+            "Den protestantiska kyrkan betydde att man slutade använda Bibeln i gudstjänster"
         ],
-        correct:"De protesterade mot den katolska kyrkan och menade att människans egen tro på Gud var viktig och att Bibeln skulle översättas."
+        correct:"Den protestantiska kyrkan växte fram genom protester mot sådant man tyckte var fel i katolska kyrkan"
     },
 
     {
@@ -247,12 +247,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad var ett avlatsbrev?",
         options:[
-            "Ett brev man kunde köpa för att få förlåtelse eller kortare straff för synder.",
-            "Ett brev som visade att en person fått tillstånd att läsa och tolka Bibeln offentligt.",
-            "Ett brev från prästerna som användes för att kalla människor till kyrkan under högtider.",
-            "Ett dokument som visade att någon blivit medlem i den protestantiska kyrkan."
+            "Ett brev man kunde köpa för att få förlåtelse eller kortare straff för synder",
+            "Ett brev som visade att man fick äga en egen Bibel hemma",
+            "Ett brev från kejsaren som gav tillstånd att bygga kyrkor",
+            "Ett brev som lärjungarna skickade till Jesus efter påsken"
         ],
-        correct:"Ett brev man kunde köpa för att få förlåtelse eller kortare straff för synder."
+        correct:"Ett brev man kunde köpa för att få förlåtelse eller kortare straff för synder"
     },
 
     {
@@ -261,12 +261,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad är treenigheten?",
         options:[
-            "Fadern, Sonen och den heliga anden. Att Gud visar sig på tre olika sätt.",
-            "Tre viktiga delar av Bibeln som alla kristna måste läsa varje vecka i kyrkan.",
-            "Tre särskilda regler som präster och munkar måste följa i den katolska kyrkan.",
-            "Tre stora kyrkor i världen som tillsammans leder alla kristna människor."
+            "Att Gud är Fadern, Sonen och den heliga anden",
+            "Att Bibeln består av tre stora delar som kallas evangelier",
+            "Att kristna måste be tre gånger om dagen i kyrkan",
+            "Att det finns tre olika kyrkor som alltid tror exakt likadant"
         ],
-        correct:"Fadern, Sonen och den heliga anden. Att Gud visar sig på tre olika sätt."
+        correct:"Att Gud är Fadern, Sonen och den heliga anden"
     },
 
     {
@@ -275,12 +275,12 @@ export const questions = [
         topic:"Kristendomen",
         text:"Vad innebär den gyllene regeln?",
         options:[
-            "Allt ni vill att människor ska göra för er ska ni också göra för dem.",
-            "Att människor alltid ska ge pengar till kyrkan för att hjälpa andra som är fattiga.",
-            "Att alla kristna måste följa samma regler och leva på exakt samma sätt.",
-            "Att man bara behöver vara snäll mot människor som tror på samma religion."
+            "Att man ska behandla andra som man själv vill bli behandlad",
+            "Att man ska ge guld till kyrkan vid varje gudstjänst",
+            "Att man bara behöver vara snäll mot personer med samma religion",
+            "Att man alltid ska lyssna på sin lilla mamma och pappa, för de är väldigt kloka"
         ],
-        correct:"Allt ni vill att människor ska göra för er ska ni också göra för dem."
+        correct:"Att man ska behandla andra som man själv vill bli behandlad"
     },
 
     {
@@ -289,12 +289,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad var Mekka känt för under Muhammeds tid?",
         options:[
-            "Det var en helig stad där det fanns många tempel och det mest berömda hette Kaba.",
-            "Det var den största kristna staden i Mellanöstern där människor samlades för nattvard.",
-            "Det var en liten stad där nästan alla människor arbetade som fiskare och bönder.",
-            "Det var platsen där romarna byggde sina största tempel och palats i Arabien."
+            "Mekka var en handelsstad och en viktig religiös plats med Kaba",
+            "Mekka var romarrikets huvudstad och centrum för kristna kyrkor",
+            "Mekka var en liten fiskeby där de flesta människor levde av havet",
+            "Mekka var platsen där Bibeln först skrevs ner på arabiska"
         ],
-        correct:"Det var en helig stad där det fanns många tempel och det mest berömda hette Kaba."
+        correct:"Mekka var en handelsstad och en viktig religiös plats med Kaba"
     },
     {
         id:"q22",
@@ -302,12 +302,12 @@ export const questions = [
         topic:"Islam",
         text:"Vem var Khadidja och varför var hon så viktig?",
         options:[
-            "Hon var Muhammeds fru och hjälpte till att skriva ner det Muhammed berättade till Koranen.",
-            "Hon var den första kvinnliga ledaren för en moské i Mekka och byggde många tempel.",
-            "Hon var en drottning som styrde Medina och bestämde att alla skulle bli muslimer.",
-            "Hon var Muhammeds dotter som reste runt och spred islam till hela Europa."
+            "Hon var Muhammeds fru och en av de första som trodde på hans budskap",
+            "Hon var den första personen som byggde en moské i Medina",
+            "Hon var en drottning som bestämde att alla i Mekka skulle bli muslimer",
+            "Hon var en lärjunge som skrev ner hela Koranen tillsammans med Paulus"
         ],
-        correct:"Hon var Muhammeds fru och hjälpte till att skriva ner det Muhammed berättade till Koranen."
+        correct:"Hon var Muhammeds fru och en av de första som trodde på hans budskap"
     },
     {
         id:"q23",
@@ -315,12 +315,12 @@ export const questions = [
         topic:"Islam",
         text:"Varför fick Muhammed så många nya anhängare i Medina?",
         options:[
-            "Islam bidrog till att hjälpa människor att komma överens och skapa fred och ordning i samhället.",
-            "Människorna i Medina blev tvingade av romarna att följa Muhammed och läsa Koranen.",
-            "Alla människor i Medina arbetade redan i moskéer och ville därför bli religiösa ledare.",
-            "Muhammed lovade att alla som blev muslimer skulle få rikedomar och slippa arbeta."
+            "Många i Medina lyssnade på honom och han blev en viktig religiös och politisk ledare där",
+            "Människorna i Medina hade redan byggt Kaba och väntade på att han skulle flytta dit",
+            "Romarriket tvingade alla i Medina att följa Muhammeds budskap",
+            "Muhammed gav alla i Medina avlatsbrev som gjorde att de slapp betala skatt"
         ],
-        correct:"Islam bidrog till att hjälpa människor att komma överens och skapa fred och ordning i samhället."
+        correct:"Många i Medina lyssnade på honom och han blev en viktig religiös och politisk ledare där"
     },
     {
         id:"q24",
@@ -354,12 +354,12 @@ export const questions = [
         topic:"Islam",
         text:"Varför ska Koranen helst läsas på arabiska?",
         options:[
-            "Muslimer tror att Koranen är Guds ord och att översättningar kan förändra betydelsen.",
-            "Arabiska är det enda språk som får användas i alla religioner och i alla heliga byggnader.",
-            "Koranen skrevs först på latin men översattes senare till arabiska av Muhammeds lärjungar.",
-            "Endast människor som bor i Arabien får egentligen läsa Koranen och förstå dess innehåll."
+            "Eftersom muslimer tror att Koranen uppenbarades på arabiska och att språket är viktigt",
+            "Eftersom arabiska är det enda språk som får användas i alla religioner",
+            "Eftersom Koranen från början skrevs på latin men senare översattes till arabiska",
+            "Eftersom det bara är personer från Arabien som får läsa Koranen"
         ],
-        correct:"Muslimer tror att Koranen är Guds ord och att översättningar kan förändra betydelsen."
+        correct:"Eftersom muslimer tror att Koranen uppenbarades på arabiska och att språket är viktigt"
     },
     {
         id:"q27",
@@ -367,12 +367,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad är de fem pelarna till för?",
         options:[
-            "De är viktiga levnadsregler inom islam som hjälper en muslim att hålla fast vid sin tro.",
-            "De är fem stora byggnader i Mekka som alla muslimer måste besöka varje år tillsammans.",
-            "De är fem berättelser i Koranen som handlar om Muhammeds liv och hans familj.",
-            "De är fem särskilda präster som leder alla moskéer och bestämmer regler inom islam."
+            "De visar viktiga handlingar och regler som hjälper muslimer att leva i sin tro",
+            "De är fem byggnader i Mekka som alla muslimer måste besöka varje år",
+            "De är fem böcker som tillsammans bildar hela Koranen",
+            "De är fem olika gudar som muslimer ber till under veckan"
         ],
-        correct:"De är viktiga levnadsregler inom islam som hjälper en muslim att hålla fast vid sin tro."
+        correct:"De visar viktiga handlingar och regler som hjälper muslimer att leva i sin tro"
     },
     {
         id:"q28",
@@ -380,12 +380,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad är det viktigaste i den muslimska trosbekännelsen?",
         options:[
-            "Att det bara finns en Gud och att Muhammed är hans profet.",
-            "Att alla muslimer måste fasta varje fredag under hela året för att visa sin tro.",
-            "Att Koranen består av både Gamla och Nya testamentet precis som Bibeln gör.",
-            "Att Medina är den viktigaste staden och att alla muslimer måste flytta dit."
+            "Att det bara finns en Gud och att Muhammed är Guds profet",
+            "Att alla muslimer måste fasta varje fredag hela året",
+            "Att Koranen består av Gamla och Nya testamentet",
+            "Att Medina är den enda heliga staden inom islam"
         ],
-        correct:"Att det bara finns en Gud och att Muhammed är hans profet."
+        correct:"Att det bara finns en Gud och att Muhammed är Guds profet"
     },
     {
         id:"q29",
@@ -393,12 +393,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad kallas det torn som står bredvid moskéer och vad används det till?",
         options:[
-            "Minaret, och den används till böneutrop för att kalla människor till bön.",
-            "Altare, och det används för att läsa upp evangelierna under gudstjänster i kyrkan.",
-            "Synagoga, och det används som plats där man förvarar Koranen och religiösa texter.",
-            "Kaba, och det används som plats där människor samlas för att fira nattvard."
+            "Minaret, och den används traditionellt för att kalla till bön",
+            "Altare, och det används för att läsa evangelierna högt",
+            "Synagoga, och den används för att förvara Koranen",
+            "Kaba, och den används som plats för nattvarden"
         ],
-        correct:"Minaret, och den används till böneutrop för att kalla människor till bön."
+        correct:"Minaret, och den används traditionellt för att kalla till bön"
     },
     {
         id:"q30",
@@ -419,12 +419,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad är zakat?",
         options:[
-            "Det är pengar eller hjälp som muslimer ska ge till fattiga och behövande människor.",
-            "Det är den resa som alla muslimer måste göra till Mecka minst en gång i livet.",
-            "Det är den fasta som muslimer genomför under ramadan för att visa sin tro.",
-            "Det är en särskild bön som bara religiösa ledare får läsa i moskéerna."
+            "Att ge en del av sina pengar till behövande",
+            "Att fasta under hela månaden ramadan",
+            "Att resa till Mecka minst en gång i livet",
+            "Att läsa Koranen på arabiska varje dag"
         ],
-        correct:"Det är pengar eller hjälp som muslimer ska ge till fattiga och behövande människor."
+        correct:"Att ge en del av sina pengar till behövande"
     },
     {
         id:"q32",
@@ -432,12 +432,12 @@ export const questions = [
         topic:"Islam",
         text:"Varför fastar man under ramadan?",
         options:[
-            "För att förstå hur det känns att vara fattig och hungrig och för att komma närmare Gud.",
-            "För att visa att man klarar sig utan mat och därför inte behöver hjälpa fattiga människor.",
-            "För att alla muslimer måste vara vakna hela nätterna och läsa hela Koranen varje dag.",
-            "För att minnas när Muhammed byggde den första moskén tillsammans med sina lärjungar."
+            "För att komma närmare Gud, öva tålamod och tänka på dem som har det svårt",
+            "För att visa att man inte behöver följa någon av de fem pelarna",
+            "För att minnas när Jesus föddes i Betlehem enligt Koranen",
+            "För att alla muslimer måste vara vakna hela natten i en månad"
         ],
-        correct:"För att förstå hur det känns att vara fattig och hungrig och för att komma närmare Gud."
+        correct:"För att komma närmare Gud, öva tålamod och tänka på dem som har det svårt"
     },
     {
         id:"q33",
@@ -445,12 +445,12 @@ export const questions = [
         topic:"Islam",
         text:"Vilken är den viktigaste tanken inom islam?",
         options:[
-            "Att Gud är en och att Allah har skapat världen och människorna.",
-            "Att det finns flera olika gudar som styr olika delar av världen och naturen.",
-            "Att Muhammed själv är Gud och därför ska tillbes av alla människor.",
-            "Att alla heliga byggnader i världen måste ligga i samma stad för att vara viktiga."
+            "Att det bara finns en Gud, Allah",
+            "Att det finns många gudar som styr olika delar av världen",
+            "Att Muhammed är Gud och därför ska tillbes",
+            "Att alla heliga byggnader måste ligga i Jerusalem"
         ],
-        correct:"Att Gud är en och att Allah har skapat världen och människorna."
+        correct:"Att det bara finns en Gud, Allah"
     },
     {
         id:"q34",
@@ -472,12 +472,12 @@ export const questions = [
         topic:"Islam",
         text:"Vad minns man under offerhögtiden?",
         options:[
-            "Man minns när Abraham skulle offra sin son till Gud och firar med en festmåltid.",
-            "Man minns när Muhammed föddes och därför dekoreras alla moskéer med ljus och blommor.",
-            "Man minns när Koranen skrevs färdigt och därför läser man hela boken under en vecka.",
-            "Man minns när Jesus åt den sista måltiden med sina lärjungar före påsken."
+            "Att Ibrahim var beredd att offra sin son men Gud stoppade honom",
+            "Att Muhammed föddes i Medina och byggde den första kyrkan",
+            "Att Moses tog emot de tio budorden på berget Sinai",
+            "Att Jesus åt den sista måltiden med sina lärjungar"
         ],
-        correct:"Man minns när Abraham skulle offra sin son till Gud och firar med en festmåltid."
+        correct:"Att Ibrahim var beredd att offra sin son men Gud stoppade honom"
     },
     {
         id:"q36",
